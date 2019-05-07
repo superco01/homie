@@ -5,13 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Homie</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css"> -->
     <!-- <script src="main.js"></script> -->
     <!-- Styles -->
-    <link href="{{ asset('css/app.js') }}">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id='app'>test</div>
+    <div id='app'></div>
     
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
