@@ -72608,7 +72608,7 @@ module.exports = exports['default'];
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78751,49 +78751,34 @@ function (_React$Component) {
       open: false
     };
     var a = true; // }
-
-    categoryOnHoverIn = function categoryOnHoverIn(e) {
-      switch (e.target.id) {
-        case "electronics-nav-dropdown":
-          {
-            _this.setState({
-              isOpenElectronics: true
-            });
-
-            break;
-          }
-
-        case "books-nav-dropdown":
-          {
-            _this.setState({
-              isOpenBook: true
-            });
-
-            break;
-          }
-
-        case "home-requirements-nav-dropdown":
-          {
-            _this.setState({
-              isOpenHome: true
-            });
-
-            break;
-          }
-      }
-    };
+    // categoryOnHoverIn = (e) => {
+    //     switch(e.target.id){
+    //         case "electronics-nav-dropdown":{
+    //             this.setState({ isOpenElectronics: true });
+    //             break;
+    //         }
+    //         case "books-nav-dropdown":{
+    //             this.setState({ isOpenBook: true });
+    //             break;
+    //         }
+    //         case "home-requirements-nav-dropdown":{
+    //             this.setState({ isOpenHome: true });
+    //             break;
+    //         }
+    //     }
+    // };
+    // categoryOnHoverOut = () => {
+    //     this.setState(() => {
+    //     return {
+    //         isOpenElectronics: false,
+    //         isOpenBook: false,
+    //         isOpenHome: false
+    //     }
+    //     });
+    // };
 
     return _this;
-  } // categoryOnHoverOut = () => {
-  //     this.setState(() => {
-  //        return {
-  //            isOpenElectronics: false,
-  //            isOpenBook: false,
-  //            isOpenHome: false
-  //        }
-  //     });
-  // };
-  // categoryClickHandler = (routeName) => {
+  } // categoryClickHandler = (routeName) => {
   //     this.props.history.push(routeName);
   // };
 
