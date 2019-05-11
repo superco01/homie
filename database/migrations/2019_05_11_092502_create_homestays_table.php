@@ -15,6 +15,7 @@ class CreateHomestaysTable extends Migration
     {
         Schema::create('homestays', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('id_user');
             $table->string('name');
             $table->string('location');
             $table->text('address');
