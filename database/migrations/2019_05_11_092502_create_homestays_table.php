@@ -14,13 +14,13 @@ class CreateHomestaysTable extends Migration
     public function up()
     {
         Schema::create('homestays', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('name');
             $table->string('location');
             $table->text('address');
             $table->string('facilities');
             $table->integer('price');
-            $table->true('availability');
+            $table->boolean('availability');
             $table->timestamps();
         });
     }
