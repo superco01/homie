@@ -22,35 +22,34 @@ class Header extends React.Component{
     // }
 
     
-    categoryOnHoverIn = (e) => {
-        switch(e.target.id){
-            case "electronics-nav-dropdown":{
-                this.setState({ isOpenElectronics: true });
-                break;
-            }
-            case "books-nav-dropdown":{
-                this.setState({ isOpenBook: true });
-                break;
-            }
-            case "home-requirements-nav-dropdown":{
-                this.setState({ isOpenHome: true });
-                break;
-            }
-        }
+        // categoryOnHoverIn = (e) => {
+        //     switch(e.target.id){
+        //         case "electronics-nav-dropdown":{
+        //             this.setState({ isOpenElectronics: true });
+        //             break;
+        //         }
+        //         case "books-nav-dropdown":{
+        //             this.setState({ isOpenBook: true });
+        //             break;
+        //         }
+        //         case "home-requirements-nav-dropdown":{
+        //             this.setState({ isOpenHome: true });
+        //             break;
+        //         }
+        //     }
+        // };
+    
+        // categoryOnHoverOut = () => {
+        //     this.setState(() => {
+        //     return {
+        //         isOpenElectronics: false,
+        //         isOpenBook: false,
+        //         isOpenHome: false
+        //     }
+        //     });
 
-    };
+        // };
     }
-    // categoryOnHoverOut = () => {
-    //     this.setState(() => {
-    //        return {
-    //            isOpenElectronics: false,
-    //            isOpenBook: false,
-    //            isOpenHome: false
-    //        }
-    //     });
-
-    // };
-
     // categoryClickHandler = (routeName) => {
     //     this.props.history.push(routeName);
     // };
