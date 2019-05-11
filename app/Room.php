@@ -12,6 +12,7 @@ class Room extends Model
         'id',
     ];
     protected $fillable = [
+        'id_homestay',
         'title',
         'description',
         'photo',

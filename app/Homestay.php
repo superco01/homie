@@ -12,6 +12,7 @@ class Homestay extends Model
         'id',
     ];
     protected $fillable = [
+        'id_user',
         'name',
         'location',
         'address',
@@ -19,4 +20,8 @@ class Homestay extends Model
         'price',
         'availability',
     ];
+
+    public function rooms() {
+        return $this-hasMany(Rooms::class);
+    }
 }
