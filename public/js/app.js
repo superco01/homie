@@ -78692,7 +78692,7 @@ function (_Component) {
           homestays: homestays
         });
       });
-      fetch().then(function (response) {
+      fetch('/api/room').then(function (response) {
         return response.json();
       });
     }
