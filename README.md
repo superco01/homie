@@ -1,3 +1,0 @@
-# homie
-
-habib yafi ardi
