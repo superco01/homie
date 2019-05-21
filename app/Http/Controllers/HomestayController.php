@@ -31,4 +31,8 @@ class HomestayController extends Controller
 
         return response()->json($product, 201);
     }
+
+    public function showDetail(Request $request) {
+        
+    }
 }

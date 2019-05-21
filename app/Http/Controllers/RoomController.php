@@ -23,4 +23,6 @@ class RoomController extends Controller
         $room = Room::create($request->all());
         return response()->json($room, 201);
     }
+
+    
 }
