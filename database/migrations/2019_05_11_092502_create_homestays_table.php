@@ -20,8 +20,9 @@ class CreateHomestaysTable extends Migration
             $table->string('location');
             $table->text('address');
             $table->string('facilities');
-            $table->integer('price');
-            $table->boolean('availability');
+            $table->integer('number_of_rooms');
+            // $table->integer('price');
+            // $table->boolean('availability');
             $table->timestamps();
         });
     }

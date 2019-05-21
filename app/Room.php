@@ -15,8 +15,8 @@ class Room extends Model
         'id_homestay',
         'title',
         'description',
-        'photo',
+        'photos',
         'price',
-        'room_availability'
+        'room_availability',
     ];
 }

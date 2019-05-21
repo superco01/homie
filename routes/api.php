@@ -18,3 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('homestay', 'HomestayController@index');
+Route::get('room', 'RoomController@index');
+Route::post('homestay', 'HomestayController@store');
+Route::post('room', 'RoomController@store');

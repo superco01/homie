@@ -2,27 +2,79 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from './Header';
+import axios from 'axios';
 
 export default class App extends Component {
     constructor(){
         super();
         this.state = {
-            homestays: []
+            homestays: [],
+            errors: [],
+            id_user: 1,
         }
     }
 
     componentDidMount() {
-        fetch('/api/homestay')
+        axios.get('/api/homestay')
             .then(response => {
-                return response.json();
+                return response;
             })
             .then(homestays => {
                 this.setState({ homestays });
             })
-        fetch()
+        fetch('/api/room')
             .then(response => {
                 return response.json();
             })
+        const { history } = this.props
+        console.log(history);
+        console.log(this.props);
+        console.log(this.state);
+        
+        const homestay = {
+            id_user: this.state.id_user,
+            name: 'test 1',
+            location: 'loc 1',
+            address: 'address 1',
+            facilities: 'fac 1',
+            number_of_rooms: 6,
+        }
+        axios.post('api/homestay', homestay)
+        .then(res => {
+                console.log(res);
+                console.log(history);
+                console.log('test');
+                history.push('/')
+            }
+        ).catch(
+            error => {
+                this.setState({
+                    errors: error.response
+                })
+            }
+        )
+        const room = {
+            id_homestay: 1,
+            title: 'test room 1',
+            description: 'test desc room 1',
+            price: 100,
+            room_availability: true,
+            photos: 'test photos path 1',
+        }
+        axios.post('api/room', room).then(
+            response => {
+                console.log(response);
+                console.log(history);
+                console.log('test');
+                history.push('/')
+            }
+        ).catch(
+            error => {
+                this.setState({
+                    errors: error.response
+                })
+            }
+        )
     }
 
     render() {
@@ -32,6 +84,7 @@ export default class App extends Component {
                 <div>
                     <Header/>
                 </div>
+                
             </Router>
             
         );

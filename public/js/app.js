@@ -78640,6 +78640,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Header */ "./resources/js/components/Header.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -78663,6 +78665,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var App =
 /*#__PURE__*/
 function (_Component) {
@@ -78675,7 +78678,9 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this));
     _this.state = {
-      homestays: []
+      homestays: [],
+      errors: [],
+      id_user: 1
     };
     return _this;
   }
@@ -78685,8 +78690,8 @@ function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      fetch('/api/homestay').then(function (response) {
-        return response.json();
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/api/homestay').then(function (response) {
+        return response;
       }).then(function (homestays) {
         _this2.setState({
           homestays: homestays
@@ -78694,6 +78699,46 @@ function (_Component) {
       });
       fetch('/api/room').then(function (response) {
         return response.json();
+      });
+      var history = this.props.history;
+      console.log(history);
+      console.log(this.props);
+      console.log(this.state);
+      var homestay = {
+        id_user: this.state.id_user,
+        name: 'test 1',
+        location: 'loc 1',
+        address: 'address 1',
+        facilities: 'fac 1',
+        number_of_rooms: 6
+      };
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('api/homestay', homestay).then(function (res) {
+        console.log(res);
+        console.log(history);
+        console.log('test');
+        history.push('/');
+      }).catch(function (error) {
+        _this2.setState({
+          errors: error.response
+        });
+      });
+      var room = {
+        id_homestay: 1,
+        title: 'test room 1',
+        description: 'test desc room 1',
+        price: 100,
+        room_availability: true,
+        photos: 'test photos path 1'
+      };
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('api/room', room).then(function (response) {
+        console.log(response);
+        console.log(history);
+        console.log('test');
+        history.push('/');
+      }).catch(function (error) {
+        _this2.setState({
+          errors: error.response
+        });
       });
     }
   }, {

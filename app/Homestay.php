@@ -17,8 +17,7 @@ class Homestay extends Model
         'location',
         'address',
         'facilities',
-        'price',
-        'availability',
+        'number_of_rooms',
     ];
 
     public function rooms() {
