@@ -12,7 +12,7 @@ export default class App extends Component {
             errors: [],
             id_user: 1,
         }
-    }
+    } 
 
     componentDidMount() {
         axios.get('/api/homestay')
