@@ -9,7 +9,7 @@ const HomestayList = (props) => {
                 <Card>
                     <CardMedia
                     style={{height: 0, paddingTop: '56.25%'}}
-                    image="asd"
+                    image=""
                     title={props.homestay.name}
                     />
                     <CardContent>

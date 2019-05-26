@@ -108443,7 +108443,7 @@ var HomestayList = function HomestayList(props) {
       height: 0,
       paddingTop: '56.25%'
     },
-    image: "asd",
+    image: "",
     title: props.homestay.name
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["CardContent"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Typography"], {
     gutterBottom: true,
