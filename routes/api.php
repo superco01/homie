@@ -21,3 +21,5 @@ Route::get('homestay', 'HomestayController@index');
 Route::get('room', 'RoomController@index');
 Route::post('homestay', 'HomestayController@store');
 Route::post('room', 'RoomController@store');
+Route::get('homestay/{id}', 'HomestayController@showDetail');
+Route::get('user/{id}', 'UserController@showName');

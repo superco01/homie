@@ -1,97 +1,115 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { Navbar, FormControl, FormGroup, Nav, NavDropdown, MenuItem, Button, Glyphicon, DropdownButton, InputGroup } from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Switch from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import { Button } from '@material-ui/core';
+import Axios from 'axios';
 
-class Header extends React.Component{
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
 
-    constructor (props) {
-        super(props)
-        this.state = {
-            isOpenElectronics: false,
-            isOpenBook: false,
-            isOpenHome: false,
-            placeholder: "Search All",
-            searchMenuItemns: ["Electronics", "Books", "Home"],
-            dropDownSelected: "All",
-            searchBoxText: "",
-            shoppingCartOpen: false,
-            menuItemMUI: ["Log In", "Register"],
-            open: false
-        }
-        const a = true;
-    // }
+function Header() {
+  const classes = useStyles();
+  const [auth, setAuth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [user, setUser] = React.useState({});
+  const open = Boolean(anchorEl);
 
+  useEffect(() => {
+    const fetchData = async () => {
+        const response = await Axios('api/user/1');
+        setUser(response.data);
+    };
+    fetchData();
+  }, [])
+
+  function handleChange(event) {
+    setAuth(event.target.checked);
+    console.log(user);
     
-        // categoryOnHoverIn = (e) => {
-        //     switch(e.target.id){
-        //         case "electronics-nav-dropdown":{
-        //             this.setState({ isOpenElectronics: true });
-        //             break;
-        //         }
-        //         case "books-nav-dropdown":{
-        //             this.setState({ isOpenBook: true });
-        //             break;
-        //         }
-        //         case "home-requirements-nav-dropdown":{
-        //             this.setState({ isOpenHome: true });
-        //             break;
-        //         }
-        //     }
-        // };
-    
-        // categoryOnHoverOut = () => {
-        //     this.setState(() => {
-        //     return {
-        //         isOpenElectronics: false,
-        //         isOpenBook: false,
-        //         isOpenHome: false
-        //     }
-        //     });
+  }
 
-        // };
-    }
-    // categoryClickHandler = (routeName) => {
-    //     this.props.history.push(routeName);
-    // };
+  function handleMenu(event) {
+    setAnchorEl(event.currentTarget);
+  }
 
-    render () {
-        return (
-            <Navbar bg="light" expand="lg">
-                <Navbar.Brand>
-                    <Link to="/">Homie</Link>
-                </Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-            
-                <Navbar.Collapse>
-                    <Nav>
-                        <NavDropdown
-                            title="Menu 1"
-                            id="electronics-nav-dropdown"
-                            // onMouseEnter = { this.categoryOnHoverIn }
-                            // onMouseLeave = { this.categoryOnHoverOut }
-                            // open={ this.state.isOpenElectronics }
-                            // onClick={() => this.categoryClickHandler("/electronics")}
-                            
-                        >
-                            <NavDropdown.Item>Item 1</NavDropdown.Item>
-                        </NavDropdown>
-                    </Nav>
-                </Navbar.Collapse>
-            </Navbar>
-        )
-    }
+  function handleClose() {
+    setAnchorEl(null);
+  }
 
+  return (
+    <div className={classes.root}>
+      <FormGroup>
+        <FormControlLabel
+          control={<Switch checked={auth} onChange={handleChange} aria-label="LoginSwitch" />}
+          label={auth ? 'Logout' : 'Login'}
+        />
+      </FormGroup>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="Menu">
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            HOMIE
+          </Typography>
+          {auth? (
+            <div>
+                <Button>Welcome {user.name}</Button>
+              <IconButton
+                aria-owns={open ? 'menu-appbar' : undefined}
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={open}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose}>My account</MenuItem>
+              </Menu>
+            </div>
+          ) : (
+              <div>
+                  <Button color="inherit">Login</Button>
+                  <Button color="inherit">Register</Button>
+              </div>
+          )}
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
 }
-// const Navbar = () => (
-//     <nav className='navbar navbar-expand-md navbar-light navbar-laravel'>
-//         <div className='container'>
-//             <Link className='navbar-brand' to='/'>Homie</Link>
-//             <ul className="nav navbar-nav">
-//                 <li>Login Owner</li>
-//                 <li>Register</li>
-//             </ul>
-//         </div>
-//     </nav>
-// )
 
-export default Header
+export default Header;

@@ -14,6 +14,7 @@ class HomestayController extends Controller
     }
 
     public function store(Request $request) {
+        error_log($request->id_user);
         $this->validate($request, [
             'name'          => 'required',
             'location'      => 'required',
@@ -32,7 +33,11 @@ class HomestayController extends Controller
         return response()->json($product, 201);
     }
 
-    // public function showDetail(Request $request) {
-        
-    // }
+    public function showDetail($id) {
+        $homestay = Homestay::with(['rooms' => function ($query) {
+            $query->where('price', 100);
+        }])->find($id);
+
+        return $homestay->toJson();
+    }
 }
