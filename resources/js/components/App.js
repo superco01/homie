@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, HashRouter } from 'react-router-dom';
 import Header from './Header';
 import Search from './Search';
 import axios from 'axios';
 import HomestayDetails from './HomestayDetail';
 import HomestayList from './HomestayList';
+import Login from './Login';
+import Register from './Register';
+import OwnerHomestay from './OwnerHomestay';
+import OrderForm from './OrderForm';
+import AddHomestay from './AddHomestay';
+import Payment from './Payment';
 
 export default class App extends Component {
     constructor(){
@@ -42,7 +48,7 @@ export default class App extends Component {
         //         this.setState({ homestays });
         //     })
 
-        const { history } = this.props
+        // const { history } = this.props
         // const homestay = {
         //     id_user: this.state.id_user,
         //     name: 'test 1',
@@ -86,16 +92,23 @@ export default class App extends Component {
     render() {
         
         return (
-            <Router>
             <div>
-                <Header/>
-                <Switch>
-                    <Route exact path='/' component={Search}/>
-                    <Route path='/homestay/:id' component={HomestayDetails}/>
-                </Switch>
-                </div>
-            </Router>
-            
+                <HashRouter>
+                    <div>
+                        <Header/>
+                        <Switch>
+                            <Route exact path='/' component={Search}/>
+                            <Route path='/login' component={Login}/>
+                            <Route path='/register' component={Register}/>
+                            <Route path='/ownerhomestay' component={OwnerHomestay}/>
+                            <Route path='/addhomestay/:id' component={AddHomestay}/>
+                            <Route path='/homestay/:id?/:checkin?/:duration?' component={HomestayDetails}/>
+                            <Route path='/order/:id?/:checkin?/:duration?' component={OrderForm}/>
+                            <Route path='/payment/:id' component={Payment}/>
+                        </Switch>
+                    </div>
+                </HashRouter>
+            </div>
         );
     }
 }

@@ -12,11 +12,27 @@ class Room extends Model
         'id',
     ];
     protected $fillable = [
-        'id_homestay',
-        'title',
+        'homestay_id',
+        'room_number',
+        'type',
         'description',
         'photos',
         'price',
         'room_availability',
     ];
+
+    // public function homestay() {
+    //     return $this->belongsTo(Homestay::class);
+    // }
+    public function orders() {
+        return $this->hasMany(Order::class);
+    }
+
+    public function roomFacilities() {
+        return $this->hasMany(RoomFacilities::class);
+    }
+
+    public function roomMeta() {
+        return $this->hasMany(RoomMeta::class);
+    }
 }

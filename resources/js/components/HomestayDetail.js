@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Card, CardActions, CardContent, CardMedia, Button, Typography} from '@material-ui/core'
+import {Divider, ButtonBase, Grid, Card, CardActions, CardContent, CardMedia, Button, Typography, Container, Paper} from '@material-ui/core'
 import {Link} from 'react-router-dom'
 
 
@@ -8,51 +8,105 @@ class HomestayDetail extends Component {
         super()
         this.state = {
             homestay: [],
+            roomCount: 0,
+            rooms: [],
             errors: [],
         }
     }
 
     componentDidMount() {
-        console.log("Fetch data");
         const homestayId= this.props.match.params.id
-        console.log(this.props);
         
         axios.get(`/api/homestay/${homestayId}`)
-            .then(response => {
-                return response;
-            })
             .then(homestay => {
                 this.setState({ homestay: homestay.data});
-            });
-        console.log(this.state.homestay);
-        
+                // return homestay.data;
+            })
+            .then(() => {
+              axios.get(`/api/roomList/${homestayId}`)
+              .then(response => {
+                this.setState({ rooms: response.data.room, roomCount: response.data.roomCount });
+              })
+            })
     }
 
     render() {
         return (
-            <div>
-                {this.state.homestay ? (
-                    <Card>
-                        <CardMedia
-                        style={{height: 0, paddingTop: '56.25%'}}
-                        image="asd"
-                        title={this.state.homestay.name}
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="caption" component="header">
-                                {this.state.homestay.id}
-                            </Typography>
-                            <Typography component="p">
-                                {this.state.homestay.name}
-                            </Typography>
-                        </CardContent>
-                        <CardActions>
-                            <Button component={Link} to={`/homestay/${this.state.homestay.id}`}>
+          <div>
+          <Container style={{paddingTop: 50, paddingBottom: 100, paddingLeft: 150, paddingRight: 150}}>
+            {/* {this.state.homestay ? ( */}
+              <Container>
+                <Container spacing={3} style={{paddingBottom: 25}}>
+                  <Card spacing={3}>
+                    <CardMedia
+                      style={{height: 0, paddingTop: '56.25%'}}
+                      image="/images/evelyn-paris-96422-unsplash.jpg"
+                      title={this.state.homestay.name}
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="caption" component="header">
+                          {this.state.homestay.name}
+                      </Typography>
+                      <Typography component="p">
+                          Facilities : {this.state.homestay.facilities}
+                      </Typography>
+                      <Typography component="p">
+                          Total Rooms : {this.state.roomCount} from {this.state.homestay.number_of_rooms}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Container>
+                <Divider variant="fullWidth"/>
+                {/* <Container spacing={2}> */}
+                { this.state.rooms.map(room =>(
+                  <Container key={room.id}  style={{paddingTop: 25, paddingBottom: 25}}>
+                    <Paper>
+                      <Grid container spacing={2}>
+                        <Grid item>
+                          <ButtonBase style={{ width: 128 , height: 128 }}>
+                            <img style={{ margin: 1, display: 'block', maxWidth: '100%', maxHeight: '100%' }} alt="complex" src="/images/evelyn-paris-96422-unsplash.jpg"/>
+                          </ButtonBase>
+                        </Grid>
+                        <Grid item xs={12} sm container>
+                          <Grid item xs container direction="column" spacing={2}>
+                            <Grid item xs>
+                              <Typography variant="h6" >
+                                {room.type}
+                              </Typography>
+                            </Grid>
+                            <Divider/>
+                            <Grid item xs>
+                              <Typography variant="body1">
+                                {room.room_number}
+                              </Typography>
+                              <Typography variant="body1">
+                                {room.price}
+                              </Typography>
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                        <Grid item sm container>
+                          <Grid item xs={12} >
+                            <Grid item xs={12}>
+                              <Typography variant="h6">
+                                Rp {room.price},-
+                              </Typography>
+                            </Grid>
+                            <Grid item xs={12}>
+                              <Button component={Link} to={`/order/${room.id}/${this.props.match.params.checkin}/${this.props.match.params.duration}`}>
                                 Select Room
-                            </Button>
-                        </CardActions>
-                    </Card>
-                ) : "Empty"}
+                              </Button>
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </Paper>
+                  </Container>
+                )) }
+                {/* </Container> */}
+                </Container>
+                {/* ) : <Paper>Not Found</Paper>} */}
+            </Container>
             </div>
         )
     }

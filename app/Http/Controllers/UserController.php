@@ -2,12 +2,74 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
-class User extends Controllers {
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Facades\JWTFactory;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+use Tymon\JWTAuth\PayloadFactory;
+use Tymon\JWTAuth\JWTManager as JWT;
+
+class UserController extends Controller 
+{
+    public function register(Request $request) {
+        $this->validate($request,[
+            'name'      => 'required',
+            'email'     => 'required',
+            'password'  => 'required|min:4',
+        ]);
+        
+        $user = User::create([
+            'name'      => $request->json()->get('name'),
+            'email'     => $request->json()->get('email'),
+            'password'  => Hash::make($request->json()->get('password')),
+        ]);
+
+        $token = JWTAuth::fromUser($user);
+
+        return response()->json(compact('user', 'token'), 201);
+    }
+
+    public function login(Request $request) {
+        $credentials = $request->json()->all();
+        
+        try {
+            if (! $token = JWTAuth::attempt($credentials)) {
+                return response()->json(['error' => 'invalid_credentials'], 401);
+            }
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'could_not_create_token'], 500);
+        }
+
+        return response()->json(compact('token'));
+    }
+
+    public function logout() {
+        auth()->logout();
+
+        return response()->json(['message' => 'successfully logged out']);
+    }
+
+    public function getAuthenticatedUser() {
+        try {
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user not found'], 404);
+            }
+        }catch(Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            return response()->json(['token expired'], $e->getStatusCode());
+        }catch(Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return response()->json(['token invalid'], $e->getStatusCode());
+        }catch(Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return response()->json(['token absent'], $e->getStatusCode());
+        }
+        return response()->json(compact('user'));
+    }
+
     public function showName($id) {
-        $user = User::find($id);
-        error_log("usercontroller");
+        $homestay = User::find($id);
     
         return $homestay->toJson();
     }
