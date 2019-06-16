@@ -44,7 +44,7 @@ function HomestayList(props) {
                 </Typography>
               </Grid>
               <Grid item xs>
-                <Button component={Link} to={`/homestay/${props.homestay.id}/${props.checkinDate}/${props.duration}`}>
+                <Button variant="contained" color="primary" component={Link} to={`/homestay/${props.homestay.id}/${props.checkinDate}/${props.duration}`}>
                   Select Homestay
                 </Button>
               </Grid>

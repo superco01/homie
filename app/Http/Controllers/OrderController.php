@@ -42,6 +42,16 @@ class OrderController extends Controller
         return response()->json($order, 201);
     }
 
+    public function update(Request $request) {
+        $id = $request->order_id;
+        $request->request->remove('order_id');
+        $request->request->remove('status_code');
+        $request->request->remove('status_message');
+        $orderUpdate = Order::where('id', $id)->update($request->all());
+
+        return $orderUpdate->toJson();
+    }
+
     public function getOrder($id) {
         $order = Order::find($id);
         // $order = Order::with(['rooms'])->find($id);
@@ -50,11 +60,11 @@ class OrderController extends Controller
         return response()->json(compact('order', 'homestay'));
     }
 
-    public function invoice(Request $request) {
-        $invoice = Order::with(['transactions' => function ($query) {
-            $query->where('status', 'paid');
-        }])->find($id);
+    // public function invoice(Request $request) {
+    //     $invoice = Order::with(['transactions' => function ($query) {
+    //         $query->where('status', 'paid');
+    //     }])->find($id);
 
-        return $invoice->toJson();
-    }
+    //     return $invoice->toJson();
+    // }
 }

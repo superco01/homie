@@ -27,8 +27,12 @@ Route::get('roomList/{id}', 'RoomController@showRoomList');
 Route::get('room/{id}', 'RoomController@getRoom');
 Route::get('user/{id}', 'UserController@showName');
 Route::post('order', 'OrderController@store');
+Route::post('order', 'OrderController@store');
+Route::post('orderUpdate', 'OrderController@update');
 Route::get('order/{id}', 'OrderController@getOrder');
-
+//Management Route
+Route::post('checkin', 'ManagementController@checkin');
+Route::post('checkout', 'ManagementController@checkout');
 //User Route
 Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@login');

@@ -93,7 +93,7 @@ class HomestayDetail extends Component {
                               </Typography>
                             </Grid>
                             <Grid item xs={12}>
-                              <Button component={Link} to={`/order/${room.id}/${this.props.match.params.checkin}/${this.props.match.params.duration}`}>
+                              <Button variant="contained" color="primary" component={Link} to={`/order/${room.id}/${this.props.match.params.checkin}/${this.props.match.params.duration}`}>
                                 Select Room
                               </Button>
                             </Grid>

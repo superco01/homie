@@ -108983,6 +108983,8 @@ function (_Component) {
           item: true,
           xs: 12
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+          variant: "contained",
+          color: "primary",
           component: react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"],
           to: "/order/".concat(room.id, "/").concat(_this3.props.match.params.checkin, "/").concat(_this3.props.match.params.duration)
         }, "Select Room")))))));
@@ -109096,6 +109098,8 @@ function HomestayList(props) {
     item: true,
     xs: true
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+    variant: "contained",
+    color: "primary",
     component: react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"],
     to: "/homestay/".concat(props.homestay.id, "/").concat(props.checkinDate, "/").concat(props.duration)
   }, "Select Homestay")))))));
@@ -110071,6 +110075,10 @@ function Payment(props) {
     fetchOrder();
   }, []);
 
+  function updateOrderStatus() {
+    axios__WEBPACK_IMPORTED_MODULE_17___default.a.post('/api/orderUpdate', snapPayResult);
+  }
+
   function onPay(e) {
     e.preventDefault();
     axios__WEBPACK_IMPORTED_MODULE_17___default.a.post('/api/snaptoken', responseData, {
@@ -110087,12 +110095,14 @@ function Payment(props) {
           console.log('success');
           console.log(result);
           setSnapPayResult(result);
+          updateOrderStatus();
           props.history.push('/');
         },
         onPending: function onPending(result) {
           console.log('pending');
           console.log(result);
           setSnapPayResult(result);
+          updateOrderStatus();
           props.history.push('/');
         },
         onError: function onError(result) {
@@ -110465,7 +110475,7 @@ function (_Component) {
     _this.state = {
       location: '',
       duration: 1,
-      checkinDate: '',
+      checkinDate: '16-06-2019',
       guests: '',
       rooms: '',
       homestays: [],
@@ -110503,7 +110513,7 @@ function (_Component) {
         room_availability: 1
       }).then(function (response) {
         _this2.setState({
-          homestays: response.data
+          homestays: response.data.homestaySearch
         });
 
         console.log(_this2.state.homestays);
@@ -110518,10 +110528,12 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       console.log(this.state.checkinDate);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Container"], {
         style: {
-          padding: 50,
+          padding: 30,
           paddingLeft: 150,
           paddingRight: 150
         }
@@ -110537,21 +110549,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TextField"], {
         id: "date",
         label: "Check-in",
-        type: "date",
-        value: this.state.checkinDate // className={classes.textField}
-        ,
-        style: {
-          marginTop: 24,
-          marginLeft: 24
-        },
-        InputLabelProps: {
-          shrink: true
-        }
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["ButtonBase"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Paper"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TextField"], {
-        id: "date",
-        label: "Check-in",
-        type: "date",
-        defaultValue: "12-12-2019" // value={this.state.checkinDate}
+        type: "date" // value={this.state.checkinDate}
         // className={classes.textField}
         ,
         style: {
@@ -110561,36 +110559,27 @@ function (_Component) {
         InputLabelProps: {
           shrink: true
         }
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TextField"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
+        item: true
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TextField"], {
         style: {
-          padding: 24
+          marginTop: 24
         },
         id: "searchInput",
         placeholder: "Location",
         margin: "normal",
         onChange: this.onSearchLocationInputChange
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TextField"], {
-        style: {
-          padding: 24
-        },
-        id: "searchInput",
-        placeholder: "Location",
-        margin: "normal",
-        onChange: this.onSearchLocationInputChange
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Container"], {
-        xs: 2,
-        sm: 1,
-        md: 2,
-        lg: 2
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
+        item: true
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         variant: "contained",
-        color: "primary",
+        color: "secondary",
         style: {
-          padding: 24,
+          padding: 16,
           margin: 24
         },
         onClick: this.onSearch
-      }, "Search")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Container"], {
+      }, "Search")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Divider"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Container"], {
         style: {
           padding: 20,
           paddingLeft: 150,
@@ -110607,7 +110596,9 @@ function (_Component) {
           key: homestay.id
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_HomestayList__WEBPACK_IMPORTED_MODULE_2__["default"], {
           key: homestay.id,
-          homestay: homestay
+          homestay: homestay,
+          checkinDate: _this3.state.checkinDate,
+          duration: _this3.state.duration
         }));
       })))));
     }

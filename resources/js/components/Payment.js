@@ -163,6 +163,10 @@ export default function Payment(props) {
     fetchOrder();
   }, [])
 
+  function updateOrderStatus() {
+    axios.post('/api/orderUpdate', snapPayResult)
+  }
+
   function onPay(e) {
     e.preventDefault()
     
@@ -173,8 +177,8 @@ export default function Payment(props) {
       console.log(response);
       // token = response.data
       window.snap.pay(response.data, {
-        onSuccess: function(result){console.log('success');console.log(result);setSnapPayResult(result);props.history.push('/');},
-        onPending: function(result){console.log('pending');console.log(result);setSnapPayResult(result);props.history.push('/');},
+        onSuccess: function(result){console.log('success');console.log(result);setSnapPayResult(result);updateOrderStatus();props.history.push('/');},
+        onPending: function(result){console.log('pending');console.log(result);setSnapPayResult(result);updateOrderStatus();props.history.push('/');},
         onError: function(result){console.log('error');console.log(result);setSnapPayResult(result);},
         onClose: function(){console.log('customer closed the popup without finishing the payment');},
       })

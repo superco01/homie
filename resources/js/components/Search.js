@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Grid, TextField, Paper, Container, Button, ButtonBase} from '@material-ui/core'
+import {Grid, TextField, Paper, Container, Button, ButtonBase, Divider} from '@material-ui/core'
 import HomestayList from './HomestayList';
 import SearchResult from './SearchResult';
 
@@ -11,7 +11,7 @@ class Search extends Component {
         this.state = {
             location: '',
             duration: 1,
-            checkinDate: '',
+            checkinDate: '16-06-2019',
 
             guests: '',
             rooms: '',
@@ -48,7 +48,7 @@ class Search extends Component {
             room_availability: 1,
         })
         .then(response => {
-            this.setState({ homestays: response.data})
+            this.setState({ homestays: response.data.homestaySearch})
             console.log(this.state.homestays);
         })
         // axios.get('/api/homestay')
@@ -68,7 +68,7 @@ class Search extends Component {
                 {/* {this.state.location ? ( */}
                     <div>
                         <Container
-                        style={{padding: 50, paddingLeft: 150, paddingRight: 150}}>
+                        style={{padding: 30, paddingLeft: 150, paddingRight: 150}}>
                         <Paper>
                             <Grid container spacing={2} style={{margin: 12, paddingBottom: 12}}>
                                 <Grid item>
@@ -76,7 +76,7 @@ class Search extends Component {
                                         id="date"
                                         label="Check-in"
                                         type="date"
-                                        value={this.state.checkinDate}
+                                        // value={this.state.checkinDate}
                                         // className={classes.textField}
                                         style={{marginTop: 24, marginLeft:24}}
                                         InputLabelProps={{
@@ -84,11 +84,28 @@ class Search extends Component {
                                         }}
                                     />
                                 </Grid>
-                                <ButtonBase></ButtonBase>
+                                <Grid item>
+                                    <TextField
+                                        style={{marginTop: 24}}
+                                        id="searchInput"
+                                        placeholder="Location"
+                                        margin="normal"
+                                        onChange={this.onSearchLocationInputChange}
+                                    />
+                                </Grid>
+                                <Grid item>
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        style={{padding: 16, margin:24}}
+                                        onClick={this.onSearch}
+                                        >Search
+                                    </Button>
+                                </Grid>
                             </Grid>
                         </Paper>
-
-                        <Paper>
+                        <Divider/>
+                        {/* <Paper>
                         <TextField
                             id="date"
                             label="Check-in"
@@ -123,7 +140,7 @@ class Search extends Component {
                         onClick={this.onSearch}
                         >Search</Button>
                         </Container>
-                        </Paper>
+                        </Paper> */}
                         </Container>
                         <Container
                         style={{padding: 20, paddingLeft: 150, paddingRight: 150}}>
@@ -134,7 +151,7 @@ class Search extends Component {
                         >
                             { this.state.homestays.map(homestay => (
                                 <Grid item xs={12} key={homestay.id} >
-                                    <HomestayList key={homestay.id} homestay={homestay}/>
+                                    <HomestayList key={homestay.id} homestay={homestay} checkinDate={this.state.checkinDate} duration={this.state.duration}/>
                                 </Grid>
                             ))}
                         </Grid>
