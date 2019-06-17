@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function EditHomestay(props) {
+export default function EditRoom(props) {
   const classes = useStyles();
 
   const [name, setName] = React.useState('')
@@ -88,7 +88,7 @@ export default function EditHomestay(props) {
         number_of_rooms: numberOfRooms,
       }
 
-      axios.post(`/api/homestayUpdate`, editHomestay, {
+      axios.post(`/api/roomUpdate`, editHomestay, {
         headers: { 'Content-Type': 'application/json' }
       }).then(response => {
         const data = response.data;
@@ -100,8 +100,9 @@ export default function EditHomestay(props) {
             price: price,
             room_availability: 0
           }
-        // axios.post(`/api/room`, addNewRoom)
-        // console.log(response);
+
+        axios.post(`/api/room`, addNewRoom)
+        console.log(response);
       }).catch(error => {
         console.log(error);
       })

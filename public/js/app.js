@@ -34083,6 +34083,70 @@ exports.default = _default;
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/icons/Delete.js":
+/*!***************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Delete.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)(_react.default.createElement(_react.default.Fragment, null, _react.default.createElement("path", {
+  d: "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+}), _react.default.createElement("path", {
+  fill: "none",
+  d: "M0 0h24v24H0z"
+})), 'Delete');
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/icons/FilterList.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/@material-ui/icons/FilterList.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)(_react.default.createElement(_react.default.Fragment, null, _react.default.createElement("path", {
+  d: "M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"
+}), _react.default.createElement("path", {
+  fill: "none",
+  d: "M0 0h24v24H0z"
+})), 'FilterList');
+
+exports.default = _default;
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/icons/LockOutlined.js":
 /*!*********************************************************!*\
   !*** ./node_modules/@material-ui/icons/LockOutlined.js ***!
@@ -108429,6 +108493,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AddHomestay__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./AddHomestay */ "./resources/js/components/AddHomestay.js");
 /* harmony import */ var _Payment__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./Payment */ "./resources/js/components/Payment.js");
 /* harmony import */ var _EditHomestay__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./EditHomestay */ "./resources/js/components/EditHomestay.js");
+/* harmony import */ var _OwnerOrderList__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./OwnerOrderList */ "./resources/js/components/OwnerOrderList.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -108446,6 +108511,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -108483,77 +108549,12 @@ function (_Component) {
   }
 
   _createClass(App, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {// axios.get(`/api/homestay/${this.state.id_user}`)
-      //     .then(response => {
-      //         return response;
-      //     })
-      //     .then(homestay => {
-      //         this.setState({ homestays: homestay.data});
-      //     });
-      // axios.get('/api/homestay')
-      //     .then(response => {
-      //         return response;
-      //     })
-      //     .then(homestay => {
-      //         this.setState({ homestays: homestay.data });
-      //         console.log(homestay);
-      //         console.log(this.state.homestays);
-      //     })
-      // fetch('/api/homestay')
-      //     .then(response => {
-      //         return response.json();
-      //     })
-      //     .then(homestays => {
-      //         this.setState({ homestays });
-      //     })
-      // const { history } = this.props
-      // const homestay = {
-      //     id_user: this.state.id_user,
-      //     name: 'test 1',
-      //     location: 'loc 1',
-      //     address: 'address 1',
-      //     facilities: 'fac 1',
-      //     number_of_rooms: 6,
-      // }
-      // axios.post('api/homestay', homestay)
-      // .then(res => {
-      //         history.push('/')
-      //     }
-      // ).catch(
-      //     error => {
-      //         this.setState({
-      //             errors: error.response
-      //         })
-      //     }
-      // )
-      // const room = {
-      //     id_homestay: 1,
-      //     title: 'test room 1',
-      //     description: 'test desc room 1',
-      //     price: 100,
-      //     room_availability: true,
-      //     photos: 'test photos path 1',
-      // }
-      // axios.post('api/room', room).then(
-      //     response => {
-      //         history.push('/')
-      //     }
-      // ).catch(
-      //     error => {
-      //         this.setState({
-      //             errors: error.response
-      //         })
-      //     }
-      // )
-    }
-  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         exact: true,
         path: "/",
-        component: _Search__WEBPACK_IMPORTED_MODULE_4__["default"]
+        component: _OwnerOrderList__WEBPACK_IMPORTED_MODULE_15__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/login",
         component: _Login__WEBPACK_IMPORTED_MODULE_8__["default"]
@@ -108717,13 +108718,18 @@ function EditHomestay(props) {
 
   var _React$useState15 = react__WEBPACK_IMPORTED_MODULE_1___default.a.useState(''),
       _React$useState16 = _slicedToArray(_React$useState15, 2),
-      photos = _React$useState16[0],
-      setPhotos = _React$useState16[1];
+      photo1 = _React$useState16[0],
+      setPhoto1 = _React$useState16[1];
 
   var _React$useState17 = react__WEBPACK_IMPORTED_MODULE_1___default.a.useState(''),
       _React$useState18 = _slicedToArray(_React$useState17, 2),
-      price = _React$useState18[0],
-      setPrice = _React$useState18[1];
+      photo2 = _React$useState18[0],
+      setPhoto2 = _React$useState18[1];
+
+  var _React$useState19 = react__WEBPACK_IMPORTED_MODULE_1___default.a.useState(''),
+      _React$useState20 = _slicedToArray(_React$useState19, 2),
+      price = _React$useState20[0],
+      setPrice = _React$useState20[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     var fetchRoom =
@@ -108738,14 +108744,22 @@ function EditHomestay(props) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get("api/homestay/".concat(props.match.params.id));
+                return axios.get("api/homestay/".concat(props.match.params.id)).then(function (response) {
+                  return response.data;
+                });
 
               case 2:
                 response = _context.sent;
-                setRoom(response.data);
                 console.log(response);
+                setName(response.name);
+                setLocation(response.location);
+                setAddress(response.address);
+                setFacilities(response.facilities);
+                setNumberOfRooms(response.number_of_rooms);
+                setPhoto1(response.photo1);
+                setPhoto2(response.photo2);
 
-              case 5:
+              case 11:
               case "end":
                 return _context.stop();
             }
@@ -108764,15 +108778,17 @@ function EditHomestay(props) {
   function onSubmit(e) {
     e.preventDefault();
     var userId = props.match.params.id;
-    var addNewHomestay = {
+    var editHomestay = {
       user_id: userId,
-      name: name,
-      location: location,
-      address: address,
+      // name: name,
+      // location: location,
+      // address: address,
       facilities: facilities,
+      photo1: photo1,
+      photo2: photo2,
       number_of_rooms: numberOfRooms
     };
-    axios.post("/api/homestay", addNewHomestay, {
+    axios.post("/api/homestayUpdate", editHomestay, {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -108784,10 +108800,10 @@ function EditHomestay(props) {
         description: description,
         photos: photos,
         price: price,
-        room_availability: 0
+        room_availability: 0 // axios.post(`/api/room`, addNewRoom)
+        // console.log(response);
+
       };
-      axios.post("/api/room", addNewRoom);
-      console.log(response);
     }).catch(function (error) {
       console.log(error);
     });
@@ -108811,6 +108827,7 @@ function EditHomestay(props) {
     item: true,
     xs: 12
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    disabled: true,
     value: name,
     onChange: function onChange(event) {
       return setName(event.target.value);
@@ -108827,6 +108844,7 @@ function EditHomestay(props) {
     item: true,
     xs: 12
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    disabled: true,
     value: location,
     onChange: function onChange(event) {
       return setLocation(event.target.value);
@@ -108842,6 +108860,7 @@ function EditHomestay(props) {
     item: true,
     xs: 12
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    disabled: true,
     value: address,
     onChange: function onChange(event) {
       return setAddress(event.target.value);
@@ -108872,6 +108891,7 @@ function EditHomestay(props) {
     item: true,
     xs: 12
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    disabled: true,
     value: numberOfRooms,
     onChange: function onChange(event) {
       return setNumberOfRooms(event.target.value);
@@ -108883,21 +108903,6 @@ function EditHomestay(props) {
     label: "Number of Rooms",
     name: "numberOfRooms",
     autoComplete: "numberOfRooms"
-  })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
-    item: true,
-    xs: 12
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    value: type,
-    onChange: function onChange(event) {
-      return setType(event.target.value);
-    },
-    variant: "outlined",
-    required: true,
-    fullWidth: true,
-    id: "type",
-    label: "Type",
-    name: "type",
-    autoComplete: "type"
   })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
     item: true,
     xs: 12
@@ -108917,17 +108922,32 @@ function EditHomestay(props) {
     item: true,
     xs: 12
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    value: photos,
+    value: photo1,
     onChange: function onChange(event) {
       return setPhotos(event.target.value);
     },
     variant: "outlined",
     required: true,
     fullWidth: true,
-    id: "photos",
-    label: "Photos",
-    name: "photos",
-    autoComplete: "photos"
+    id: "photo1",
+    label: "Photo 1",
+    name: "photo1",
+    autoComplete: "photo1"
+  })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    item: true,
+    xs: 12
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    value: photo2,
+    onChange: function onChange(event) {
+      return setPhotos(event.target.value);
+    },
+    variant: "outlined",
+    required: true,
+    fullWidth: true,
+    id: "photo2",
+    label: "Photo 2",
+    name: "photo2",
+    autoComplete: "photo2"
   })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
     item: true,
     xs: 12
@@ -110170,6 +110190,434 @@ function (_Component) {
 
 /***/ }),
 
+/***/ "./resources/js/components/OwnerOrderList.js":
+/*!***************************************************!*\
+  !*** ./resources/js/components/OwnerOrderList.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return OwnerOrderList; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_Table__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Table */ "./node_modules/@material-ui/core/esm/Table/index.js");
+/* harmony import */ var _material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/TableBody */ "./node_modules/@material-ui/core/esm/TableBody/index.js");
+/* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/TableCell */ "./node_modules/@material-ui/core/esm/TableCell/index.js");
+/* harmony import */ var _material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/TableHead */ "./node_modules/@material-ui/core/esm/TableHead/index.js");
+/* harmony import */ var _material_ui_core_TablePagination__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/TablePagination */ "./node_modules/@material-ui/core/esm/TablePagination/index.js");
+/* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/TableRow */ "./node_modules/@material-ui/core/esm/TableRow/index.js");
+/* harmony import */ var _material_ui_core_TableSortLabel__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/TableSortLabel */ "./node_modules/@material-ui/core/esm/TableSortLabel/index.js");
+/* harmony import */ var _material_ui_core_Toolbar__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/Toolbar */ "./node_modules/@material-ui/core/esm/Toolbar/index.js");
+/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
+/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/esm/Paper/index.js");
+/* harmony import */ var _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core/Checkbox */ "./node_modules/@material-ui/core/esm/Checkbox/index.js");
+/* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/core/IconButton */ "./node_modules/@material-ui/core/esm/IconButton/index.js");
+/* harmony import */ var _material_ui_core_Tooltip__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @material-ui/core/Tooltip */ "./node_modules/@material-ui/core/esm/Tooltip/index.js");
+/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "./node_modules/@material-ui/core/esm/FormControlLabel/index.js");
+/* harmony import */ var _material_ui_core_Switch__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @material-ui/core/Switch */ "./node_modules/@material-ui/core/esm/Switch/index.js");
+/* harmony import */ var _material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @material-ui/icons/Delete */ "./node_modules/@material-ui/icons/Delete.js");
+/* harmony import */ var _material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var _material_ui_icons_FilterList__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @material-ui/icons/FilterList */ "./node_modules/@material-ui/icons/FilterList.js");
+/* harmony import */ var _material_ui_icons_FilterList__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_FilterList__WEBPACK_IMPORTED_MODULE_20__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function createData(name, calories, fat, carbs, protein) {
+  return {
+    name: name,
+    calories: calories,
+    fat: fat,
+    carbs: carbs,
+    protein: protein
+  };
+}
+
+var rows = [createData('Cupcake', 305, 3.7, 67, 4.3), createData('Donut', 452, 25.0, 51, 4.9), createData('Eclair', 262, 16.0, 24, 6.0), createData('Frozen yoghurt', 159, 6.0, 24, 4.0), createData('Gingerbread', 356, 16.0, 49, 3.9), createData('Honeycomb', 408, 3.2, 87, 6.5), createData('Ice cream sandwich', 237, 9.0, 37, 4.3), createData('Jelly Bean', 375, 0.0, 94, 0.0), createData('KitKat', 518, 26.0, 65, 7.0), createData('Lollipop', 392, 0.2, 98, 0.0), createData('Marshmallow', 318, 0, 81, 2.0), createData('Nougat', 360, 19.0, 9, 37.0), createData('Oreo', 437, 18.0, 63, 4.0)];
+
+function desc(a, b, orderBy) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+
+  return 0;
+}
+
+function stableSort(array, cmp) {
+  var stabilizedThis = array.map(function (el, index) {
+    return [el, index];
+  });
+  stabilizedThis.sort(function (a, b) {
+    var order = cmp(a[0], b[0]);
+    if (order !== 0) return order;
+    return a[1] - b[1];
+  });
+  return stabilizedThis.map(function (el) {
+    return el[0];
+  });
+}
+
+function getSorting(order, orderBy) {
+  return order === 'desc' ? function (a, b) {
+    return desc(a, b, orderBy);
+  } : function (a, b) {
+    return -desc(a, b, orderBy);
+  };
+}
+
+var headRows = [{
+  id: 'name',
+  numeric: false,
+  disablePadding: true,
+  label: 'Dessert (100g serving)'
+}, {
+  id: 'calories',
+  numeric: true,
+  disablePadding: false,
+  label: 'Calories'
+}, {
+  id: 'fat',
+  numeric: true,
+  disablePadding: false,
+  label: 'Fat (g)'
+}, {
+  id: 'carbs',
+  numeric: true,
+  disablePadding: false,
+  label: 'Carbs (g)'
+}, {
+  id: 'protein',
+  numeric: true,
+  disablePadding: false,
+  label: 'Protein (g)'
+}];
+
+function EnhancedTableHead(props) {
+  var onSelectAllClick = props.onSelectAllClick,
+      order = props.order,
+      orderBy = props.orderBy,
+      numSelected = props.numSelected,
+      rowCount = props.rowCount,
+      onRequestSort = props.onRequestSort;
+
+  var createSortHandler = function createSortHandler(property) {
+    return function (event) {
+      onRequestSort(event, property);
+    };
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_9__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    padding: "checkbox"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    indeterminate: numSelected > 0 && numSelected < rowCount,
+    checked: numSelected === rowCount,
+    onChange: onSelectAllClick,
+    inputProps: {
+      'aria-label': 'Select all desserts'
+    }
+  })), headRows.map(function (row) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      key: row.id,
+      align: row.numeric ? 'right' : 'left',
+      padding: row.disablePadding ? 'none' : 'default',
+      sortDirection: orderBy === row.id ? order : false
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableSortLabel__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      active: orderBy === row.id,
+      direction: order,
+      onClick: createSortHandler(row.id)
+    }, row.label));
+  })));
+}
+
+EnhancedTableHead.propTypes = {
+  numSelected: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number.isRequired,
+  onRequestSort: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired,
+  onSelectAllClick: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired,
+  order: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
+  orderBy: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
+  rowCount: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number.isRequired
+};
+var useToolbarStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["makeStyles"])(function (theme) {
+  return {
+    root: {
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(1)
+    },
+    highlight: theme.palette.type === 'light' ? {
+      color: theme.palette.secondary.main,
+      backgroundColor: Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["lighten"])(theme.palette.secondary.light, 0.85)
+    } : {
+      color: theme.palette.text.primary,
+      backgroundColor: theme.palette.secondary.dark
+    },
+    spacer: {
+      flex: '1 1 100%'
+    },
+    actions: {
+      color: theme.palette.text.secondary
+    },
+    title: {
+      flex: '0 0 auto'
+    }
+  };
+});
+
+var EnhancedTableToolbar = function EnhancedTableToolbar(props) {
+  var classes = useToolbarStyles();
+  var numSelected = props.numSelected;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Toolbar__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    className: Object(clsx__WEBPACK_IMPORTED_MODULE_1__["default"])(classes.root, _defineProperty({}, classes.highlight, numSelected > 0))
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.title
+  }, numSelected > 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    color: "inherit",
+    variant: "subtitle1"
+  }, numSelected, " selected") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    variant: "h6",
+    id: "tableTitle"
+  }, "Nutrition")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.spacer
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.actions
+  }, numSelected > 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Tooltip__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    title: "Delete"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    "aria-label": "Delete"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_19___default.a, null))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Tooltip__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    title: "Filter list"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    "aria-label": "Filter list"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_FilterList__WEBPACK_IMPORTED_MODULE_20___default.a, null)))));
+};
+
+EnhancedTableToolbar.propTypes = {
+  numSelected: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number.isRequired
+};
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["makeStyles"])(function (theme) {
+  return {
+    root: {
+      width: '100%',
+      marginTop: theme.spacing(3)
+    },
+    paper: {
+      width: '100%',
+      marginBottom: theme.spacing(2)
+    },
+    table: {
+      minWidth: 750
+    },
+    tableWrapper: {
+      overflowX: 'auto'
+    }
+  };
+});
+function OwnerOrderList() {
+  var classes = useStyles();
+
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState('asc'),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      order = _React$useState2[0],
+      setOrder = _React$useState2[1];
+
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState('calories'),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      orderBy = _React$useState4[0],
+      setOrderBy = _React$useState4[1];
+
+  var _React$useState5 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState([]),
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      selected = _React$useState6[0],
+      setSelected = _React$useState6[1];
+
+  var _React$useState7 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(0),
+      _React$useState8 = _slicedToArray(_React$useState7, 2),
+      page = _React$useState8[0],
+      setPage = _React$useState8[1];
+
+  var _React$useState9 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(false),
+      _React$useState10 = _slicedToArray(_React$useState9, 2),
+      dense = _React$useState10[0],
+      setDense = _React$useState10[1];
+
+  var _React$useState11 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(5),
+      _React$useState12 = _slicedToArray(_React$useState11, 2),
+      rowsPerPage = _React$useState12[0],
+      setRowsPerPage = _React$useState12[1];
+
+  function handleRequestSort(event, property) {
+    var isDesc = orderBy === property && order === 'desc';
+    setOrder(isDesc ? 'asc' : 'desc');
+    setOrderBy(property);
+  }
+
+  function handleSelectAllClick(event) {
+    if (event.target.checked) {
+      var newSelecteds = rows.map(function (n) {
+        return n.name;
+      });
+      setSelected(newSelecteds);
+      return;
+    }
+
+    setSelected([]);
+  }
+
+  function handleClick(event, name) {
+    var selectedIndex = selected.indexOf(name);
+    var newSelected = [];
+
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, name);
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1));
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
+    }
+
+    setSelected(newSelected);
+  }
+
+  function handleChangePage(event, newPage) {
+    setPage(newPage);
+  }
+
+  function handleChangeRowsPerPage(event) {
+    setRowsPerPage(+event.target.value);
+  }
+
+  function handleChangeDense(event) {
+    setDense(event.target.checked);
+  }
+
+  var isSelected = function isSelected(name) {
+    return selected.indexOf(name) !== -1;
+  };
+
+  var emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.root
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    className: classes.paper
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(EnhancedTableToolbar, {
+    numSelected: selected.length
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.tableWrapper
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Table__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    className: classes.table,
+    "aria-labelledby": "tableTitle",
+    size: dense ? 'small' : 'medium'
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(EnhancedTableHead, {
+    numSelected: selected.length,
+    order: order,
+    orderBy: orderBy,
+    onSelectAllClick: handleSelectAllClick,
+    onRequestSort: handleRequestSort,
+    rowCount: rows.length
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_5__["default"], null, stableSort(rows, getSorting(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(function (row, index) {
+    var isItemSelected = isSelected(row.name);
+    var labelId = "enhanced-table-checkbox-".concat(index);
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      hover: true,
+      onClick: function onClick(event) {
+        return handleClick(event, row.name);
+      },
+      role: "checkbox",
+      "aria-checked": isItemSelected,
+      tabIndex: -1,
+      key: row.name,
+      selected: isItemSelected
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      padding: "checkbox"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_14__["default"], {
+      checked: isItemSelected,
+      inputProps: {
+        'aria-labelledby': labelId
+      }
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      component: "th",
+      id: labelId,
+      scope: "row",
+      padding: "none"
+    }, row.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      align: "right"
+    }, row.calories), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      align: "right"
+    }, row.fat), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      align: "right"
+    }, row.carbs), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      align: "right"
+    }, row.protein));
+  }), emptyRows > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    style: {
+      height: 49 * emptyRows
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    colSpan: 6
+  }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TablePagination__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    rowsPerPageOptions: [5, 10, 25],
+    component: "div",
+    count: rows.length,
+    rowsPerPage: rowsPerPage,
+    page: page,
+    backIconButtonProps: {
+      'aria-label': 'Previous Page'
+    },
+    nextIconButtonProps: {
+      'aria-label': 'Next Page'
+    },
+    onChangePage: handleChangePage,
+    onChangeRowsPerPage: handleChangeRowsPerPage
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_17__["default"], {
+    control: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Switch__WEBPACK_IMPORTED_MODULE_18__["default"], {
+      checked: dense,
+      onChange: handleChangeDense
+    }),
+    label: "Dense padding"
+  }));
+}
+
+/***/ }),
+
 /***/ "./resources/js/components/Payment.js":
 /*!********************************************!*\
   !*** ./resources/js/components/Payment.js ***!
@@ -110907,7 +111355,25 @@ function (_Component) {
           paddingBottom: 12
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
-        item: true
+        item: true,
+        sm: 4
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TextField"], {
+        id: "location",
+        label: "Location",
+        type: "dropdown" // value={this.state.checkinDate}
+        // className={classes.textField}
+        ,
+        style: {
+          marginTop: 24,
+          marginLeft: 24
+        },
+        InputLabelProps: {
+          shrink: true
+        },
+        variant: "outlined"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
+        item: true,
+        sm: 4
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TextField"], {
         id: "date",
         label: "Check-in",
@@ -110920,17 +111386,31 @@ function (_Component) {
         },
         InputLabelProps: {
           shrink: true
-        }
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
-        item: true
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TextField"], {
-        style: {
-          marginTop: 24
         },
-        id: "searchInput",
-        placeholder: "Location",
-        margin: "normal",
-        onChange: this.onSearchLocationInputChange
+        variant: "outlined"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
+        item: true,
+        sm: 2
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["TextField"], {
+        id: "outlined-number",
+        label: "Duration",
+        value: this.state.duration,
+        onChange: function onChange(event) {
+          return _this3.setState({
+            duration: event.target
+          });
+        },
+        type: "number",
+        style: {
+          marginTop: 24,
+          marginLeft: 24
+        } // className={classes.textField}
+        ,
+        InputLabelProps: {
+          shrink: true
+        } // margin="normal"
+        ,
+        variant: "outlined"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
         item: true
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Button"], {

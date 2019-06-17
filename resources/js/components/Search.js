@@ -71,7 +71,21 @@ class Search extends Component {
                         style={{padding: 30, paddingLeft: 150, paddingRight: 150}}>
                         <Paper>
                             <Grid container spacing={2} style={{margin: 12, paddingBottom: 12}}>
-                                <Grid item>
+                                <Grid item sm={4}>
+                                    <TextField
+                                        id="location"
+                                        label="Location"
+                                        type="dropdown"
+                                        // value={this.state.checkinDate}
+                                        // className={classes.textField}
+                                        style={{marginTop: 24, marginLeft:24}}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        variant="outlined"
+                                    />
+                                </Grid>
+                                <Grid item sm={4}>
                                     <TextField
                                         id="date"
                                         label="Check-in"
@@ -82,16 +96,24 @@ class Search extends Component {
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
+                                        variant="outlined"
                                     />
                                 </Grid>
-                                <Grid item>
-                                    <TextField
-                                        style={{marginTop: 24}}
-                                        id="searchInput"
-                                        placeholder="Location"
-                                        margin="normal"
-                                        onChange={this.onSearchLocationInputChange}
-                                    />
+                                <Grid item sm={2}>
+                                <TextField
+                                    id="outlined-number"
+                                    label="Duration"
+                                    value={this.state.duration}
+                                    onChange={event => this.setState({ duration : event.target})}
+                                    type="number"
+                                    style={{marginTop: 24, marginLeft:24}}
+                                    // className={classes.textField}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    // margin="normal"
+                                    variant="outlined"
+                                />
                                 </Grid>
                                 <Grid item>
                                     <Button

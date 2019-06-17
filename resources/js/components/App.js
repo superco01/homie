@@ -13,6 +13,7 @@ import OrderForm from './OrderForm';
 import AddHomestay from './AddHomestay';
 import Payment from './Payment';
 import EditHomestay from './EditHomestay';
+import OwnerOrderList from './OwnerOrderList';
 
 export default class App extends Component {
     constructor(){
@@ -24,72 +25,6 @@ export default class App extends Component {
         }
     } 
 
-    componentDidMount() {
-        // axios.get(`/api/homestay/${this.state.id_user}`)
-        //     .then(response => {
-        //         return response;
-        //     })
-        //     .then(homestay => {
-        //         this.setState({ homestays: homestay.data});
-        //     });
-        // axios.get('/api/homestay')
-        //     .then(response => {
-        //         return response;
-        //     })
-        //     .then(homestay => {
-        //         this.setState({ homestays: homestay.data });
-        //         console.log(homestay);
-        //         console.log(this.state.homestays);
-        //     })
-        // fetch('/api/homestay')
-        //     .then(response => {
-        //         return response.json();
-        //     })
-        //     .then(homestays => {
-        //         this.setState({ homestays });
-        //     })
-
-        // const { history } = this.props
-        // const homestay = {
-        //     id_user: this.state.id_user,
-        //     name: 'test 1',
-        //     location: 'loc 1',
-        //     address: 'address 1',
-        //     facilities: 'fac 1',
-        //     number_of_rooms: 6,
-        // }
-        // axios.post('api/homestay', homestay)
-        // .then(res => {
-        //         history.push('/')
-        //     }
-        // ).catch(
-        //     error => {
-        //         this.setState({
-        //             errors: error.response
-        //         })
-        //     }
-        // )
-        // const room = {
-        //     id_homestay: 1,
-        //     title: 'test room 1',
-        //     description: 'test desc room 1',
-        //     price: 100,
-        //     room_availability: true,
-        //     photos: 'test photos path 1',
-        // }
-        // axios.post('api/room', room).then(
-        //     response => {
-        //         history.push('/')
-        //     }
-        // ).catch(
-        //     error => {
-        //         this.setState({
-        //             errors: error.response
-        //         })
-        //     }
-        // )
-    }
-
     render() {
         
         return (
@@ -98,7 +33,7 @@ export default class App extends Component {
                     <div>
                         <Header/>
                         <Switch>
-                            <Route exact path='/' component={Search}/>
+                            <Route exact path='/' component={OwnerOrderList}/>
                             <Route path='/login' component={Login}/>
                             <Route path='/register' component={Register}/>
                             <Route path='/ownerhomestay' component={OwnerHomestay}/>
