@@ -13,7 +13,7 @@ class HomestayController extends Controller
         return $homestays->toJson();
     }
 
-    public function store(Request $request) {
+    public function createHomestay(Request $request) {
         // error_log($request->id_user);
         $this->validate($request, [
             'name'          => 'required',

@@ -97,6 +97,7 @@ function Header() {
               >
                 <MenuItem onClick={handleClose} component={Link} to={`/ownerhomestay`} >My Homestay</MenuItem>
                 <MenuItem onClick={handleClose} component={Link} to={`/addhomestay/${user.id}`} >Add Homestay</MenuItem>
+                <MenuItem onClick={handleClose} component={Link} to={`/edithomestay/${user.id}`} >Edit Homestay</MenuItem>
               </Menu>
             </div>
           ) : (

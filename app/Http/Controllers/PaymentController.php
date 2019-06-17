@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Transaction;
 
 use App\Veritrans\Midtrans;
+use App\Order;
 
 class PaymentController extends Controller
 {
@@ -16,13 +17,7 @@ class PaymentController extends Controller
 
     public function token(Request $request) {
         error_log('masuk ke snap token lewat route API');
-        // error_log($request);
-        // error_log($request->transaction_details['order_id']);
-        // echo $request;
         $midtrans = new Midtrans;
-
-        // error_log($request->order['id']);
-        // dd($request);
 
         $transaction_details = array(
             'order_id'      => $request->order['id'],
@@ -86,7 +81,6 @@ class PaymentController extends Controller
         } catch (Exception $e) {
             return $e->getMessage;
         }
-
     }
 
     public function store(Request $request) {
@@ -100,9 +94,5 @@ class PaymentController extends Controller
                                         'status' => 'paid',
                                         'code' => $code]);
         return response()->json($payment, 201);
-    }
-
-    public function verifiedPayment() {
-        
     }
 }

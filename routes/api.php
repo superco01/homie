@@ -17,18 +17,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('user/{id}', 'UserController@showName');
 Route::get('homestay', 'HomestayController@index');
-Route::get('room', 'RoomController@index');
-Route::post('homestay/', 'HomestayController@store');
+Route::post('homestay/', 'HomestayController@createHomestay');
 Route::post('homestaySearch/', 'HomestayController@searchHomestay');
-Route::post('room/', 'RoomController@store');
 Route::get('homestay/{id}', 'HomestayController@showDetail');
+Route::get('room', 'RoomController@index');
+Route::post('room/', 'RoomController@createRoom');
 Route::get('roomList/{id}', 'RoomController@showRoomList');
 Route::get('room/{id}', 'RoomController@getRoom');
-Route::get('user/{id}', 'UserController@showName');
-Route::post('order', 'OrderController@store');
-Route::post('order', 'OrderController@store');
-Route::post('orderUpdate', 'OrderController@update');
+Route::post('order', 'OrderController@createOrder');
+Route::post('orderUpdate', 'OrderController@updateOrder');
 Route::get('order/{id}', 'OrderController@getOrder');
 //Management Route
 Route::post('checkin', 'ManagementController@checkin');

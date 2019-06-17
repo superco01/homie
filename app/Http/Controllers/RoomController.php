@@ -8,7 +8,7 @@ use App\Homestay;
 
 class RoomController extends Controller
 {
-    public function store(Request $request) {
+    public function createRoom(Request $request) {
         $this->validate($request, [
             // 'title'     => 'required',
             'price'     => 'required',

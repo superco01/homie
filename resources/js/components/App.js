@@ -12,6 +12,7 @@ import OwnerHomestay from './OwnerHomestay';
 import OrderForm from './OrderForm';
 import AddHomestay from './AddHomestay';
 import Payment from './Payment';
+import EditHomestay from './EditHomestay';
 
 export default class App extends Component {
     constructor(){
@@ -102,6 +103,7 @@ export default class App extends Component {
                             <Route path='/register' component={Register}/>
                             <Route path='/ownerhomestay' component={OwnerHomestay}/>
                             <Route path='/addhomestay/:id' component={AddHomestay}/>
+                            <Route path='/edithomestay/:id' component={EditHomestay}/>
                             <Route path='/homestay/:id?/:checkin?/:duration?' component={HomestayDetails}/>
                             <Route path='/order/:id?/:checkin?/:duration?' component={OrderForm}/>
                             <Route path='/payment/:id' component={Payment}/>

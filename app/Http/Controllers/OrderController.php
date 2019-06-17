@@ -10,7 +10,7 @@ use DateTime;
 
 class OrderController extends Controller
 {
-    public function store(Request $request) {
+    public function createOrder(Request $request) {
         $this->validate($request, [
             'name'          => 'required',
             'guest'         => 'required',
@@ -42,7 +42,7 @@ class OrderController extends Controller
         return response()->json($order, 201);
     }
 
-    public function update(Request $request) {
+    public function updateOrder(Request $request) {
         $id = $request->order_id;
         $request->request->remove('order_id');
         $request->request->remove('status_code');
