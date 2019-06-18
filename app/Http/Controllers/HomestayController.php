@@ -42,7 +42,7 @@ class HomestayController extends Controller
 
     public function showDetail($id) {
         $homestay = Homestay::with(['rooms' => function ($query) {
-            $query->where('price', 111111);
+            // $query->where('price', 111111);
         }])->find($id);
 
         return $homestay->toJson();

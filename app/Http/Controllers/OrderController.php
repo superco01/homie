@@ -49,7 +49,7 @@ class OrderController extends Controller
         $request->request->remove('status_message');
         $orderUpdate = Order::where('id', $id)->update($request->all());
 
-        return $orderUpdate->toJson();
+        // return $orderUpdate->toJson();
     }
 
     public function getOrder($id) {
@@ -58,6 +58,13 @@ class OrderController extends Controller
         $homestay = Homestay::where('id', $order['homestay_id'])->first();
 
         return response()->json(compact('order', 'homestay'));
+    }
+
+    public function getOrderList($id) {
+        $order = Order::where('homestay_id', $id)->get();
+        // $order = Order::where('homestay_id', $id)->where('transaction_status', 'capture')->get();
+
+        return response()->json($order, 200);
     }
 
     // public function invoice(Request $request) {

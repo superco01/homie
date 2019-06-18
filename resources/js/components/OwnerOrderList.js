@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -19,6 +19,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import { Container } from '@material-ui/core';
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -65,11 +66,11 @@ function getSorting(order, orderBy) {
 }
 
 const headRows = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)' },
-  { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
-  { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
-  { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
-  { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
+  { id: 'name', numeric: false, disablePadding: true, label: 'Guest Name' },
+  { id: 'room', numeric: false, disablePadding: false, label: 'Room Number' },
+  { id: 'checkin', numeric: false, disablePadding: false, label: 'Check-in Date' },
+  { id: 'duration', numeric: true, disablePadding: false, label: 'Duration of Stay' },
+  { id: 'checkout', numeric: false, disablePadding: false, label: 'Check-out Date' },
 ];
 
 function EnhancedTableHead(props) {
@@ -162,7 +163,7 @@ const EnhancedTableToolbar = props => {
           </Typography>
         ) : (
           <Typography variant="h6" id="tableTitle">
-            Nutrition
+            Orders
           </Typography>
         )}
       </div>
@@ -214,7 +215,18 @@ export default function OwnerOrderList() {
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const [values, setValues] = React.useState([]);
+
+  useEffect(() => {
+    const fetchOrder = async () => {
+      const response = await axios.get(`/api/orderList/1`)
+      setValues(response.data)
+      console.log(response.data);
+    }
+    fetchOrder();
+  }, [])
 
   function handleRequestSort(event, property) {
     const isDesc = orderBy === property && order === 'desc';
@@ -224,7 +236,7 @@ export default function OwnerOrderList() {
 
   function handleSelectAllClick(event) {
     if (event.target.checked) {
-      const newSelecteds = rows.map(n => n.name);
+      const newSelecteds = values.map(n => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -256,7 +268,9 @@ export default function OwnerOrderList() {
   }
 
   function handleChangeRowsPerPage(event) {
-    setRowsPerPage(+event.target.value);
+    console.log(event);
+    
+    setRowsPerPage(+event.target.values);
   }
 
   function handleChangeDense(event) {
@@ -265,9 +279,10 @@ export default function OwnerOrderList() {
 
   const isSelected = name => selected.indexOf(name) !== -1;
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, values.length - page * rowsPerPage);
 
   return (
+    <Container>
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <EnhancedTableToolbar numSelected={selected.length} />
@@ -283,10 +298,10 @@ export default function OwnerOrderList() {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={values.length}
             />
             <TableBody>
-              {stableSort(rows, getSorting(order, orderBy))
+              {stableSort(values, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
@@ -299,7 +314,7 @@ export default function OwnerOrderList() {
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.id}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -311,10 +326,12 @@ export default function OwnerOrderList() {
                       <TableCell component="th" id={labelId} scope="row" padding="none">
                         {row.name}
                       </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
+                      <TableCell align="right">{row.room_number}</TableCell>
+                      <TableCell align="right">{row.checkin_date}</TableCell>
+                      <TableCell align="right">{row.duration}</TableCell>
+                      <TableCell align="right">{row.checkout_date}</TableCell>
+                      {/* <TableCell align="right">{row.email}</TableCell>
+                      <TableCell align="right">{row.phone_number}</TableCell> */}
                     </TableRow>
                   );
                 })}
@@ -329,7 +346,7 @@ export default function OwnerOrderList() {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={values.length}
           rowsPerPage={rowsPerPage}
           page={page}
           backIconButtonProps={{
@@ -342,10 +359,11 @@ export default function OwnerOrderList() {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
-      <FormControlLabel
+      {/* <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
-      />
+      /> */}
     </div>
+    </Container>
   );
 }
