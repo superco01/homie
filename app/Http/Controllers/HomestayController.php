@@ -34,10 +34,12 @@ class HomestayController extends Controller
         return response()->json($homestay, 201);
     }
 
-    public function update(Request $request, Homestay $homestay) {
-        $homestay->update($request->all());
+    public function updateHomestay(Request $request) {
+        // $homestay = Homestay::find($request->id);
+        // $homestay->update($request->all());
+        $homestay = Homestay::where('id', $request->id)->update($request->all());
 
-        return response()->json($product, 201);
+        return response()->json($homestay, 201);
     }
 
     public function showDetail($id) {

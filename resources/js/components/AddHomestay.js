@@ -13,6 +13,8 @@ import AndoridOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import ImageUploader from 'react-images-upload';
+import { Paper, Divider } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -39,10 +41,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
-
 export default function AddHomestay(props) {
   const classes = useStyles();
+
+  const [pictures, setPictures] = React.useState([])
 
   const [name, setName] = React.useState('')
   const [location, setLocation] = React.useState('')
@@ -54,15 +56,10 @@ export default function AddHomestay(props) {
   const [description, setDescription] = React.useState('')
   const [photos, setPhotos] = React.useState('')
   const [price, setPrice] = React.useState('')
-  
-  useEffect(() => {
-    const fetchRoom = async () => {
-      const response = await axios.get(`api/room/${props.match.params.id}`)
-      setRoom(response.data);
-      console.log(response);
-    }
-    fetchRoom();
-  }, [])
+ 
+  function onDrop(picture) {
+    setPictures(pictures.concat(picture));
+  }
 
   function onSubmit(e) {
       e.preventDefault()
@@ -83,11 +80,11 @@ export default function AddHomestay(props) {
         const data = response.data;
         const addNewRoom = {
             homestay_id: data.id,
-            type: type,
+            // type: type,
             description: description,
             photos: photos,
             price: price,
-            room_availability: 0
+            // room_availability: 0
           }
 
         axios.post(`/api/room`, addNewRoom)
@@ -98,7 +95,7 @@ export default function AddHomestay(props) {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container style={{paddingBottom: 80}} component="main" maxWidth="lg">
       <CssBaseline />
       <div className={classes.paper}>
         {/* <Avatar className={classes.avatar}>
@@ -108,9 +105,10 @@ export default function AddHomestay(props) {
           Add Homestay
         </Typography>
         <form className={classes.form} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
+        <Grid justify="center" container spacing={2}>
+          <Grid item sm={6} md={6} >
+            <Grid item  >
+              <TextField style={{marginBottom: 12}}
                 value={name}
                 onChange={event => setName(event.target.value)}
                 autoComplete="name"
@@ -123,8 +121,8 @@ export default function AddHomestay(props) {
                 autoFocus
               />
             </Grid>
-            <Grid item xs={12}>
-              <TextField
+            <Grid item  >
+              <TextField style={{marginBottom: 12}}
                 value={location}
                 onChange={event => setLocation(event.target.value)}
                 variant="outlined"
@@ -136,8 +134,8 @@ export default function AddHomestay(props) {
                 autoComplete="location"
               />
             </Grid>
-            <Grid item xs={12}>
-              <TextField
+            <Grid item  >
+              <TextField style={{marginBottom: 12}}
                 value={address}
                 onChange={event => setAddress(event.target.value)}
                 variant="outlined"
@@ -149,8 +147,8 @@ export default function AddHomestay(props) {
                 autoComplete="address"
               />
             </Grid>
-            <Grid item xs={12}>
-              <TextField
+            <Grid item  >
+              <TextField style={{marginBottom: 12}}
                 value={facilities}
                 onChange={event => setFacilities(event.target.value)}
                 variant="outlined"
@@ -162,8 +160,8 @@ export default function AddHomestay(props) {
                 autoComplete="facilities"
               />
             </Grid>
-            <Grid item xs={12}>
-              <TextField
+            <Grid item  >
+              <TextField style={{marginBottom: 12}}
                 value={numberOfRooms}
                 onChange={event => setNumberOfRooms(event.target.value)}
                 variant="outlined"
@@ -175,21 +173,8 @@ export default function AddHomestay(props) {
                 autoComplete="numberOfRooms"
               />
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                value={type}
-                onChange={event => setType(event.target.value)}
-                variant="outlined"
-                required
-                fullWidth
-                id="type"
-                label="Type"
-                name="type"
-                autoComplete="type"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
+            <Grid item  >
+              <TextField style={{marginBottom: 12}}
                 value={description}
                 onChange={event => setDescription(event.target.value)}
                 variant="outlined"
@@ -201,21 +186,8 @@ export default function AddHomestay(props) {
                 autoComplete="description"
               />
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                value={photos}
-                onChange={event => setPhotos(event.target.value)}
-                variant="outlined"
-                required
-                fullWidth
-                id="photos"
-                label="Photos"
-                name="photos"
-                autoComplete="photos"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
+            <Grid item  >
+              <TextField style={{marginBottom: 12}}
                 value={price}
                 onChange={event => setPrice(event.target.value)}
                 variant="outlined"
@@ -228,6 +200,23 @@ export default function AddHomestay(props) {
               />
             </Grid>
           </Grid>
+          <Grid item sm={6} md={6}>
+          <Paper>
+            <Typography style={{ padding: 12}}>Homestay Pictures</Typography>
+            <Divider/>
+            <Typography style={{ padding: 12}}>Max 2 Pictures</Typography>
+            <ImageUploader
+                withIcon={false}
+                withPreview
+                buttonText='Choose images'
+                onChange={onDrop}
+                imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                maxFileSize={5242880}
+            />
+          </Paper>
+          </Grid>
+          </Grid>
+
           <Button
             onClick={onSubmit}
             type="submit"

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {Link} from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, createMuiTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -14,6 +14,24 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { Button } from '@material-ui/core';
 import axios from 'axios';
+import MyTheme from './MyTheme'
+import { ThemeProvider } from '@material-ui/styles';
+// import { orange, blue } from '@material-ui/core/colors'
+
+const themeHomie = createMuiTheme({
+  palette: {
+    primary: {
+        main: '#FFC107'
+    },
+    secondary: {
+        main: '#26C6DA'
+        // '#FFA000'
+    },
+    // accent: {
+    //     main: '#26C6DA'
+    // },
+  }
+})
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -43,21 +61,19 @@ function Header() {
     }
     fetchUser();
   }, [])
-
   function handleChange(event) {
     setAuth(event.target.checked);
     console.log(localStorage);
   }
-
   function handleMenu(event) {
     setAnchorEl(event.currentTarget);
   }
-
   function handleClose() {
     setAnchorEl(null);
   }
-
+  
   return (
+    <ThemeProvider theme={themeHomie}>
     <div className={classes.root}>
       <FormGroup>
         <FormControlLabel
@@ -65,14 +81,15 @@ function Header() {
           label={auth ? 'Logout' : 'Login'}
         />
       </FormGroup>
-      <AppBar position="static" color="default">
+      <AppBar color="primary" position="static" >
         <Toolbar>
           <Typography color="inherit" style={{textDecoration: 'none',}} component={Link} to="/" variant="h5" className={classes.title}>
             HOMIE
           </Typography>
           {auth? (
+            <ThemeProvider theme={themeHomie}>
             <div>
-              <Button  color="inherit">Welcome {user.name}</Button>
+              <Button color="secondary" variant="contained" >Welcome {user.name}</Button>
               <IconButton
                 aria-owns={open ? 'menu-appbar' : undefined}
                 aria-haspopup="true"
@@ -103,6 +120,7 @@ function Header() {
                 <MenuItem onClick={handleClose} component={Link} to={`/report/${user.id}`} >Report</MenuItem>
               </Menu>
             </div>
+            </ThemeProvider>
           ) : (
               <div>
                   <Button component={Link} to="/register" variant="outlined" color="primary" className={classes.button}>Register</Button>
@@ -112,6 +130,7 @@ function Header() {
         </Toolbar>
       </AppBar>
     </div>
+    </ThemeProvider>
   );
 }
 

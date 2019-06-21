@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Paper, Typography } from '@material-ui/core';
 // import { Line } from 'react-chartjs-2';
-import Chartkick, { LineChart, PieChart, AreaChart } from 'react-chartkick';
+import Chartkick, { LineChart, PieChart, AreaChart, BarChart } from 'react-chartkick';
 import  'chart.js';
 import axios from 'axios';
 
@@ -21,11 +21,11 @@ export default class OwnerReport extends Component {
                         // backgroundColor: "rgba(255, 0, 255, 0.75)",
                         data: {"2017-01-01": 7, "2017-01-02": 4,"2017-01-03": 3, "2017-01-04": 4,"2017-01-05": 9, "2017-01-06": 8,}
                     },
-                    {
-                        label: "Transaction",
-                        // backgroundColor: "rgba(255, 0, 255, 0.75)",
-                        data: {"2017-01-01": 5, "2017-01-02": 6,"2017-01-05": 1, "2017-01-06": 3,}
-                    },
+                    // {
+                    //     label: "Transaction",
+                    //     // backgroundColor: "rgba(255, 0, 255, 0.75)",
+                    //     data: {"2017-01-01": 5, "2017-01-02": 6,"2017-01-05": 1, "2017-01-06": 3,}
+                    // },
                 ]
             },
             homestays: [],
@@ -57,9 +57,9 @@ export default class OwnerReport extends Component {
                     Profit
                 </Typography>
                 <Container style={{paddingTop: 36, paddingBottom: 36}}>
-                <AreaChart 
+                <BarChart 
                     // message={{ empty: "No data"}}
-                    label={this.state.data.label}
+                    // label={this.state.data.label}
                     data={this.state.data.dataset}
                 />
                 </Container>

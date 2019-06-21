@@ -79,7 +79,7 @@ export default function EditHomestay(props) {
       
       const editHomestay = {
         user_id: userId,
-        // name: name,
+        name: name,
         // location: location,
         // address: address,
         facilities: facilities,
@@ -121,7 +121,7 @@ export default function EditHomestay(props) {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                disabled
+                // disabled
                 value={name}
                 onChange={event => setName(event.target.value)}
                 autoComplete="name"

@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react'
 import {Grid, Paper, List, ListItem, ListItemText, ListItemAvatar, Avatar, Divider, Card, CardActions, CardContent, CardMedia, Button, Typography, ButtonBase} from '@material-ui/core'
 import {Link} from 'react-router-dom'
+import { ThemeProvider } from '@material-ui/styles'
+import MyTheme from './MyTheme'
+
 
 function HomestayList(props) {
   const [room, setRoom] = React.useState([])
@@ -40,13 +43,17 @@ function HomestayList(props) {
             <Grid item xs >
               <Grid item xs>
                 <Typography variant="h6">
-                  10000
+                  Rp. 10000
                 </Typography>
               </Grid>
               <Grid item xs>
-                <Button variant="contained" color="primary" component={Link} to={`/homestay/${props.homestay.id}/${props.checkinDate}/${props.duration}`}>
+              <ThemeProvider theme={MyTheme}>
+
+                <Button variant="contained" style={MyTheme.palette.mainHomie} component={Link} to={`/homestay/${props.homestay.id}/${props.checkinDate}/${props.duration}`}>
                   Select Homestay
                 </Button>
+
+                </ThemeProvider>
               </Grid>
             </Grid>
           </Grid>

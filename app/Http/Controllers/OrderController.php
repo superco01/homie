@@ -62,7 +62,7 @@ class OrderController extends Controller
 
     public function getOrderList($id) {
         $order = Order::where('homestay_id', $id)->get();
-        // $order = Order::where('homestay_id', $id)->where('transaction_status', 'capture')->get();
+        $order = Order::where('homestay_id', $id)->where('transaction_status', 'capture')->get();
 
         return response()->json($order, 200);
     }

@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {Grid, TextField, Paper, Container, Button, ButtonBase, Divider} from '@material-ui/core'
 import HomestayList from './HomestayList';
 import SearchResult from './SearchResult';
+import { ThemeProvider } from '@material-ui/styles';
+
 
 
 
@@ -11,7 +13,7 @@ class Search extends Component {
         this.state = {
             location: '',
             duration: 1,
-            checkinDate: '16-06-2019',
+            checkinDate: '20-06-2019',
 
             guests: '',
             rooms: '',
@@ -20,7 +22,9 @@ class Search extends Component {
             isSearch: false,
             
             date: new Date()
+            
         }
+        
         // this.onSearch = this.onSearch.bind(this)
         // console.log(this.props);
     }

@@ -12,9 +12,10 @@ class ManagementController extends Controller
     public function roomAvailability(Request $request) {
         date_default_timezone_set('Asia/Jakarta');
         $currentDate = date('Y-m-d');
+        error_log($currentDate);
 
         $room = Room::where('homestay_id', $request->homestay_id)->with(['orders' => function ($query) use ($currentDate) {
-            // $query->where('checkin_date', $currentDate);
+            $query->where('checkin_date', $currentDate)->where(function($q) { $q->where('transaction_status', 'active')->orWhere('transaction_status', 'capture');});
         }])->get();
 
         return $room->toJson();
@@ -27,9 +28,9 @@ class ManagementController extends Controller
             // 'password'  => 'required|min:4',
         ]);
 
-        $transactionStatus = Order::where('guest', $request->guest_name)->where('room_number', $request->room_number)->get(['transaction_status']);
+        $transactionStatus = Order::where('guest', $request->guest_name)->where('id', $request->order_id)->get(['transaction_status']);
         if ($transactionStatus[0]->transaction_status == 'capture' ) {
-            $transactionStatus = Order::where('guest', $request->guest_name)->where('room_number', $request->room_number)->update(['transaction_status' => 'active']);
+            $transactionStatus = Order::where('guest', $request->guest_name)->where('id', $request->order_id)->update(['transaction_status' => 'active']);
             return response()->json('Success', 200);
         }
         else {
@@ -44,9 +45,9 @@ class ManagementController extends Controller
             // 'password'  => 'required|min:4',
         ]);
 
-        $transactionStatus = Order::where('guest', $request->guest_name)->where('room_number', $request->room_number)->get(['transaction_status']);
+        $transactionStatus = Order::where('guest', $request->guest_name)->where('id', $request->order_id)->get(['transaction_status']);
         if ($transactionStatus[0]->transaction_status == 'active' ) {
-            $transactionStatus = Order::where('guest', $request->guest_name)->where('room_number', $request->room_number)->update(['transaction_status' => 'used']);
+            $transactionStatus = Order::where('guest', $request->guest_name)->where('id', $request->order_id)->update(['transaction_status' => 'used']);
             return response()->json('Success', 200);
         }
         else {
