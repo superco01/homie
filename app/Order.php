@@ -39,7 +39,7 @@ class Order extends Model
         'order_type',
     ];
 
-    public function transactions() {
-        return $this->hasOne(Transaction::class);
+    public function orderMeta() {
+        return $this->hasMany(OrderMeta::class);
     }
 }

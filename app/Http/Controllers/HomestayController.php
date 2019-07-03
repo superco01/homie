@@ -37,7 +37,9 @@ class HomestayController extends Controller
     public function updateHomestay(Request $request) {
         // $homestay = Homestay::find($request->id);
         // $homestay->update($request->all());
-        $homestay = Homestay::where('id', $request->id)->update($request->all());
+        $homestay = Homestay::where('id', $request->user_id)->update($request->all());
+        // $test = Homestay::where('id')
+        // error_log($homestay);
 
         return response()->json($homestay, 201);
     }
@@ -55,9 +57,15 @@ class HomestayController extends Controller
     }
     
     public function searchHomestay(Request $request) {
+        $searchResult = ($request->location == null) ? (
         $homestaySearch = Homestay::with(['rooms.orders' => function ($query) {
             // $query->where('status', '');
-        }])->get();
+        }])->get()
+        ) : (
+        $homestaySearch = Homestay::where('location', $request->location)->with(['rooms.orders' => function ($query) {
+            // $query->where('status', '');
+        }])->get()
+    );
         // $homestaySearch->orders;
         // dd($homestaySearch[]);
         // error_log($homestaySearch[9]);

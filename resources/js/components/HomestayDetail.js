@@ -1,7 +1,18 @@
 import React, { Component } from 'react'
-import {Divider, ButtonBase, Grid, Card, CardActions, CardContent, CardMedia, Button, Typography, Container, Paper} from '@material-ui/core'
+import {Divider, ButtonBase, Grid, Card, CardActions, CardContent, CardMedia, Button, Typography, Container, Paper, withStyles} from '@material-ui/core'
 import {Link} from 'react-router-dom'
 
+const styles = {
+  root: {
+      backgroundColor: '#FFC107'
+  },
+  content: {
+      backgroundColor: '#FFA000'
+  },
+  button: {
+      backgroundColor: '#26C6DA'
+  },
+}
 
 class HomestayDetail extends Component {
     constructor() {
@@ -23,8 +34,16 @@ class HomestayDetail extends Component {
                 // return homestay.data;
             })
             .then(() => {
-              axios.get(`/api/roomList/${homestayId}`)
+              const data = {
+                homestay_id: homestayId,
+                checkin_date: this.props.match.params.checkin,
+                duration: this.props.match.params.duration
+              }
+              axios.post(`/api/roomList/`, data)
               .then(response => {
+                console.log("roomlist");
+                console.log(response.data);
+                
                 this.setState({ rooms: response.data.room, roomCount: response.data.roomCount });
               })
             })
@@ -33,14 +52,14 @@ class HomestayDetail extends Component {
     render() {
         return (
           <div>
-          <Container style={{paddingTop: 50, paddingBottom: 100, paddingLeft: 150, paddingRight: 150}}>
+          <Container style={{paddingTop: 50, paddingBottom: 100, paddingLeft: 180, paddingRight: 180}}>
             {/* {this.state.homestay ? ( */}
               <Container>
                 <Container spacing={3} style={{paddingBottom: 25}}>
                   <Card spacing={3}>
                     <CardMedia
                       style={{height: 0, paddingTop: '56.25%'}}
-                      image="/images/evelyn-paris-96422-unsplash.jpg"
+                      image={this.state.homestay.photo1}
                       title={this.state.homestay.name}
                     />
                     <CardContent>
@@ -64,28 +83,28 @@ class HomestayDetail extends Component {
                       <Grid container spacing={2}>
                         <Grid item>
                           <ButtonBase style={{ width: 128 , height: 128 }}>
-                            <img style={{ margin: 1, display: 'block', maxWidth: '100%', maxHeight: '100%' }} alt="complex" src="/images/evelyn-paris-96422-unsplash.jpg"/>
+                            <img style={{ margin: 1, display: 'block', maxWidth: '100%', maxHeight: '100%' }} alt="complex" src={room.photos}/>
                           </ButtonBase>
                         </Grid>
                         <Grid item xs={12} sm container>
                           <Grid item xs container direction="column" spacing={2}>
                             <Grid item xs>
                               <Typography variant="h6" >
-                                {room.type}
+                                Room Number: {room.room_number}
                               </Typography>
                             </Grid>
                             <Divider/>
                             <Grid item xs>
                               <Typography variant="body1">
-                                {room.room_number}
+                                Room Type: {room.type}
                               </Typography>
                               <Typography variant="body1">
-                                {room.price}
+                                {room.description}
                               </Typography>
                             </Grid>
                           </Grid>
                         </Grid>
-                        <Grid item sm container>
+                        <Grid item md={4} container>
                           <Grid item xs={12} >
                             <Grid item xs={12}>
                               <Typography variant="h6">
@@ -93,7 +112,12 @@ class HomestayDetail extends Component {
                               </Typography>
                             </Grid>
                             <Grid item xs={12}>
-                              <Button variant="contained" color="primary" component={Link} to={`/order/${room.id}/${this.props.match.params.checkin}/${this.props.match.params.duration}`}>
+                              <Button
+                              className={this.props.classes.button} 
+                              variant="contained" 
+                              // color="primary" 
+                              component={Link} 
+                              to={`/order/${room.id}/${this.props.match.params.checkin}/${this.props.match.params.duration}`}>
                                 Select Room
                               </Button>
                             </Grid>
@@ -112,4 +136,4 @@ class HomestayDetail extends Component {
     }
 }
 
-export default HomestayDetail
+export default withStyles(styles)(HomestayDetail);

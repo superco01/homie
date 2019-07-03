@@ -26,13 +26,13 @@ class RoomManagement extends Component {
         }
         console.log(checkin);
         
-        axios.post('/api/checkin', checkin)
+        axios.post('/api/checkin', checkin, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
         .then((response) => {
             console.log(response);
             // this.setState({ toggle: response.data })
-            const homestayId= this.props.match.params.id
-            const data = {homestay_id : homestayId}
-            axios.post(`/api/roomAvailability`, data)
+            // const homestayId= this.props.match.params.id
+            const data = {homestay_id : JSON.parse(localStorage.getItem('user')).id}
+            axios.post(`/api/roomAvailability`, data, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
         .then(response => {
             // console.log(response.data[1].orders[0].name);
           this.setState({ rooms: response.data });
@@ -49,13 +49,13 @@ class RoomManagement extends Component {
         }
         console.log(checkout);
         
-        axios.post('/api/checkout', checkout)
+        axios.post('/api/checkout', checkout, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
         .then((response) => {
             console.log(response);
             // this.setState({ toggle: response.data })
-            const homestayId= this.props.match.params.id
-            const data = {homestay_id : homestayId}
-            axios.post(`/api/roomAvailability`, data)
+            // const homestayId= this.props.match.params.id
+            const data = {homestay_id : JSON.parse(localStorage.getItem('user')).id}
+            axios.post(`/api/roomAvailability`, data, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
         .then(response => {
             // console.log(response.data[1].orders[0].name);
           this.setState({ rooms: response.data });
@@ -64,11 +64,10 @@ class RoomManagement extends Component {
         })
     }
 
-
     componentDidMount() {
-        const homestayId= this.props.match.params.id
-        const data = {homestay_id : homestayId}
-        axios.post(`/api/roomAvailability`, data)
+        // const homestayId= this.props.match.params.id
+        const data = {homestay_id : JSON.parse(localStorage.getItem('user')).id}
+        axios.post(`/api/roomAvailability`, data, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
         .then(response => {
             // console.log(response.data[1].orders[0].name);
           this.setState({ rooms: response.data });
@@ -77,9 +76,14 @@ class RoomManagement extends Component {
     }
 
     render() {
+        // console.log(this.state.rooms[0].id);
+        if (this.state.rooms.length > 0) {
+            console.log(this.state.rooms);
+        }
+        
         return (
           <div>
-          <Container style={{paddingTop: 50, paddingBottom: 100, paddingLeft: 100, paddingRight: 100}}>
+          <Container style={{paddingTop: 50, paddingBottom: 100, paddingLeft: 180, paddingRight: 180}}>
             {/* {this.state.homestay ? ( */}
                 <Paper>
                 { this.state.rooms.map(room =>(
@@ -95,34 +99,47 @@ class RoomManagement extends Component {
                             </Grid>
                             <Divider/>
                             <Grid item xs>
-                            {room.orders[0] != null? (
+                            {room.orders[room.orders.length-1] != null? (
                                         <div>
-                                        <Typography>Guest Name : {room.orders[0].guest}</Typography>
-                                        <Typography>Status     : {room.orders[0].transaction_status}</Typography>
+                                            {room.orders[room.orders.length-1].order_meta[0] != null? (
+                                                <div>
+                                                <Typography>Guest Name : {room.orders[room.orders.length-1].guest}</Typography>
+                                                <Typography>Duration of Stay     : {room.orders[room.orders.length-1].duration}</Typography>
+                                                </div>
+                                            ) : ("")}
+                                        {/* <Typography>Guest Name : {room.orders[room.orders.length-1].guest}</Typography>
+                                        <Typography>Status     : {room.orders[room.orders.length-1].transaction_status}</Typography> */}
                                         </div>
                                     ) : ("")}
                             </Grid>
                           </Grid>
                         </Grid>
                         <Grid item sm={3} container>
-                        {room.orders[0] != null? (
+                        {room.orders[room.orders.length-1] != null? (
+                            <div>
+                            {room.orders[room.orders.length-1].order_meta[0] != null? (
+                            <div>
                             <Grid container spacing={1} direction="column" >
                             <Grid item>
-                            {room.orders[0].transaction_status == 'active'? (
-                                <Button onClick={()=>this.checkout(room.orders[0])} fullWidth variant="contained" color="secondary">
+                            {room.orders[room.orders.length-1].transaction_status == 'active'? (
+                                <Button onClick={()=>this.checkout(room.orders[room.orders.length-1])} fullWidth variant="contained" color="secondary">
                                     CHECK-OUT
                                 </Button>
                             ) : (
-                                <Button onClick={()=>this.checkin(room.orders[0])} fullWidth variant="contained" color="primary">
+                                <Button onClick={()=>this.checkin(room.orders[room.orders.length-1])} fullWidth variant="contained" color="primary">
                                     CHECK-IN
                                 </Button>
                             )}
-                                
                             </Grid>
                             <Grid item>
-                                <Typography><Button fullWidth color="secondary" variant="outlined">Check-out: {room.orders[0].checkout_date}</Button></Typography>
+                                <Typography><Button fullWidth color="secondary" variant="outlined">Check-out: {room.orders[room.orders.length-1].checkout_date}</Button></Typography>
                             </Grid>
                             </Grid>
+                            </div>) : (
+                            <Grid><Button variant="contained">
+                            EMPTY
+                            </Button></Grid>)}
+                            </div>
                             ) : (<Grid><Button variant="contained">
                             EMPTY
                             </Button></Grid>)}

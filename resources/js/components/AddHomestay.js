@@ -72,6 +72,8 @@ export default function AddHomestay(props) {
         address: address,
         facilities: facilities,
         number_of_rooms: numberOfRooms,
+        photo1: pictures[0],
+        photo2: pictures[1],
       }
 
       axios.post(`/api/homestay`, addNewHomestay, {
@@ -90,6 +92,7 @@ export default function AddHomestay(props) {
         axios.post(`/api/room`, addNewRoom)
         console.log(response);
       }).catch(error => {
+        alert('Field should not empty')
         console.log(error);
       })
   }

@@ -34,6 +34,11 @@ class UserController extends Controller
     }
 
     public function login(Request $request) {
+        $this->validate($request,[
+            'email'     => 'required',
+            'password'  => 'required|min:4',
+        ]);
+
         $credentials = $request->json()->all();
         
         try {
@@ -43,8 +48,10 @@ class UserController extends Controller
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
+        $user = User::where('email', $request->email)->get()->first();
+        error_log($user);
 
-        return response()->json(compact('token'));
+        return response()->json(compact('token', 'user'));
     }
 
     public function logout() {

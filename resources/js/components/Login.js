@@ -54,12 +54,24 @@ function Login(props) {
         axios.post('/api/login', user, {
           headers: { 'Content-Type': 'application/json' }
         }).then(response => {
+          console.log(response);
           localStorage.setItem('usertoken', response.data.token)
+          localStorage.setItem('user', JSON.stringify(response.data.user))
           console.log(localStorage);
-        }).catch(error => {
-          console.log(error);
-        }).then( () => {
-          props.history.push(`/ownerhomestay`);
+        })
+        .catch(error => {
+          if (error.response.status == 422) {
+            alert('Field should not empty')
+          } else {
+            alert('Email or Passowrd not valid')
+          }
+          console.log(error.response);
+          console.log("error");
+          console.log(response);
+          alert(error)
+        })
+        .then( () => {
+          props.history.push(`/`);
         })
     }
 
@@ -73,7 +85,7 @@ function Login(props) {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form}>
           <TextField
             value={email}
             onChange={event => setEmail(event.target.value)}

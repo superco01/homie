@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import {Link} from 'react-router-dom';
-import { makeStyles, createMuiTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -16,6 +15,7 @@ import { Button } from '@material-ui/core';
 import axios from 'axios';
 import MyTheme from './MyTheme'
 import { ThemeProvider } from '@material-ui/styles';
+import { withStyles, makeStyles, createMuiTheme } from '@material-ui/core/styles';
 // import { orange, blue } from '@material-ui/core/colors'
 
 const themeHomie = createMuiTheme({
@@ -24,8 +24,8 @@ const themeHomie = createMuiTheme({
         main: '#FFC107'
     },
     secondary: {
-        main: '#26C6DA'
-        // '#FFA000'
+        main: '#FFA000'
+        // main: '#26C6DA'
     },
     // accent: {
     //     main: '#26C6DA'
@@ -36,33 +36,42 @@ const themeHomie = createMuiTheme({
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    background: '#FFC107',
+  },
+  content: {
+    marginLeft: theme.spacing(2),
+    background: '#FFA000'
   },
   button: {
     marginLeft: theme.spacing(2),
+    background: '#26C6DA'
   },
   title: {
     flexGrow: 1,
   },
 }));
 
-function Header() {
+function Header(props) {
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
+  const [auth, setAuth] = React.useState('');
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [user, setUser] = React.useState({id: 0, name: ""});
   const open = Boolean(anchorEl);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const response = await axios.get('api/owner', {
-        headers: {Authorization: `Bearer ${localStorage.usertoken}`}
-      })
-      setUser(response.data.user);
-    }
-    fetchUser();
+    // console.log(JSON.parse(localStorage.getItem('user')))
+    // console.log("----------------------------------");
+    
+    // const fetchUser = async () => {
+    //   const response = await axios.get('api/owner', {
+    //     headers: {Authorization: `Bearer ${localStorage.usertoken}`}
+    //   })
+    //   setUser(response.data.user);
+    // }
+    // fetchUser();
   }, [])
   function handleChange(event) {
-    setAuth(event.target.checked);
+    setAuth('admin');
     console.log(localStorage);
   }
   function handleMenu(event) {
@@ -71,25 +80,76 @@ function Header() {
   function handleClose() {
     setAnchorEl(null);
   }
+
+  function logout() {
+    axios.get('/api/logout', { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
+    .then((response) => {
+      localStorage.setItem('usertoken', '0')
+      localStorage.setItem('user', '0')
+      console.log(response);
+      this.setState(this.state)
+    })
+    .catch((error) => {
+      console.log(error);
+      localStorage.setItem('usertoken', '0')
+      localStorage.setItem('user', '0')
+    })
+    .then( () => {
+      props.history.push(`/`);
+    })
+  }
   
   return (
-    <ThemeProvider theme={themeHomie}>
+    
     <div className={classes.root}>
-      <FormGroup>
+      {/* <FormGroup>
         <FormControlLabel
           control={<Switch checked={auth} onChange={handleChange} aria-label="LoginSwitch" />}
           label={auth ? 'Logout' : 'Login'}
         />
-      </FormGroup>
-      <AppBar color="primary" position="static" >
+      </FormGroup> */}
+      <AppBar className={classes.root} position="static" >
         <Toolbar>
           <Typography color="inherit" style={{textDecoration: 'none',}} component={Link} to="/" variant="h5" className={classes.title}>
             HOMIE
           </Typography>
-          {auth? (
-            <ThemeProvider theme={themeHomie}>
+          {localStorage.getItem('usertoken') != '0'? (
             <div>
-              <Button color="secondary" variant="contained" >Welcome {user.name}</Button>
+            {JSON.parse(localStorage.getItem('user')).name == 'admin'? (
+            <div>
+              <Button color="default" variant="text" >Welcome Admin</Button>
+              <Button onClick={logout} style={{ marginRight: 5, marginLeft: 5}} color="secondary" variant="contained" >Logout</Button>
+              <IconButton
+                aria-owns={open ? 'menu-appbar' : undefined}
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle fontSize="large"/>
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={open}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose} component={Link} to={`/admowner`} >Owner List</MenuItem>
+                <MenuItem onClick={handleClose} component={Link} to={`/admhomestay`} >Homestay List</MenuItem>
+                <MenuItem onClick={handleClose} component={Link} to={`/admorder`} >Order List</MenuItem>
+              </Menu>
+            </div>
+            ) : (
+            <div>
+              <Button color="default" variant="text" >Welcome {user.name}</Button>
+              <Button onClick={logout} style={{ marginRight: 5, marginLeft: 5}} color="secondary" variant="contained" >Logout</Button>
               <IconButton
                 aria-owns={open ? 'menu-appbar' : undefined}
                 aria-haspopup="true"
@@ -120,17 +180,17 @@ function Header() {
                 <MenuItem onClick={handleClose} component={Link} to={`/report/${user.id}`} >Report</MenuItem>
               </Menu>
             </div>
-            </ThemeProvider>
+            )}
+            </div>
           ) : (
               <div>
-                  <Button component={Link} to="/register" variant="outlined" color="primary" className={classes.button}>Register</Button>
-                  <Button component={Link} to="/login" variant="contained" color="primary" className={classes.button}>Login</Button>
+                  <Button component={Link} to="/register" variant="text" className={classes.content}>Register</Button>
+                  <Button component={Link} to="/login" variant="text" className={classes.content}>Login</Button>
               </div>
           )}
         </Toolbar>
       </AppBar>
     </div>
-    </ThemeProvider>
   );
 }
 

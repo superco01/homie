@@ -29,9 +29,23 @@ class RoomController extends Controller
         return response()->json($room, 201);
     }
 
-    public function showRoomList($id) {
+    public function showRoomList(Request $request) {
         
-        $roomList = Room::where('homestay_id', $id)->where('room_availability', 0)->get();
+        // $roomList = Room::where('homestay_id', $request->homestay_id)->where('checkin_date', '<>', $request->checkin_date)->with(['orders.orderMeta' => function ($query) use ($request){
+        //     $query->where('stay_date', '<>', $request->checkin_date);
+        // }])->get();
+
+        // $roomList = Room::where('homestay_id', $request->homestay_id)->whereHas('orders', function ($query) use ($request) {
+            // $query->where('status', '<>','capture')->where('stay_date', '<>', $request->checkin_date);
+        // })->get();
+
+        // $roomList = Room::where('homestay_id', $request->homestay_id)->whereHas('orders', function ($query) use ($request) {
+            // $query->where('status', '<>','capture')->where('stay_date', '<>', $request->checkin_date);
+        // })->get();
+
+        $roomList = Room::where('homestay_id', $request->homestay_id)->whereDoesntHave('orders.orderMeta', function ($query) use ($request) {
+            $query->where('status', 'capture')->where('stay_date', $request->checkin_date);
+        })->get();
         
         if ($roomList != null) {
             $roomCount = $roomList->count();
@@ -49,5 +63,10 @@ class RoomController extends Controller
         $homestay = Room::find($id);
         
         return $homestay->toJson();
+    }
+    public function getOwnerRoom($id) {
+        $ownerRoom = Room::where('homestay_id', $id)->get();
+        
+        return response()->json(compact('ownerRoom'), 200);
     }
 }

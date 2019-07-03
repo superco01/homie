@@ -15,7 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import axios from 'axios';
-import { Divider } from '@material-ui/core';
+import { Divider, Paper } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -198,101 +198,62 @@ export default function Payment(props) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container maxWidth="sm" component="main" className={classes.heroContent}>
+      <Container  className={classes.heroContent}>
         <Typography component="h4" variant="h4" align="center" color="textPrimary" gutterBottom>
           Booking Details
         </Typography>
       </Container>
-      <Container maxWidth="md" component="main">
-        <Grid container spacing={5} alignItems="flex-end">
-          {/* {tiers.map(tier => ( */}
-            {/* // Enterprise card is full width at sm breakpoint */}
-            <Grid item xs={12} sm={12} md={12}>
-              <Card>
-                <CardHeader
-                  title={homestayName}
-                  subheader={homestayAddress}
-                  titleTypographyProps={{ align: 'center' }}
-                  subheaderTypographyProps={{ align: 'center' }}
-                  // action={tier.title === 'Pro' ? <StarIcon /> : null}
-                  className={classes.cardHeader}
-                />
-                <CardContent>
-                  <Divider/>
-                  <Typography style={{fontSize:15}} component="li" variant="button" align="center">
-                    Check-in at {checkInDate}
+      <Container >
+        <Grid container spacing={5} justify="center" alignItems="center">
+          <Grid item xs={12} sm={6} md={6}>
+            <Card>
+              <CardHeader
+                title={homestayName}
+                subheader={homestayAddress}
+                titleTypographyProps={{ align: 'center' }}
+                subheaderTypographyProps={{ align: 'center' }}
+                className={classes.cardHeader}
+              />
+              <CardContent>
+                <Divider/>
+                <Typography style={{fontSize:15}} component="li" variant="button" align="center">
+                  Check-in at {checkInDate}
+                </Typography>
+                <Typography style={{fontSize:15}} component="li" variant="button" align="center">
+                  {duration} night
+                </Typography>
+                <Typography style={{fontSize:15}} component="li" variant="button" align="center">
+                  Check-out at {checkOutDate}
+                </Typography>
+                <Divider/>
+                <Typography style={{fontSize:15}} component="li" variant="caption" align="center">
+                  Booked by {name}
+                </Typography>
+                <Typography style={{fontSize:15}} component="li" variant="caption" align="center">
+                  Guest Name : {guestName}
+                </Typography>
+                <Typography style={{fontSize:15}} component="li" variant="caption" align="center">
+                  Email : {email}
+                </Typography>
+                <Typography style={{fontSize:15}} component="li" variant="caption" align="center">
+                  Phone Number : {phoneNumber}
+                </Typography>
+                <Divider/>
+                <div className={classes.cardPricing}>
+                  <Typography component="h2" variant="h4" color="textPrimary">
+                    Rp. {priceTotal},-
                   </Typography>
-                  <Typography style={{fontSize:15}} component="li" variant="button" align="center">
-                    {duration} night
-                  </Typography>
-                  <Typography style={{fontSize:15}} component="li" variant="button" align="center">
-                    Check-out at {checkOutDate}
-                  </Typography>
-                  <Divider/>
-                  <Typography style={{fontSize:15}} component="li" variant="caption" align="center">
-                    Booked by {name}
-                  </Typography>
-                  <Typography style={{fontSize:15}} component="li" variant="caption" align="center">
-                    Guest Name : {guestName}
-                  </Typography>
-                  <Typography style={{fontSize:15}} component="li" variant="caption" align="center">
-                    Email : {email}
-                  </Typography>
-                  <Typography style={{fontSize:15}} component="li" variant="caption" align="center">
-                    Phone Number : {phoneNumber}
-                  </Typography>
-                  {/* <ul>
-                    {tier.description.map(line => (
-                      <Typography component="li" variant="subtitle1" align="center" key={line}>
-                        {line}
-                      </Typography>
-                    ))}
-                  </ul> */}
-                  <Divider/>
-                  <div className={classes.cardPricing}>
-                    <Typography component="h2" variant="h4" color="textPrimary">
-                      Rp. {priceTotal},-
-                    </Typography>
-                    {/* <Typography variant="h6" color="textSecondary">
-                      /mo
-                    </Typography> */}
-                  </div>
-                </CardContent>
-                <CardActions>
-                  <Button onClick={onPay} fullWidth variant="contained" color="primary">
-                    Pay
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          // ))}
+                </div>
+              </CardContent>
+              <CardActions>
+                <Button onClick={onPay} fullWidth variant="contained" color="primary">
+                  Pay
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
         </Grid>
       </Container>
-      {/* Footer */}
-      {/* <Container maxWidth="md" component="footer" className={classes.footer}>
-        <Grid container spacing={4} justify="space-evenly">
-          {footers.map(footer => (
-            <Grid item xs={6} sm={3} key={footer.title}>
-              <Typography variant="h6" color="textPrimary" gutterBottom>
-                {footer.title}
-              </Typography>
-              <ul>
-                {footer.description.map(item => (
-                  <li key={item}>
-                    <Link href="#" variant="subtitle1" color="textSecondary">
-                      {item}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </Grid>
-          ))}
-        </Grid>
-        <Box mt={5}>
-          <MadeWithLove />
-        </Box>
-      </Container> */}
-      {/* End footer */}
     </React.Fragment>
   );
 }

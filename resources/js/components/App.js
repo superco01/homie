@@ -14,9 +14,14 @@ import AddHomestay from './AddHomestay';
 import Payment from './Payment';
 import EditHomestay from './EditHomestay';
 import OwnerOrderList from './OwnerOrderList';
-import EditRoom from './EditRoom';
+import EditRooms from './EditRooms';
 import OwnerReport from './OwnerReport';
 import RoomManagement from './RoomManagement';
+import Footer from './Footer';
+import EditRoom from './EditRoom';
+import AdminOwner from './AdminOwner';
+import AdminHomestay from './AdminHomestay';
+import AdminOrder from './AdminOrder';
 
 export default class App extends Component {
     constructor(){
@@ -34,7 +39,8 @@ export default class App extends Component {
             <div>
                 <HashRouter>
                     <div>
-                        <Header/>
+                        {/* <Header/> */}
+                            <Route component={Header}/>
                         <Switch>
                             <Route exact path='/' component={Search}/>
                             <Route path='/login' component={Login}/>
@@ -42,13 +48,22 @@ export default class App extends Component {
                             <Route path='/ownerhomestay' component={OwnerHomestay}/>
                             <Route path='/addhomestay/:id' component={AddHomestay}/>
                             <Route path='/edithomestay/:id' component={EditHomestay}/>
+                            <Route path='/editrooms/:id' component={EditRooms}/>
+                            <Route path='/editrooms/:id' component={EditRooms}/>
+                            <Route path='/editroom/:id' component={EditRoom}/>
                             <Route path='/orderlist/:id' component={OwnerOrderList}/>
                             <Route path='/homestay/:id?/:checkin?/:duration?' component={HomestayDetails}/>
                             <Route path='/order/:id?/:checkin?/:duration?' component={OrderForm}/>
                             <Route path='/payment/:id' component={Payment}/>
                             <Route path='/report' component={OwnerReport}/>
-                            <Route path='/roommanagement/:id' component={RoomManagement}/>
+                            <Route path='/roommanagement/' component={RoomManagement}/>
+                            {/* Admin Route */}
+                            <Route path='/admowner' component={AdminOwner}/>
+                            <Route path='/admhomestay' component={AdminHomestay}/>
+                            <Route path='/admorder' component={AdminOrder}/>
+
                         </Switch>
+                        <Footer/>
                     </div>
                 </HashRouter>
             </div>

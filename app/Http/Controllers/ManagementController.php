@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Room;
 use App\Order;
+use App\OrderMeta;
 use App\Transaction;
 
 class ManagementController extends Controller
@@ -14,23 +15,28 @@ class ManagementController extends Controller
         $currentDate = date('Y-m-d');
         error_log($currentDate);
 
-        $room = Room::where('homestay_id', $request->homestay_id)->with(['orders' => function ($query) use ($currentDate) {
-            $query->where('checkin_date', $currentDate)->where(function($q) { $q->where('transaction_status', 'active')->orWhere('transaction_status', 'capture');});
+        $room = Room::where('homestay_id', $request->homestay_id)->with(['orders.orderMeta' => function ($query) use ($currentDate) {
+            $query->where('stay_date', $currentDate)->where(function ($q) {
+                $q->where('status','capture')->orWhere('status', 'active');
+            });
         }])->get();
 
         return $room->toJson();
     }
 
     public function checkin(Request $request) {
-        $this->validate($request,[
-            'guest_name'      => 'required',
+        // $this->validate($request,[
+            // 'guest_name'      => 'required',
             // 'email'     => 'required',
             // 'password'  => 'required|min:4',
-        ]);
+        // ]);
 
         $transactionStatus = Order::where('guest', $request->guest_name)->where('id', $request->order_id)->get(['transaction_status']);
         if ($transactionStatus[0]->transaction_status == 'capture' ) {
             $transactionStatus = Order::where('guest', $request->guest_name)->where('id', $request->order_id)->update(['transaction_status' => 'active']);
+            // $orderMetaUpdate = OrderMeta::where('order_id', $id)->update(['status' => 'used']);
+            $orderMetaUpdate = Order::where('guest', $request->guest_name)->where('id', $request->order_id)->first();
+            $orderMetaUpdate->orderMeta()->update(['status' => 'active']);
             return response()->json('Success', 200);
         }
         else {
@@ -39,15 +45,17 @@ class ManagementController extends Controller
     }
     
     public function checkout(Request $request) {
-        $this->validate($request,[
-            'guest_name'      => 'required',
+        // $this->validate($request,[
+        //     'guest_name'      => 'required',
             // 'email'     => 'required',
             // 'password'  => 'required|min:4',
-        ]);
+        // ]);
 
         $transactionStatus = Order::where('guest', $request->guest_name)->where('id', $request->order_id)->get(['transaction_status']);
         if ($transactionStatus[0]->transaction_status == 'active' ) {
             $transactionStatus = Order::where('guest', $request->guest_name)->where('id', $request->order_id)->update(['transaction_status' => 'used']);
+            $orderMetaUpdate = Order::where('guest', $request->guest_name)->where('id', $request->order_id)->first();
+            $orderMetaUpdate->orderMeta()->update(['status' => 'used']);
             return response()->json('Success', 200);
         }
         else {

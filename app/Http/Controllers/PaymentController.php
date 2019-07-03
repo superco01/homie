@@ -41,23 +41,23 @@ class PaymentController extends Controller
 
         // Populate customer's billing address
         $billing_address = array(
-            'first_name'        => "Andri",
-            'last_name'         => "Setiawan",
-            'address'           => "Karet Belakang 15A, Setiabudi.",
-            'city'                  => "Jakarta",
-            'postal_code'   => "51161",
-            'phone'                 => "081322311801",
-            'country_code'  => 'IDN'
+            // 'first_name'        => "Andri",
+            // 'last_name'         => "Setiawan",
+            // 'address'           => "Karet Belakang 15A, Setiabudi.",
+            // 'city'                  => "Jakarta",
+            // 'postal_code'   => "51161",
+            // 'phone'                 => "081322311801",
+            // 'country_code'  => 'IDN'
             );
         // Populate customer's shipping address
         $shipping_address = array(
-            'first_name'    => "John",
-            'last_name'     => "Watson",
-            'address'       => "Bakerstreet 221B.",
-            'city'              => "Jakarta",
-            'postal_code' => "51162",
-            'phone'             => "081322311801",
-            'country_code'=> 'IDN'
+            // 'first_name'    => "John",
+            // 'last_name'     => "Watson",
+            // 'address'       => "Bakerstreet 221B.",
+            // 'city'              => "Jakarta",
+            // 'postal_code' => "51162",
+            // 'phone'             => "081322311801",
+            // 'country_code'=> 'IDN'
             );
         // Populate customer's Info
         $customer_details = array(

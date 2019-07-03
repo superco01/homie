@@ -13,6 +13,7 @@ import AndoridOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { Paper } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -90,6 +91,7 @@ export default function OrderForm(props) {
         props.history.push(`/payment/${data.id}`);
       })
       .catch(error => {
+        alert('Field should not empty')
         console.log(error);
       })
   }
@@ -98,9 +100,7 @@ export default function OrderForm(props) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        {/* <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar> */}
+      <Paper style={{ padding: 25}}>
         <Typography component="h1" variant="h5">
           Order Form
         </Typography>
@@ -173,6 +173,7 @@ export default function OrderForm(props) {
             Confirm
           </Button>
         </form>
+        </Paper>
       </div>
     </Container>
   );

@@ -1,27 +1,20 @@
 import React, { useEffect } from 'react'
 import {Grid, Paper, List, ListItem, ListItemText, ListItemAvatar, Avatar, Divider, Card, CardActions, CardContent, CardMedia, Button, Typography, ButtonBase} from '@material-ui/core'
 import {Link} from 'react-router-dom'
-import { ThemeProvider } from '@material-ui/styles'
+import { withStyles } from '@material-ui/styles'
 import MyTheme from './MyTheme'
 
-
 function HomestayList(props) {
+  // const {styles} = this.props
+  // console.log(props);
   const [room, setRoom] = React.useState([])
-  
-  // useEffect(() => {
-  //   const fetchRoom = async () => {
-  //     const response = await axios.get(`/api/room/1`)
-  //     setRoom(response.data);
-  //   }
-  //   fetchRoom();
-  // }, [])
   return (
     <div>
       <Paper>
         <Grid container style={{ marginLeft: 20, marginRight: 20 }} spacing={2}>
           <Grid item>
             <ButtonBase style={{ width: 128 , height: 128 }}>
-                <img style={{ margin: 1, display: 'block', maxWidth: '100%', maxHeight: '100%' }} alt="complex" src="/images/evelyn-paris-96422-unsplash.jpg"/>
+                <img style={{ margin: 1, display: 'block', maxWidth: '100%', maxHeight: '100%' }} alt="complex" src={props.homestay.photo1}/>
             </ButtonBase>
           </Grid>
           <Grid item xs={12} sm container>
@@ -47,13 +40,17 @@ function HomestayList(props) {
                 </Typography>
               </Grid>
               <Grid item xs>
-              <ThemeProvider theme={MyTheme}>
+              {/* <ThemeProvider theme={MyTheme}> */}
 
-                <Button variant="contained" style={MyTheme.palette.mainHomie} component={Link} to={`/homestay/${props.homestay.id}/${props.checkinDate}/${props.duration}`}>
+                <Button
+                className={props.className.button} 
+                variant="contained" 
+                component={Link} 
+                to={`/homestay/${props.homestay.id}/${props.checkinDate}/${props.duration}`}>
                   Select Homestay
                 </Button>
 
-                </ThemeProvider>
+                {/* </ThemeProvider> */}
               </Grid>
             </Grid>
           </Grid>
@@ -63,6 +60,7 @@ function HomestayList(props) {
   )
 }
 
+export default (HomestayList);
 // const HomestayList = (props) => {
   
 //   return (
@@ -109,7 +107,6 @@ function HomestayList(props) {
 //   )
 // }
 
-export default HomestayList
 
 {/* <div>
             {props.homestay ? (
