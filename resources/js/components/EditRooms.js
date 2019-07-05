@@ -121,7 +121,6 @@ class EditRooms extends Component {
                               <Button
                               className={this.props.classes.button} 
                               variant="contained"
-                              // color="primary" 
                               component={Link} 
                               to={`/editroom/${room.id}`}
                               >
