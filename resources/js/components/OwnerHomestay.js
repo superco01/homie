@@ -61,7 +61,7 @@ class OwnerHomestay extends Component {
                   <Card spacing={3}>
                     <CardMedia
                       style={{height: 0, paddingTop: '56.25%'}}
-                      image="/images/evelyn-paris-96422-unsplash.jpg"
+                      image={this.state.homestay.photo1}
                       title={this.state.homestay.name}
                     />
                     <CardContent>

@@ -56,7 +56,8 @@ export default function EditRoom(props) {
   
   useEffect(() => {
     const fetchRoom = async () => {
-      const response = await axios.get(`api/homestay/${JSON.parse(localStorage.getItem('user')).id}`)
+      const response = await axios.get(`api/room/${props.match.params}`)
+      // const response = await axios.get(`api/homestay/${JSON.parse(localStorage.getItem('user')).id}`)
       .then((response) => {
           return response.data
       })
@@ -115,7 +116,7 @@ export default function EditRoom(props) {
           <LockOutlinedIcon />
         </Avatar> */}
         <Typography component="h1" variant="h5">
-          Edit Homestay
+          Edit Room
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>

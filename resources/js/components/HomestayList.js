@@ -6,8 +6,10 @@ import MyTheme from './MyTheme'
 
 function HomestayList(props) {
   // const {styles} = this.props
-  // console.log(props);
+  console.log(props);
+  console.log("-----------------------------");
   const [room, setRoom] = React.useState([])
+  let lowerPrice = 0;
   return (
     <div>
       <Paper>
@@ -35,8 +37,13 @@ function HomestayList(props) {
           <Grid item xs={12} sm container>
             <Grid item xs >
               <Grid item xs>
+              {props.homestay.rooms.map(room => {
+                if (lowerPrice < room.price) {
+                  lowerPrice = room.price
+                }
+              })}
                 <Typography variant="h6">
-                  Rp. 10000
+                  Rp. {lowerPrice}
                 </Typography>
               </Grid>
               <Grid item xs>

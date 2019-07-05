@@ -89,7 +89,7 @@ class EditRooms extends Component {
                       <Grid container spacing={2}>
                         <Grid item>
                           <ButtonBase style={{ width: 128 , height: 128 }}>
-                            <img style={{ margin: 1, display: 'block', maxWidth: '100%', maxHeight: '100%' }} alt="complex" src="/images/evelyn-paris-96422-unsplash.jpg"/>
+                            <img style={{ margin: 1, display: 'block', maxWidth: '100%', maxHeight: '100%' }} alt="complex" src={room.photos}/>
                           </ButtonBase>
                         </Grid>
                         <Grid item xs={12} sm container>
