@@ -28,7 +28,7 @@ class HomestayDetail extends Component {
     componentDidMount() {
         const homestayId= this.props.match.params.id
         
-        axios.get(`/api/homestay/${homestayId}`)
+        axios.get(`/homiehosting/public/api/homestay/${homestayId}`)
             .then(homestay => {
                 this.setState({ homestay: homestay.data});
                 // return homestay.data;
@@ -39,7 +39,7 @@ class HomestayDetail extends Component {
                 checkin_date: this.props.match.params.checkin,
                 duration: this.props.match.params.duration
               }
-              axios.post(`/api/roomList/`, data)
+              axios.post(`/homiehosting/public/api/roomList/`, data)
               .then(response => {
                 console.log("roomlist");
                 console.log(response.data);
