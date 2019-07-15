@@ -37,7 +37,7 @@ export default class App extends Component {
         
         return (
             <div>
-                <HashRouter>
+                <Router>
                     <div>
                         {/* <Header/> */}
                             <Route component={Header}/>
@@ -65,7 +65,7 @@ export default class App extends Component {
                         </Switch>
                         <Footer/>
                     </div>
-                </HashRouter>
+                </Router>
             </div>
         );
     }
