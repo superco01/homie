@@ -60,7 +60,7 @@ export default function EditHomestay(props) {
   
   useEffect(() => {
     const fetchRoom = async () => {
-      const response = await axios.get(`api/homestay/${JSON.parse(localStorage.getItem('user')).id}`)
+      const response = await axios.get(`api/homestay/${JSON.parse(localStorage.getItem('id'))}`)
       .then((response) => {
         return response.data
       })
@@ -88,7 +88,7 @@ export default function EditHomestay(props) {
 
   function onSubmit(e) {
       e.preventDefault()
-      const userId = JSON.parse(localStorage.getItem('user')).id
+      const userId = JSON.parse(localStorage.getItem('id'))
       console.log('---------------------');
       console.log(pictures);
       console.log('---------------------');

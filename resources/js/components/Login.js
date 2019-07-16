@@ -51,12 +51,13 @@ function Login(props) {
             email: email,
             password: password,
         }
-        axios.post('/api/login', user, {
+        axios.post('/homiehosting/public/api/login', user, {
           headers: { 'Content-Type': 'application/json' }
         }).then(response => {
           console.log(response);
           localStorage.setItem('usertoken', response.data.token)
-          localStorage.setItem('user', JSON.stringify(response.data.user))
+          localStorage.setItem('name', JSON.stringify(response.data.user.name))
+          localStorage.setItem('id', JSON.stringify(response.data.user.id))
           console.log(localStorage);
         })
         .catch(error => {

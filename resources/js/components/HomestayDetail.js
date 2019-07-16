@@ -39,7 +39,7 @@ class HomestayDetail extends Component {
                 checkin_date: this.props.match.params.checkin,
                 duration: this.props.match.params.duration
               }
-              axios.post('/homiehosting/public/api/roomList/', data)
+              axios.post('/homiehosting/public/api/roomList', data)
               .then(response => {
                 console.log("roomlist");
                 console.log(response.data);

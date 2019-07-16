@@ -57,6 +57,12 @@ function Header(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [user, setUser] = React.useState({id: 0, name: ""});
   const open = Boolean(anchorEl);
+  // localStorage.setItem('usertoken', '0')
+  // localStorage.setItem('user', '0')
+  console.log('----------------------------------');
+  console.log(localStorage);
+  console.log('----------------------------------');
+  
 
   useEffect(() => {
     // console.log(JSON.parse(localStorage.getItem('user')))
@@ -85,14 +91,16 @@ function Header(props) {
     axios.get('/api/logout', { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
     .then((response) => {
       localStorage.setItem('usertoken', '0')
-      localStorage.setItem('user', '0')
+      localStorage.setItem('name', '0')
+      localStorage.setItem('id', '0')
       console.log(response);
       this.setState(this.state)
     })
     .catch((error) => {
       console.log(error);
       localStorage.setItem('usertoken', '0')
-      localStorage.setItem('user', '0')
+      localStorage.setItem('name', '0')
+      localStorage.setItem('id', '0')
     })
     .then( () => {
       props.history.push(`/`);
@@ -115,7 +123,7 @@ function Header(props) {
           </Typography>
           {localStorage.getItem('usertoken') != '0'? (
             <div>
-            {JSON.parse(localStorage.getItem('user')).name == 'admin'? (
+            {JSON.parse(localStorage.getItem('name')) == 'admin'? (
             <div>
               <Button color="default" variant="text" >Welcome Admin</Button>
               <Button onClick={logout} style={{ marginRight: 5, marginLeft: 5}} color="secondary" variant="contained" >Logout</Button>

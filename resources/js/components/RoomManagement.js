@@ -31,7 +31,7 @@ class RoomManagement extends Component {
             console.log(response);
             // this.setState({ toggle: response.data })
             // const homestayId= this.props.match.params.id
-            const data = {homestay_id : JSON.parse(localStorage.getItem('user')).id}
+            const data = {homestay_id : JSON.parse(localStorage.getItem('id'))}
             axios.post(`/api/roomAvailability`, data, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
         .then(response => {
             // console.log(response.data[1].orders[0].name);
@@ -54,7 +54,7 @@ class RoomManagement extends Component {
             console.log(response);
             // this.setState({ toggle: response.data })
             // const homestayId= this.props.match.params.id
-            const data = {homestay_id : JSON.parse(localStorage.getItem('user')).id}
+            const data = {homestay_id : JSON.parse(localStorage.getItem('id'))}
             axios.post(`/api/roomAvailability`, data, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
         .then(response => {
             // console.log(response.data[1].orders[0].name);
@@ -66,7 +66,7 @@ class RoomManagement extends Component {
 
     componentDidMount() {
         // const homestayId= this.props.match.params.id
-        const data = {homestay_id : JSON.parse(localStorage.getItem('user')).id}
+        const data = {homestay_id : JSON.parse(localStorage.getItem('id'))}
         axios.post(`/api/roomAvailability`, data, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
         .then(response => {
             // console.log(response.data[1].orders[0].name);

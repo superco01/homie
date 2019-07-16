@@ -44,7 +44,7 @@ class Search extends Component {
     }
     componentDidMount() {
         console.log(localStorage);
-        axios.post('/homiehosting/public/api/homestaySearch',{
+        axios.post('/public/api/homestaySearch',{
             room_availability: 1,
         })
         .then(response => {
