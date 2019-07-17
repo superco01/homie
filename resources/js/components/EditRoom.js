@@ -89,7 +89,7 @@ export default function EditRoom(props) {
         number_of_rooms: numberOfRooms,
       }
 
-      axios.post(`/api/homestayUpdate`, editHomestay, {
+      axios.post(`api/homestayUpdate`, editHomestay, {
         headers: { 'Content-Type': 'application/json' }
       }).then(response => {
         const data = response.data;

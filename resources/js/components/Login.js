@@ -51,7 +51,7 @@ function Login(props) {
             email: email,
             password: password,
         }
-        axios.post('/homiehosting/public/api/login', user, {
+        axios.post('api/login', user, {
           headers: { 'Content-Type': 'application/json' }
         }).then(response => {
           console.log(response);

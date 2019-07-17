@@ -169,13 +169,13 @@ export default function Payment(props) {
     console.log(snapPayResult);
     console.log(result);
     
-    axios.post('/api/orderUpdate', result)
+    axios.post('api/orderUpdate', result)
   }
 
   function onPay(e) {
     e.preventDefault()
     
-    axios.post('/api/snaptoken', responseData,{
+    axios.post('api/snaptoken', responseData,{
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': 'U0ItTWlkLXNlcnZlci1NaElqUXdfUGtEQkdJeG5mOW1uMlhISVE6' }
     })
     .then((response) => {

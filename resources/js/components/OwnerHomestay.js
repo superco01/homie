@@ -31,7 +31,7 @@ class OwnerHomestay extends Component {
         
         const homestayId= 1
         
-        axios.get(`/api/homestay/${JSON.parse(localStorage.getItem('id'))}`)
+        axios.get(`api/homestay/${JSON.parse(localStorage.getItem('id'))}`)
             .then(homestay => {
                 this.setState({ homestay: homestay.data});
                 // return homestay.data;

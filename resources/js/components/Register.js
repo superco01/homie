@@ -53,7 +53,7 @@ export default function Register(props) {
           email: email,
           password: password,
       }
-      axios.post('/api/register', newUser, {
+      axios.post('api/register', newUser, {
         headers: { 'Content-Type': 'application/json' }
       }).then(response => {
         console.log(response);

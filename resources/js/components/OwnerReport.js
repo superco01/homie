@@ -35,7 +35,7 @@ export default class OwnerReport extends Component {
         }
     } 
     componentDidMount() {
-        axios.get(`/api/orderList/${JSON.parse(localStorage.getItem('id'))}`)
+        axios.get(`api/orderList/${JSON.parse(localStorage.getItem('id'))}`)
         .then((response) => {
             this.setState({order: response.data.report})
             console.log(this.state);

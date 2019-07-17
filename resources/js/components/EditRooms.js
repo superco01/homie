@@ -44,7 +44,7 @@ class EditRooms extends Component {
               //   checkin_date: this.props.match.params.checkin,
               //   duration: this.props.match.params.duration
               // }
-              axios.get(`/api/roomOwner/${homestayId}`)
+              axios.get(`api/roomOwner/${homestayId}`)
               .then(response => {
                 console.log("roomlist");
                 console.log(response.data);

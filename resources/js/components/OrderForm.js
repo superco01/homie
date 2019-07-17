@@ -55,7 +55,7 @@ export default function OrderForm(props) {
   
   useEffect(() => {
     const fetchRoom = async () => {
-      const response = await axios.get(`/api/room/${props.match.params.id}`)
+      const response = await axios.get(`api/room/${props.match.params.id}`)
       setRoom(response.data);
       setCheckInDate(props.match.params.checkin)
       setDuration(props.match.params.duration)
@@ -82,7 +82,7 @@ export default function OrderForm(props) {
       console.log(room);
       console.log(newOrder);
       
-      axios.post('/api/order', newOrder, {
+      axios.post('api/order', newOrder, {
         headers: { 'Content-Type': 'application/json' }
       }).then(response => {
         return response.data;

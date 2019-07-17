@@ -111,7 +111,7 @@ export default function EditHomestay(props) {
       console.log(editHomestay);
       
 
-      axios.post(`/public/api/homestayUpdate`, editHomestay, {
+      axios.post(`api/homestayUpdate`, editHomestay, {
         headers: { 'Content-Type': 'application/json' }
       }).then(response => {
         const data = response.data;

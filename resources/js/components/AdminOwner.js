@@ -34,10 +34,10 @@ class AdminOwner extends Component {
         id: e,
       }
 
-      axios.post('/public/api/admindeleteowner', deleteOwner, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')}})
+      axios.post('api/admindeleteowner', deleteOwner, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')}})
       .then((response) => {
         console.log(response);
-        axios.get(`/public/api/adminowner/`, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')}})
+        axios.get(`api/adminowner/`, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')}})
               .then(response => {
                 console.log(response.data);
                 
@@ -61,7 +61,7 @@ class AdminOwner extends Component {
               //   checkin_date: this.props.match.params.checkin,
               //   duration: this.props.match.params.duration
               // }
-              axios.get(`/public/api/adminowner/`, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')}})
+              axios.get(`api/adminowner/`, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')}})
               .then(response => {
                 console.log(response.data);
                 
