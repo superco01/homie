@@ -43,8 +43,8 @@ class Search extends Component {
         })
     }
     componentDidMount() {
-        console.log(localStorage);
-        axios.post('/public/api/homestaySearch',{
+        // console.log(localStorage);
+        axios.post('api/homestaySearch',{
             room_availability: 1,
         })
         .then(response => {
@@ -68,7 +68,7 @@ class Search extends Component {
             checkin_date: this.state.checkinDate,
             duration: this.state.duration,
         }
-        axios.post('/api/homestaySearch', data)
+        axios.post('api/homestaySearch', data)
         .then(response => {
             this.setState({ homestays: response.data.homestaySearch})
             // console.log(this.state.homestays);

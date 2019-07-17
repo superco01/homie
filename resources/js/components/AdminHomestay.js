@@ -36,10 +36,10 @@ class AdminHomestay extends Component {
       console.log(deleteHomestay);
       
 
-      axios.post('/api/admindeletehomestay', deleteHomestay, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')}})
+      axios.post('/public/api/admindeletehomestay', deleteHomestay, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')}})
       .then((response) => {
         console.log(response);
-        axios.get(`/api/adminhomestay/`, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')}})
+        axios.get(`/public/api/adminhomestay/`, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')}})
               .then(response => {
                 console.log(response.data);
                 
@@ -65,7 +65,7 @@ class AdminHomestay extends Component {
               // }
               console.log(localStorage);
               
-              axios.get(`/api/adminhomestay/`, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')}})
+              axios.get(`/public/api/adminhomestay/`, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')}})
               .then(response => {
                 console.log(response.data);
                 

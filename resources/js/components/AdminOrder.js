@@ -224,7 +224,7 @@ export default function AdminOrder() {
 
   useEffect(() => {
     const fetchOrder = async () => {
-      const response = await axios.get(`/api/adminorder/`, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')}})
+      const response = await axios.get(`/public/api/adminorder/`, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')}})
       setValues(response.data)
       console.log(response.data);
     }

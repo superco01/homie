@@ -88,7 +88,7 @@ function Header(props) {
   }
 
   function logout() {
-    axios.get('/api/logout', { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
+    axios.get('/public/api/logout', { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
     .then((response) => {
       localStorage.setItem('usertoken', '0')
       localStorage.setItem('name', '0')

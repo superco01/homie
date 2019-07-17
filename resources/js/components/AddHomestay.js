@@ -76,7 +76,7 @@ export default function AddHomestay(props) {
         photo2: pictures[1],
       }
 
-      axios.post(`/api/homestay`, addNewHomestay, {
+      axios.post(`/public/api/homestay`, addNewHomestay, {
         headers: { 'Content-Type': 'application/json' }
       }).then(response => {
         const data = response.data;
@@ -89,7 +89,7 @@ export default function AddHomestay(props) {
             // room_availability: 0
           }
 
-        axios.post(`/api/room`, addNewRoom)
+        axios.post(`/public/api/room`, addNewRoom)
         console.log(response);
       }).catch(error => {
         alert('Field should not empty')
