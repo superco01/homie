@@ -32,7 +32,7 @@ class RoomManagement extends Component {
             // this.setState({ toggle: response.data })
             // const homestayId= this.props.match.params.id
             const data = {homestay_id : JSON.parse(localStorage.getItem('id'))}
-            axios.post(`/api/roomAvailability`, data, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
+            axios.post(`api/roomAvailability`, data, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
         .then(response => {
             // console.log(response.data[1].orders[0].name);
           this.setState({ rooms: response.data });
@@ -55,7 +55,7 @@ class RoomManagement extends Component {
             // this.setState({ toggle: response.data })
             // const homestayId= this.props.match.params.id
             const data = {homestay_id : JSON.parse(localStorage.getItem('id'))}
-            axios.post(`/api/roomAvailability`, data, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
+            axios.post(`api/roomAvailability`, data, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
         .then(response => {
             // console.log(response.data[1].orders[0].name);
           this.setState({ rooms: response.data });

@@ -3,13 +3,14 @@ import {Grid, Paper, List, ListItem, ListItemText, ListItemAvatar, Avatar, Divid
 import {Link} from 'react-router-dom'
 import { withStyles } from '@material-ui/styles'
 import MyTheme from './MyTheme'
+import NumberFormat from 'react-number-format';
 
 function HomestayList(props) {
   // const {styles} = this.props
   console.log(props);
   console.log("-----------------------------");
   const [room, setRoom] = React.useState([])
-  let lowerPrice = 0;
+  var lowerPrice = 0;
   return (
     <div>
       <Paper>
@@ -41,9 +42,15 @@ function HomestayList(props) {
                 if (lowerPrice < room.price) {
                   lowerPrice = room.price
                 }
+                else {
+                  lowerPrice = room.price
+                }
               })}
+                <Typography display="inline" variant="h6">
+                  Lower Price
+                </Typography>
                 <Typography variant="h6">
-                  Rp. {lowerPrice}
+                  <NumberFormat value={lowerPrice} displayType={'text'} thousandSeparator={true} prefix={'Rp '} suffix={',-'} />
                 </Typography>
               </Grid>
               <Grid item xs>

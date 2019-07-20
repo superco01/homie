@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Divider, ButtonBase, Grid, Card, CardActions, CardContent, CardMedia, Button, Typography, Container, Paper, withStyles} from '@material-ui/core'
 import {Link} from 'react-router-dom'
+import NumberFormat from 'react-number-format';
 
 const styles = {
   root: {
@@ -108,7 +109,7 @@ class HomestayDetail extends Component {
                           <Grid item xs={12} >
                             <Grid item xs={12}>
                               <Typography variant="h6">
-                                Rp {room.price},-
+                              <NumberFormat value={room.price} displayType={'text'} thousandSeparator={true} prefix={'Rp '} suffix={',-'} />
                               </Typography>
                             </Grid>
                             <Grid item xs={12}>

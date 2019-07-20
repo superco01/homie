@@ -142,7 +142,7 @@ export default function Payment(props) {
   
   useEffect(() => {
     const fetchOrder = async () => {
-      const response = await axios.get(`/api/order/${props.match.params.id}`)
+      const response = await axios.get(`api/order/${props.match.params.id}`)
       console.log(response.data);
       setResponseData(response.data)
       setHomestayName(response.data.homestay.name)
