@@ -58,6 +58,7 @@ function Login(props) {
           localStorage.setItem('usertoken', response.data.token)
           localStorage.setItem('name', JSON.stringify(response.data.user.name))
           localStorage.setItem('id', JSON.stringify(response.data.user.id))
+          localStorage.setItem('homestayId', JSON.stringify(response.data.homestayId))
           console.log(localStorage);
         })
         .catch(error => {
@@ -72,7 +73,15 @@ function Login(props) {
           alert(error)
         })
         .then( () => {
-          props.history.push(`/`);
+          if (JSON.parse(localStorage.getItem('name')) != 'admin') {
+            console.log('ifffffffffffffffffffffffffff');
+            
+            props.history.push(`/ownerhomestay`);
+          }
+          else {
+            console.log('elseeeeeeeeeeeeeeeeeeeeeeeeee');
+            props.history.push(`/`);
+          }
         })
     }
 

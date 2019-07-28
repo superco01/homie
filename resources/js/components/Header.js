@@ -62,9 +62,10 @@ function Header(props) {
   console.log('----------------------------------');
   console.log(localStorage);
   console.log('----------------------------------');
-  
+  // logout();
 
   useEffect(() => {
+    
     // console.log(JSON.parse(localStorage.getItem('user')))
     // console.log("----------------------------------");
     
@@ -93,6 +94,7 @@ function Header(props) {
       localStorage.setItem('usertoken', '0')
       localStorage.setItem('name', '0')
       localStorage.setItem('id', '0')
+      localStorage.setItem('homestayId', '0')
       console.log(response);
       this.setState(this.state)
     })
@@ -125,7 +127,7 @@ function Header(props) {
             <div>
             {JSON.parse(localStorage.getItem('name')) == 'admin'? (
             <div>
-              <Button color="default" variant="text" >Welcome Admin</Button>
+              <Button color="default" variant="text" >Welcome {JSON.parse(localStorage.getItem('name'))}</Button>
               <Button onClick={logout} style={{ marginRight: 5, marginLeft: 5}} color="secondary" variant="contained" >Logout</Button>
               <IconButton
                 aria-owns={open ? 'menu-appbar' : undefined}
@@ -156,7 +158,7 @@ function Header(props) {
             </div>
             ) : (
             <div>
-              <Button color="default" variant="text" >Welcome {user.name}</Button>
+              <Button color="default" variant="text" >Welcome {JSON.parse(localStorage.getItem('name'))}</Button>
               <Button onClick={logout} style={{ marginRight: 5, marginLeft: 5}} color="secondary" variant="contained" >Logout</Button>
               <IconButton
                 aria-owns={open ? 'menu-appbar' : undefined}
@@ -183,6 +185,7 @@ function Header(props) {
                 <MenuItem onClick={handleClose} component={Link} to={`/ownerhomestay`} >My Homestay</MenuItem>
                 <MenuItem onClick={handleClose} component={Link} to={`/addhomestay/${user.id}`} >Add Homestay</MenuItem>
                 <MenuItem onClick={handleClose} component={Link} to={`/edithomestay/${user.id}`} >Edit Homestay</MenuItem>
+                <MenuItem onClick={handleClose} component={Link} to={`/editrooms/${JSON.parse(localStorage.getItem('homestayId'))}`} >Edit Rooms</MenuItem>
                 <MenuItem onClick={handleClose} component={Link} to={`/roommanagement/${user.id}`} >Check-in / Check-Out</MenuItem>
                 <MenuItem onClick={handleClose} component={Link} to={`/orderlist/${user.id}`} >Order List</MenuItem>
                 <MenuItem onClick={handleClose} component={Link} to={`/report/${user.id}`} >Report</MenuItem>

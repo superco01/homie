@@ -7,6 +7,9 @@ use App\Transaction;
 
 use App\Veritrans\Midtrans;
 use App\Order;
+use App\OrderMeta;
+use Veritrans_Config;
+use Veritrans_Notification;
 
 class PaymentController extends Controller
 {
@@ -83,16 +86,66 @@ class PaymentController extends Controller
         }
     }
 
-    public function store(Request $request) {
-        $this->validate($request, [
-            'order_id'  => 'required',
-            'status'    => 'required',
-            'code'      => 'required',
-        ]);
-        $code = substr(str_shuffle(str_repeat("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", 5)), 0, 5);
-        $payment = Transaction::create(['order_id' => $request->order_id,
-                                        'status' => 'paid',
-                                        'code' => $code]);
-        return response()->json($payment, 201);
+    public function notificationHandler() {
+        Veritrans_Config::$isProduction = false;
+        Veritrans_Config::$serverKey = 'SB-Mid-server-MhIjQw_PkDBGIxnf9mn2XHIQ';
+        $notif = new Veritrans_Notification();
+
+        $transaction = $notif->transaction_status;
+        $type = $notif->payment_type;
+        $order_id = $notif->order_id;
+        $fraud = $notif->fraud_status;
+
+        if ($transaction == 'capture') {
+            $orderUpdate = Order::where('id', $order_id)->update(['transaction_status' => $transaction,
+                                                                  'order_type' => $type,
+                                                                  'fraud_status' => $fraud]);
+            $orderUpdateMeta = OrderMeta::where('order_id', $order_id)->update(['status' => $transaction]);
+        // For credit card transaction, we need to check whether transaction is challenge by FDS or not
+            if ($type == 'credit_card'){
+                if($fraud == 'challenge'){
+                    // TODO set payment status in merchant's database to 'Challenge by FDS'
+                    // TODO merchant should decide whether this transaction is authorized or not in MAP
+                    echo "Transaction order_id: " . $order_id ." is challenged by FDS";
+                }
+                else {
+                    // TODO set payment status in merchant's database to 'Success'
+                    echo "Transaction order_id: " . $order_id ." successfully captured using " . $type;
+                }
+            }
+        }
+        else if ($transaction == 'settlement'){
+        // TODO set payment status in merchant's database to 'Settlement'
+            $orderUpdate = Order::where('id', $order_id)->update(['transaction_status' => $transaction,
+                                                                    'order_type' => $type,
+                                                                    'fraud_status' => $fraud]);
+            $orderUpdateMeta = OrderMeta::where('order_id', $order_id)->update(['status' => $transaction]);
+        echo "Transaction order_id: " . $order_id ." successfully transfered using " . $type;
+        }
+        else if($transaction == 'pending'){
+            $orderUpdate = Order::where('id', $order_id)->update(['transaction_status' => $transaction,
+                                                                    'order_type' => $type,
+                                                                    'fraud_status' => $fraud]);
+            $orderUpdateMeta = OrderMeta::where('order_id', $order_id)->update(['status' => $transaction]);
+        // TODO set payment status in merchant's database to 'Pending'
+        echo "Waiting customer to finish transaction order_id: " . $order_id . " using " . $type;
+        }
+        else if ($transaction == 'deny') {
+        // TODO set payment status in merchant's database to 'Denied'
+        echo "Payment using " . $type . " for transaction order_id: " . $order_id . " is denied.";
+        }
+        else if ($transaction == 'expire') {
+            $orderUpdate = Order::where('id', $order_id)->update(['transaction_status' => $transaction,
+                                                                  'order_type' => $type,
+                                                                  'fraud_status' => $fraud]);
+            $orderUpdateMeta = OrderMeta::where('order_id', $order_id)->update(['status' => $transaction]);
+        // TODO set payment status in merchant's database to 'expire'
+        echo "Payment using " . $type . " for transaction order_id: " . $order_id . " is expired.";
+        }
+        else if ($transaction == 'cancel') {
+        // TODO set payment status in merchant's database to 'Denied'
+        echo "Payment using " . $type . " for transaction order_id: " . $order_id . " is canceled.";
+        }
     }
+
 }

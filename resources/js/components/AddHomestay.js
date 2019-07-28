@@ -14,7 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import ImageUploader from 'react-images-upload';
-import { Paper, Divider } from '@material-ui/core';
+import { Paper, Divider, FormControl, Select, OutlinedInput, MenuItem } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -58,12 +58,23 @@ export default function AddHomestay(props) {
   const [price, setPrice] = React.useState('')
  
   function onDrop(picture) {
+    console.log(picture);
+    
     setPictures(pictures.concat(picture));
   }
 
   function onSubmit(e) {
       e.preventDefault()
-      const userId = props.match.params.id  
+      console.log(pictures);
+      let photo1 = null;
+      let photo2 = null;
+      const userId = JSON.parse(localStorage.getItem('id'))
+      if (pictures[0] != null) {
+        photo1 = pictures[0].name
+      }
+      if (pictures[1] != null) {
+        photo2 = pictures[1].name
+      }
       
       const addNewHomestay = {
         user_id: userId,
@@ -72,25 +83,35 @@ export default function AddHomestay(props) {
         address: address,
         facilities: facilities,
         number_of_rooms: numberOfRooms,
-        photo1: pictures[0],
-        photo2: pictures[1],
+        photo1: photo1,
+        photo2: photo2,
       }
+
+      console.log(addNewHomestay);
+      
 
       axios.post(`api/homestay`, addNewHomestay, {
         headers: { 'Content-Type': 'application/json' }
       }).then(response => {
         const data = response.data;
+        console.log('set local storage homestay id');
+        
+        localStorage.setItem('homestayId', data.id)
         const addNewRoom = {
             homestay_id: data.id,
-            // type: type,
+            type: 'Single',
             description: description,
             photos: photos,
             price: price,
             // room_availability: 0
           }
+          console.log(addNewRoom);
+          
 
         axios.post(`api/room`, addNewRoom)
         console.log(response);
+        alert('Homestay Added')
+        props.history.push('/ownerhomestay')
       }).catch(error => {
         alert('Field should not empty')
         console.log(error);
@@ -137,6 +158,26 @@ export default function AddHomestay(props) {
                 autoComplete="location"
               />
             </Grid>
+            <Grid item>
+                <Typography color="textSecondary">Location</Typography>
+                <FormControl variant="outlined">
+                    <Select
+                    value={location}
+                    onChange={event => setLocation(event.target.value)}
+                    input={<OutlinedInput placeholder="LOCATION" labelWidth={10} name="location" id="outlined-location-simple" />}
+                    >
+                    <MenuItem value="Select Location">
+                        Select Location
+                    </MenuItem>
+                    <MenuItem value={'Bukit Raya'}>Bukit Raya</MenuItem>
+                    <MenuItem value={'Rumbai'}>Rumbai</MenuItem>
+                    <MenuItem value={'Marpoyan Damai'}>Marpoyan Damai</MenuItem>
+                    <MenuItem value={'Simpang Baru'}>Simpang Baru</MenuItem>
+                    <MenuItem value={'Pekanbaru'}>Pekanbaru</MenuItem>
+                    <MenuItem value={'Tampan'}>Tampan</MenuItem>
+                    </Select>
+                </FormControl>
+              </Grid>
             <Grid item  >
               <TextField style={{marginBottom: 12}}
                 value={address}
@@ -207,7 +248,7 @@ export default function AddHomestay(props) {
           <Paper>
             <Typography style={{ padding: 12}}>Homestay Pictures</Typography>
             <Divider/>
-            <Typography style={{ padding: 12}}>Max 2 Pictures</Typography>
+            <Typography style={{ padding: 12}}>Add 2 Pictures</Typography>
             <ImageUploader
                 withIcon={false}
                 withPreview

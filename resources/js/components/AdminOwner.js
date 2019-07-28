@@ -33,18 +33,18 @@ class AdminOwner extends Component {
       const deleteOwner = {
         id: e,
       }
-
-      axios.post('api/admindeleteowner', deleteOwner, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')}})
-      .then((response) => {
-        console.log(response);
-        axios.get(`api/adminowner/`, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')}})
-              .then(response => {
-                console.log(response.data);
-                
-                this.setState({ owners: response.data });
-              })
-      })
-      
+      if(confirm('Sure to delete owner')) {
+        axios.post('api/admindeleteowner', deleteOwner, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')}})
+        .then((response) => {
+          console.log(response);
+          axios.get(`api/adminowner/`, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')}})
+                .then(response => {
+                  console.log(response.data);
+                  
+                  this.setState({ owners: response.data });
+                })
+        })
+      }
     }
 
     componentDidMount() {

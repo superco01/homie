@@ -31,24 +31,15 @@ class OwnerHomestay extends Component {
         
         const homestayId= 1
         
-        axios.get(`api/homestay/${JSON.parse(localStorage.getItem('id'))}`)
+        axios.get(`api/homestay/${JSON.parse(localStorage.getItem('homestayId'))}`)
             .then(homestay => {
                 this.setState({ homestay: homestay.data});
                 // return homestay.data;
             })
-            .then(() => {
-              const data = {
-                homestay_id: homestayId,
-                checkin_date: this.props.match.params.checkin,
-                duration: this.props.match.params.duration
+            .catch( error => {
+              if (error.response.status == 500) {
+                this.props.history.push(`/addhomestay/${JSON.parse(localStorage.getItem('id'))}`);
               }
-              // axios.post(`/api/roomList/`, data)
-              // .then(response => {
-              //   console.log("roomlist");
-              //   console.log(response.data);
-                
-              //   this.setState({ rooms: response.data.room, roomCount: response.data.roomCount });
-              // })
             })
     }
 

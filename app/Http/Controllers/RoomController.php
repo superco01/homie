@@ -22,7 +22,7 @@ class RoomController extends Controller
                                   'description' => $request->description,
                                   'photos' => $request->photos,
                                   'price' => $request->price,
-                                  'room_availability' => $request->room_availability,
+                                  'room_availability' => 0,
                                   ]);
             // $room_meta = Room
         }
@@ -68,5 +68,16 @@ class RoomController extends Controller
         $ownerRoom = Room::where('homestay_id', $id)->get();
         
         return response()->json(compact('ownerRoom'), 200);
+    }
+
+    public function updateRoom(Request $request) {
+        error_log($request);
+        // $homestay = Homestay::find($request->id);
+        // $homestay->update($request->all());
+        $room = Room::where('id', $request->id)->update($request->all());
+        // $test = Homestay::where('id')
+        // error_log($homestay);
+
+        return response()->json($room, 201);
     }
 }

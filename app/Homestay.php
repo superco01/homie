@@ -18,6 +18,9 @@ class Homestay extends Model
         'address',
         'facilities',
         'number_of_rooms',
+        'photo1',
+        'photo2',
+        'description',
     ];
 
     public function homestayFacilities() {

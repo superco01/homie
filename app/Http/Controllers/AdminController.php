@@ -13,7 +13,7 @@ use App\Transaction;
 class AdminController extends Controller
 {
     public function indexOwner() {
-        $owners = User::where('id', '<>', 1)->get();
+        $owners = User::where('name', '<>', 'admin')->get();
         return $owners->toJson();
     }
     public function indexHomestay() {

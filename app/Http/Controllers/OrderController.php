@@ -65,7 +65,7 @@ class OrderController extends Controller
             $orderMeta = OrderMeta::create([
                 'order_id' => $order_id,
                 'stay_date' => $stay_date,
-                'status' => 'capture',
+                'status' => 'no status',
             ]);
         }
                         

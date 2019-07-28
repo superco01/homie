@@ -10,7 +10,7 @@ function HomestayList(props) {
   console.log(props);
   console.log("-----------------------------");
   const [room, setRoom] = React.useState([])
-  var lowerPrice = 0;
+  var lowestPrice = 0;
   return (
     <div>
       <Paper>
@@ -39,18 +39,18 @@ function HomestayList(props) {
             <Grid item xs >
               <Grid item xs>
               {props.homestay.rooms.map(room => {
-                if (lowerPrice < room.price) {
-                  lowerPrice = room.price
+                if (lowestPrice == 0) {
+                  lowestPrice = room.price
                 }
-                else {
-                  lowerPrice = room.price
+                if (lowestPrice > room.price) {
+                  lowestPrice = room.price
                 }
               })}
                 <Typography display="inline" variant="h6">
-                  Lower Price
+                  Lowest Price
                 </Typography>
                 <Typography variant="h6">
-                  <NumberFormat value={lowerPrice} displayType={'text'} thousandSeparator={true} prefix={'Rp '} suffix={',-'} />
+                  <NumberFormat value={lowestPrice} displayType={'text'} thousandSeparator={true} prefix={'Rp '} suffix={',-'} />
                 </Typography>
               </Grid>
               <Grid item xs>

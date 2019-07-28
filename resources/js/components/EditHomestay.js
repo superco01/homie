@@ -60,7 +60,7 @@ export default function EditHomestay(props) {
   
   useEffect(() => {
     const fetchRoom = async () => {
-      const response = await axios.get(`api/homestay/${JSON.parse(localStorage.getItem('id'))}`)
+      const response = await axios.get(`api/homestay/${JSON.parse(localStorage.getItem('homestayId'))}`)
       .then((response) => {
         return response.data
       })
@@ -70,8 +70,9 @@ export default function EditHomestay(props) {
       setAddress(response.address)
       setFacilities(response.facilities)
       setNumberOfRooms(response.number_of_rooms)
-      setPhoto1(response.photo1)
-      setPhoto2(response.photo2)
+      // setPhoto1(response.photo1)
+      // setPhoto2(response.photo2)
+      setDescription(response.description)
       // setPictures(pictures.concat(response.photo1));
       // setPictures(pictures.concat(response.photo2));
       // setPictures(pictures.concat(response.photo1))
@@ -82,7 +83,7 @@ export default function EditHomestay(props) {
   }, [])
   
   function onDrop(picture) {
-    setPictures(pictures.concat(picture.name));
+    setPictures(pictures.concat(picture));
     console.log(pictures);
   }
 
@@ -92,10 +93,18 @@ export default function EditHomestay(props) {
       console.log('---------------------');
       console.log(pictures);
       console.log('---------------------');
+      var photo1
+      var photo2
       
-      if (pictures != null) {
-        setPhoto1(pictures[0])
-        setPhoto1(pictures[1])
+      if (pictures[0] != null) {
+        console.log('set photooo');
+        console.log('images/'.concat(pictures[0].name));
+        
+        photo1 = 'images/'.concat(pictures[0].name)
+      }
+      if (pictures[1] != null) {
+        console.log('images/'.concat(pictures[1].name));
+        photo2 = 'images/'.concat(pictures[1].name)
       }
       
       const editHomestay = {
@@ -106,7 +115,7 @@ export default function EditHomestay(props) {
         facilities: facilities,
         photo1: photo1,
         photo2: photo2,
-        number_of_rooms: numberOfRooms,
+        // number_of_rooms: numberOfRooms,
       }
       console.log(editHomestay);
       
@@ -116,6 +125,7 @@ export default function EditHomestay(props) {
       }).then(response => {
         const data = response.data;
         console.log(response);
+        alert('Homestay Edited')
         
         // const addNewRoom = {
         //     homestay_id: data.id,
@@ -160,7 +170,7 @@ export default function EditHomestay(props) {
               />
             </Grid>
             <Grid item  >
-              <TextField style={{marginBottom: 12}}
+              <TextField style={{marginBottom: 12}} disabled
                 value={location}
                 onChange={event => setLocation(event.target.value)}
                 variant="outlined"
@@ -173,7 +183,7 @@ export default function EditHomestay(props) {
               />
             </Grid>
             <Grid item  >
-              <TextField style={{marginBottom: 12}}
+              <TextField style={{marginBottom: 12}} disabled
                 value={address}
                 onChange={event => setAddress(event.target.value)}
                 variant="outlined"
@@ -199,7 +209,7 @@ export default function EditHomestay(props) {
               />
             </Grid>
             <Grid item  >
-              <TextField style={{marginBottom: 12}}
+              <TextField style={{marginBottom: 12}} disabled
                 value={numberOfRooms}
                 onChange={event => setNumberOfRooms(event.target.value)}
                 variant="outlined"
@@ -224,7 +234,7 @@ export default function EditHomestay(props) {
                 autoComplete="description"
               />
             </Grid>
-            <Grid item  >
+            {/* <Grid item  >
               <TextField style={{marginBottom: 12}}
                 value={price}
                 onChange={event => setPrice(event.target.value)}
@@ -236,7 +246,7 @@ export default function EditHomestay(props) {
                 name="price"
                 autoComplete="price"
               />
-            </Grid>
+            </Grid> */}
           </Grid>
           <Grid item sm={6} md={6}>
           <Paper>
@@ -268,178 +278,5 @@ export default function EditHomestay(props) {
         </form>
       </div>
     </Container>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // <Container component="main" maxWidth="xs">
-    //   <CssBaseline />
-    //   <div className={classes.paper}>
-    //     {/* <Avatar className={classes.avatar}>
-    //       <LockOutlinedIcon />
-    //     </Avatar> */}
-    //     <Typography component="h1" variant="h5">
-    //       Edit Homestay
-    //     </Typography>
-    //     <form className={classes.form} noValidate>
-    //       <Grid container spacing={2}>
-    //         <Grid item xs={12}>
-    //           <TextField
-    //             // disabled
-    //             value={name}
-    //             onChange={event => setName(event.target.value)}
-    //             autoComplete="name"
-    //             name="name"
-    //             variant="outlined"
-    //             required
-    //             fullWidth
-    //             id="name"
-    //             label="Name"
-    //             autoFocus
-    //           />
-    //         </Grid>
-    //         <Grid item xs={12}>
-    //           <TextField
-    //             disabled
-    //             value={location}
-    //             onChange={event => setLocation(event.target.value)}
-    //             variant="outlined"
-    //             required
-    //             fullWidth
-    //             id="location"
-    //             label="Location"
-    //             name="location"
-    //             autoComplete="location"
-    //           />
-    //         </Grid>
-    //         <Grid item xs={12}>
-    //           <TextField
-    //             disabled
-    //             value={address}
-    //             onChange={event => setAddress(event.target.value)}
-    //             variant="outlined"
-    //             required
-    //             fullWidth
-    //             id="address"
-    //             label="Address"
-    //             name="address"
-    //             autoComplete="address"
-    //           />
-    //         </Grid>
-    //         <Grid item xs={12}>
-    //           <TextField
-    //             value={facilities}
-    //             onChange={event => setFacilities(event.target.value)}
-    //             variant="outlined"
-    //             required
-    //             fullWidth
-    //             id="facilities"
-    //             label="Facilities"
-    //             name="facilities"
-    //             autoComplete="facilities"
-    //           />
-    //         </Grid>
-    //         <Grid item xs={12}>
-    //           <TextField
-    //             disabled
-    //             value={numberOfRooms}
-    //             onChange={event => setNumberOfRooms(event.target.value)}
-    //             variant="outlined"
-    //             required
-    //             fullWidth
-    //             id="numberOfRooms"
-    //             label="Number of Rooms"
-    //             name="numberOfRooms"
-    //             autoComplete="numberOfRooms"
-    //           />
-    //         </Grid>
-    //         {/* <Grid item xs={12}>
-    //           <TextField
-    //             value={type}
-    //             onChange={event => setType(event.target.value)}
-    //             variant="outlined"
-    //             required
-    //             fullWidth
-    //             id="type"
-    //             label="Type"
-    //             name="type"
-    //             autoComplete="type"
-    //           />
-    //         </Grid> */}
-    //         <Grid item xs={12}>
-    //           <TextField
-    //             value={description}
-    //             onChange={event => setDescription(event.target.value)}
-    //             variant="outlined"
-    //             required
-    //             fullWidth
-    //             id="description"
-    //             label="Description"
-    //             name="description"
-    //             autoComplete="description"
-    //           />
-    //         </Grid>
-    //         <Grid item xs={12}>
-    //           <TextField
-    //             value={photo1}
-    //             onChange={event => setPhotos(event.target.value)}
-    //             variant="outlined"
-    //             required
-    //             fullWidth
-    //             id="photo1"
-    //             label="Photo 1"
-    //             name="photo1"
-    //             autoComplete="photo1"
-    //           />
-    //         </Grid>
-    //         <Grid item xs={12}>
-    //           <TextField
-    //             value={photo2}
-    //             onChange={event => setPhotos(event.target.value)}
-    //             variant="outlined"
-    //             required
-    //             fullWidth
-    //             id="photo2"
-    //             label="Photo 2"
-    //             name="photo2"
-    //             autoComplete="photo2"
-    //           />
-    //         </Grid>
-    //         <Grid item xs={12}>
-    //           <TextField
-    //             value={price}
-    //             onChange={event => setPrice(event.target.value)}
-    //             variant="outlined"
-    //             required
-    //             fullWidth
-    //             id="price"
-    //             label="Price"
-    //             name="price"
-    //             autoComplete="price"
-    //           />
-    //         </Grid>
-    //       </Grid>
-    //       <Button
-    //         onClick={onSubmit}
-    //         type="submit"
-    //         fullWidth
-    //         variant="contained"
-    //         color="primary"
-    //         className={classes.submit}
-    //       >
-    //         Confirm
-    //       </Button>
-    //     </form>
-    //   </div>
-    // </Container>
   );
 }

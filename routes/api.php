@@ -43,6 +43,7 @@ Route::post('room/', 'RoomController@createRoom');
 Route::post('roomList', 'RoomController@showRoomList');
 Route::get('room/{id}', 'RoomController@getRoom');
 Route::get('roomOwner/{id}', 'RoomController@getOwnerRoom');
+Route::post('roomUpdate', 'RoomController@updateRoom');
 //Order Route
 Route::post('order', 'OrderController@createOrder');
 Route::post('orderUpdate', 'OrderController@updateOrder');
@@ -68,3 +69,4 @@ Route::get('user/{id}', 'UserController@showName');
 Route::get('logout', 'UserController@logout');
 //Midtrans Route
 Route::post('snaptoken', 'PaymentController@token');
+Route::post('notificationHandler', 'PaymentController@notificationHandler');

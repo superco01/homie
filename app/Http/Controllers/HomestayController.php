@@ -21,7 +21,10 @@ class HomestayController extends Controller
             'address'       => 'required',
             'facilities'    => 'required',
             'number_of_rooms' => 'required',
+            'photo1'        => 'required',
+            'photo2'        => 'required',
         ]);
+        error_log($request->photo1);
 
         $homestay = Homestay::create(['user_id' => $request->user_id,
                                       'name' => $request->name,
@@ -29,15 +32,18 @@ class HomestayController extends Controller
                                       'address' => $request->address,
                                       'facilities' => $request->facilities,
                                       'number_of_rooms' => $request->number_of_rooms,
+                                      'photo1' => 'images/'.$request->photo1,
+                                      'photo2' => 'images/'.$request->photo2,
                                       ]);
 
         return response()->json($homestay, 201);
     }
 
     public function updateHomestay(Request $request) {
+        error_log($request);
         // $homestay = Homestay::find($request->id);
         // $homestay->update($request->all());
-        $homestay = Homestay::where('id', $request->user_id)->update($request->all());
+        $homestay = Homestay::where('user_id', $request->user_id)->update($request->all());
         // $test = Homestay::where('id')
         // error_log($homestay);
 
@@ -45,9 +51,9 @@ class HomestayController extends Controller
     }
 
     public function showDetail($id) {
-        $homestay = Homestay::with(['rooms' => function ($query) {
+        $homestay = Homestay::where('id', $id)->with(['rooms' => function ($query) {
             // $query->where('price', 111111);
-        }])->find($id);
+        }])->first();
 
         return $homestay->toJson();
     }

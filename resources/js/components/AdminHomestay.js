@@ -34,19 +34,18 @@ class AdminHomestay extends Component {
         id: e,
       }
       console.log(deleteHomestay);
-      
-
-      axios.post('api/admindeletehomestay', deleteHomestay, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')}})
-      .then((response) => {
-        console.log(response);
-        axios.get(`api/adminhomestay/`, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')}})
-              .then(response => {
-                console.log(response.data);
-                
-                this.setState({ homestays: response.data });
-              })
-      })
-      
+      if(confirm('Sure to delete homestay')) {
+        axios.post('api/admindeletehomestay', deleteHomestay, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')}})
+        .then((response) => {
+          console.log(response);
+          axios.get(`api/adminhomestay/`, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')}})
+                .then(response => {
+                  console.log(response.data);
+                  
+                  this.setState({ homestays: response.data });
+                })
+        })
+      }
     }
 
     componentDidMount() {

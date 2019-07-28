@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Homestay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -50,8 +51,17 @@ class UserController extends Controller
         }
         $user = User::where('email', $request->email)->get()->first();
         error_log($user);
+        $homestayId = 0;
+        error_log($homestayId);
+        if ($user->name != 'admin') {
+            $id = Homestay::where('user_id', $user->id)->first('id');
+            if ($id != null) {
+                $homestayId = $id->id;
+            }
+        }
+        error_log($homestayId);
 
-        return response()->json(compact('token', 'user'));
+        return response()->json(compact('token', 'user', 'homestayId'));
     }
 
     public function logout() {
