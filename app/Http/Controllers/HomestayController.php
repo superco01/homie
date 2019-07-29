@@ -77,15 +77,14 @@ class HomestayController extends Controller
         );
     
         //SEND EMAIL NOTIFICATION TO OWNER
-        $order = Order::where('id', 82)->first();
-        $user = $order->room->homestay->user;
+        // $order = Order::where('id', 82)->first();
+        // $user = $order->room->homestay->user;
 
-        $to_name = $user->name;
-        $to_email = 'habibyafi45@gmail.com';
-        // $to_email = 'heruapr@gmail.com';
-        $data = array('name'=>"Homie", 'body' => "A test mail");
+        // $to_name = $user->name;
+        // $to_email = 'habibyafi45@gmail.com';
+        // $data = array('name'=>"Homie", 'body' => "A test mail");
 
-        Mail::to($to_email, $to_name)->send(new PaymentConfirmation($order));
+        // Mail::to($to_email, $to_name)->send(new PaymentConfirmation($order));
 
         return response()->json(compact('homestaySearch'));
     }
