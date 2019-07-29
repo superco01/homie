@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use App\Transaction;
 
 use App\Veritrans\Midtrans;
+use App\User;
 use App\Order;
 use App\OrderMeta;
 use Veritrans_Config;
 use Veritrans_Notification;
+use App\Mail\PaymentConfirmation;
 
 class PaymentController extends Controller
 {
@@ -101,6 +103,17 @@ class PaymentController extends Controller
                                                                   'order_type' => $type,
                                                                   'fraud_status' => $fraud]);
             $orderUpdateMeta = OrderMeta::where('order_id', $order_id)->update(['status' => $transaction]);
+
+            //SEND EMAIL NOTIFICATION TO OWNER
+            $order = Order::where('id', 82)->first();
+            $user = $order->room->homestay->user;
+
+            $to_name = $user->name;
+            $to_email = $user->email;
+            // $data = array('name'=>"Homie", 'body' => "A test mail");
+
+            Mail::to($to_email, $to_name)->send(new PaymentConfirmation($order));
+
         // For credit card transaction, we need to check whether transaction is challenge by FDS or not
             if ($type == 'credit_card'){
                 if($fraud == 'challenge'){

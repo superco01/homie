@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Homestay;
 use App\Room;
+use App\Order;
+use Mail;
+use App\Mail\PaymentConfirmation;
 
 class HomestayController extends Controller
 {
@@ -71,10 +74,19 @@ class HomestayController extends Controller
         $homestaySearch = Homestay::where('location', $request->location)->with(['rooms.orders' => function ($query) {
             // $query->where('status', '');
         }])->get()
-    );
-        // $homestaySearch->orders;
-        // dd($homestaySearch[]);
-        // error_log($homestaySearch[9]);
+        );
+    
+        //SEND EMAIL NOTIFICATION TO OWNER
+        $order = Order::where('id', 82)->first();
+        $user = $order->room->homestay->user;
+
+        $to_name = $user->name;
+        $to_email = 'habibyafi45@gmail.com';
+        // $to_email = 'heruapr@gmail.com';
+        $data = array('name'=>"Homie", 'body' => "A test mail");
+
+        Mail::to($to_email, $to_name)->send(new PaymentConfirmation($order));
+
         return response()->json(compact('homestaySearch'));
     }
 

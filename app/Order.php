@@ -42,4 +42,8 @@ class Order extends Model
     public function orderMeta() {
         return $this->hasMany(OrderMeta::class);
     }
+
+    public function room() {
+        return $this->belongsTo(Room::class);
+    }
 }

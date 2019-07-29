@@ -35,4 +35,8 @@ class Room extends Model
     public function roomMeta() {
         return $this->hasMany(RoomMeta::class);
     }
+
+    public function homestay() {
+        return $this->belongsTo(Homestay::class);
+    }
 }

@@ -44,7 +44,6 @@ class OrderController extends Controller
         // error_log($checkoutDate);
         // dd($roomPrice);
         $priceTotal = $roomPrice->price * $request->duration;
-
         // dd($request);
         $order = Order::create(['name' => $request->name,
                                 'guest' => $request->guest,
@@ -68,8 +67,6 @@ class OrderController extends Controller
                 'status' => 'no status',
             ]);
         }
-                        
-
         return response()->json($order, 201);
     }
 
