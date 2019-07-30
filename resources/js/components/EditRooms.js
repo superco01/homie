@@ -26,32 +26,36 @@ class EditRooms extends Component {
         this.onSubmit = this.onSubmit.bind(this)
     }
 
-    onSubmit() {
+    onSubmit(room) {
+      console.log(room);
+      const homestayId= this.props.match.params.id
+      
+      if(confirm('Sure to close room?')) {
+        axios.post('api/roomStatus', room, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
+        .then(response => {
+          console.log(response);
 
+          axios.get(`api/roomOwner/${homestayId}`)
+          .then(response => {
+          console.log("roomlist");
+          console.log(response.data);
+          
+          this.setState({ rooms: response.data.ownerRoom });
+        })
+        })
+      }
     }
 
     componentDidMount() {
         const homestayId= this.props.match.params.id
         
-        // axios.get(`/api/homestay/${homestayId}`)
-        //     .then(homestay => {
-        //         this.setState({ homestay: homestay.data});
-        //         // return homestay.data;
-        //     })
-        //     .then(() => {
-              // const data = {
-              //   homestay_id: homestayId,
-              //   checkin_date: this.props.match.params.checkin,
-              //   duration: this.props.match.params.duration
-              // }
-              axios.get(`api/roomOwner/${homestayId}`)
-              .then(response => {
-                console.log("roomlist");
-                console.log(response.data);
-                
-                this.setState({ rooms: response.data.ownerRoom });
-              })
-            // })
+        axios.get(`api/roomOwner/${homestayId}`)
+        .then(response => {
+          console.log("roomlist");
+          console.log(response.data);
+          
+          this.setState({ rooms: response.data.ownerRoom });
+        })
     }
 
     render() {
@@ -110,21 +114,42 @@ class EditRooms extends Component {
                             </Grid>
                           </Grid>
                         </Grid>
-                        <Grid item md={4} container>
-                          <Grid item xs={12} >
-                            <Grid item xs={12}>
+                        <Grid item md={2} container>
+                          <Grid item >
+                            {/* <Grid item xs={12}>
                               <Typography variant="h6">
                                 Rp {room.price},-
                               </Typography>
-                            </Grid>
-                            <Grid item xs={12}>
+                            </Grid> */}
+                            {/* <Grid item xs={12}> */}
                               <Button
+                              
+                              style={{padding: 20, marginTop: 30}}
                               className={this.props.classes.button} 
                               variant="contained"
                               component={Link} 
                               to={`/editroom/${room.id}`}
                               >
                                 Edit Room
+                              </Button>
+                            {/* </Grid> */}
+                          </Grid>
+                        </Grid>
+                        <Grid item md={2} container>
+                          <Grid item xs={12} >
+                            <Grid item xs={12}>
+                              <Typography variant="h6">
+                                Room Status: {room.room_availability == 0? 'Closed':'Opened'}
+                              </Typography>
+                            </Grid>
+                            <Grid item xs={12}>
+                              <Button
+                              // className={this.props.classes.button}
+                              color="secondary"
+                              variant="contained"
+                              onClick={()=>this.onSubmit(room)}
+                              >
+                                {room.room_availability == 0? 'Open':'Close'} Room
                               </Button>
                             </Grid>
                           </Grid>

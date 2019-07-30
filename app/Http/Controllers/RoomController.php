@@ -30,20 +30,7 @@ class RoomController extends Controller
     }
 
     public function showRoomList(Request $request) {
-        
-        // $roomList = Room::where('homestay_id', $request->homestay_id)->where('checkin_date', '<>', $request->checkin_date)->with(['orders.orderMeta' => function ($query) use ($request){
-        //     $query->where('stay_date', '<>', $request->checkin_date);
-        // }])->get();
-
-        // $roomList = Room::where('homestay_id', $request->homestay_id)->whereHas('orders', function ($query) use ($request) {
-            // $query->where('status', '<>','capture')->where('stay_date', '<>', $request->checkin_date);
-        // })->get();
-
-        // $roomList = Room::where('homestay_id', $request->homestay_id)->whereHas('orders', function ($query) use ($request) {
-            // $query->where('status', '<>','capture')->where('stay_date', '<>', $request->checkin_date);
-        // })->get();
-
-        $roomList = Room::where('homestay_id', $request->homestay_id)->whereDoesntHave('orders.orderMeta', function ($query) use ($request) {
+        $roomList = Room::where('homestay_id', $request->homestay_id)->where('room_availability', 1)->whereDoesntHave('orders.orderMeta', function ($query) use ($request) {
             $query->where('status', 'capture')->where('stay_date', $request->checkin_date);
         })->get();
         
@@ -54,30 +41,31 @@ class RoomController extends Controller
             $room = null;
             $roomCount = null;
         }
-        
         // return $homestay->toJson();
         return response()->json(compact('room', 'roomCount'), 200);
     }
 
+    public function setAvailability(Request $request) {
+        $roomState = 0;
+        if ($request->room_availability == 0) {
+            $roomState = 1;
+        }
+        $room = Room::find($request->id)->update(['room_availability' => $roomState]);
+
+        return response()->json($room, 201);
+    }
+
     public function getRoom($id) {
         $homestay = Room::find($id);
-        
         return $homestay->toJson();
     }
     public function getOwnerRoom($id) {
         $ownerRoom = Room::where('homestay_id', $id)->get();
-        
         return response()->json(compact('ownerRoom'), 200);
     }
 
     public function updateRoom(Request $request) {
-        error_log($request);
-        // $homestay = Homestay::find($request->id);
-        // $homestay->update($request->all());
         $room = Room::where('id', $request->id)->update($request->all());
-        // $test = Homestay::where('id')
-        // error_log($homestay);
-
         return response()->json($room, 201);
     }
 }

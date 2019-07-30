@@ -61,14 +61,14 @@ class HomestayController extends Controller
         return $homestay->toJson();
     }
 
-    public function getLowestPrice() {
+    // public function getLowestPrice() {
 
-    }
+    // }
     
     public function searchHomestay(Request $request) {
         $searchResult = ($request->location == null) ? (
         $homestaySearch = Homestay::with(['rooms.orders' => function ($query) {
-            // $query->where('status', '');
+            // $query->where('room_availability', 1);
         }])->get()
         ) : (
         $homestaySearch = Homestay::where('location', $request->location)->with(['rooms.orders' => function ($query) {

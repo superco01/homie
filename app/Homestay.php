@@ -23,9 +23,9 @@ class Homestay extends Model
         'description',
     ];
 
-    public function homestayFacilities() {
-        return $this->hasMany(HomestayFacilities::class);
-    }
+    // public function homestayFacilities() {
+    //     return $this->hasMany(HomestayFacilities::class);
+    // }
 
     public function rooms() {
         return $this->hasMany(Room::class);

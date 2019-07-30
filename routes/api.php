@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth'], function()
     Route::post('checkin', 'ManagementController@checkin');
     Route::post('checkout', 'ManagementController@checkout');
     Route::post('report', 'ManagementController@report');
+    Route::post('roomStatus', 'RoomController@setAvailability');
 });
 
 //Homestay Route

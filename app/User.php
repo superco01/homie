@@ -40,7 +40,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function getJWTIdentifier() {
         return $this->getKey();
-    } 
+    }
 
     public function getJWTCustomClaims() {
         return [];
@@ -53,6 +53,6 @@ class User extends Authenticatable implements JWTSubject
     // }
 
     public function homestays() {
-        return $this-hasMany(Homestay::class);
+        return $this-hasOne(Homestay::class);
     }
 }
