@@ -30,7 +30,7 @@ class EditRooms extends Component {
       console.log(room);
       const homestayId= this.props.match.params.id
       
-      if(confirm('Sure to close room?')) {
+      if(confirm('Are you sure to set room availability?')) {
         axios.post('api/roomStatus', room, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
         .then(response => {
           console.log(response);
