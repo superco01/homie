@@ -85,6 +85,7 @@ export default function AddHomestay(props) {
         number_of_rooms: numberOfRooms,
         photo1: photo1,
         photo2: photo2,
+        description: description,
       }
 
       console.log(addNewHomestay);
@@ -100,7 +101,7 @@ export default function AddHomestay(props) {
         const addNewRoom = {
             homestay_id: data.id,
             type: 'Single',
-            description: description,
+            // description: description,
             photos: photos,
             price: price,
             // room_availability: 0
@@ -145,7 +146,7 @@ export default function AddHomestay(props) {
                 autoFocus
               />
             </Grid>
-            <Grid item  >
+            {/* <Grid item  >
               <TextField style={{marginBottom: 12}}
                 value={location}
                 onChange={event => setLocation(event.target.value)}
@@ -157,16 +158,16 @@ export default function AddHomestay(props) {
                 name="location"
                 autoComplete="location"
               />
-            </Grid>
-            <Grid item>
+            </Grid> */}
+            <Grid item >
                 <Typography color="textSecondary">Location</Typography>
-                <FormControl variant="outlined">
+                <FormControl variant="outlined" style={{ minWidth: '100%', marginBottom: 12 }}>
                     <Select
                     value={location}
                     onChange={event => setLocation(event.target.value)}
                     input={<OutlinedInput placeholder="LOCATION" labelWidth={10} name="location" id="outlined-location-simple" />}
                     >
-                    <MenuItem value="Select Location">
+                    <MenuItem value="Select Location" >
                         Select Location
                     </MenuItem>
                     <MenuItem value={'Bukit Raya'}>Bukit Raya</MenuItem>

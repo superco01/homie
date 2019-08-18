@@ -213,10 +213,10 @@ export default function EditRoom(props) {
                 variant="outlined"
                 required
                 fullWidth
-                id="description"
-                label="Description"
-                name="description"
-                autoComplete="description"
+                id="roomDescription"
+                label="Room Description"
+                name="roomDescription"
+                autoComplete="roomDescription"
               />
             </Grid>
             {/* <Grid item  >

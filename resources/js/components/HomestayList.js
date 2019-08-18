@@ -14,13 +14,13 @@ function HomestayList(props) {
   return (
     <div>
       <Paper>
-        <Grid container style={{ marginLeft: 20, marginRight: 20 }} spacing={2}>
+        <Grid justify="space-between" container style={{ marginLeft: 20, marginRight: 20 }} spacing={2}>
           <Grid item>
             <ButtonBase style={{ width: 128 , height: 128 }}>
-                <img style={{ margin: 1, display: 'block', maxWidth: '100%', maxHeight: '100%' }} alt="complex" src={props.homestay.photo1}/>
+              <img style={{ margin: 1, display: 'block', maxWidth: '100%', maxHeight: '100%' }} alt="complex" src={props.homestay.photo1}/>
             </ButtonBase>
           </Grid>
-          <Grid item xs={12} sm container>
+          <Grid item xs={12} sm={7}>
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography variant="h6">
@@ -30,32 +30,36 @@ function HomestayList(props) {
               <Divider/>
               <Grid item xs>
                 <Typography variant="body1">
-                  {props.homestay.address}
+                  Homestay Description: {props.homestay.description}
+                </Typography>
+                <Typography variant="body1">
+                  Address: {props.homestay.address}
                 </Typography>
               </Grid>
             </Grid>
           </Grid>
           <Grid item xs={12} sm container>
-            <Grid item xs >
-              <Grid item xs>
+            <Grid item>
+              <Grid item>
               {props.homestay.rooms.map(room => {
-                if (lowestPrice == 0) {
-                  lowestPrice = room.price
-                }
-                if (lowestPrice > room.price) {
-                  lowestPrice = room.price
+                if (room.room_availability == 1) {
+                  if (lowestPrice == 0) {
+                    lowestPrice = room.price
+                  }
+                  if (lowestPrice > room.price) {
+                    lowestPrice = room.price
+                  }
                 }
               })}
                 <Typography display="inline" variant="h6">
                   Lowest Price
                 </Typography>
                 <Typography variant="h6">
-                  <NumberFormat value={lowestPrice} displayType={'text'} thousandSeparator={true} prefix={'Rp '} suffix={',-'} />
+                  <NumberFormat value={lowestPrice} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} prefix={'Rp '} suffix={',-'} />
                 </Typography>
               </Grid>
-              <Grid item xs>
+              <Grid item>
               {/* <ThemeProvider theme={MyTheme}> */}
-
                 <Button
                 className={props.className.button} 
                 variant="contained" 
@@ -63,7 +67,6 @@ function HomestayList(props) {
                 to={`/homestay/${props.homestay.id}/${props.checkinDate}/${props.duration}`}>
                   Select Homestay
                 </Button>
-
                 {/* </ThemeProvider> */}
               </Grid>
             </Grid>

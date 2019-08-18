@@ -49,8 +49,8 @@ export default function OrderForm(props) {
   const [guestName, setGuestName] = React.useState('')
   const [email, setEmail] = React.useState('')
   const [phoneNumber, setPhoneNumber] = React.useState('')
-  const [checkInDate, setCheckInDate] = React.useState('2019-06-14')
-  const [duration, setDuration] = React.useState('2')
+  const [checkInDate, setCheckInDate] = React.useState('')
+  const [duration, setDuration] = React.useState('')
   const [checkOutDate, setCheckOutDate] = React.useState('')
   
   useEffect(() => {
@@ -85,6 +85,8 @@ export default function OrderForm(props) {
       axios.post('api/order', newOrder, {
         headers: { 'Content-Type': 'application/json' }
       }).then(response => {
+        console.log('Order Response');
+        console.log(response);
         return response.data;
       })
       .then( (data) => {

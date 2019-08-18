@@ -115,6 +115,7 @@ export default function EditHomestay(props) {
         facilities: facilities,
         photo1: photo1,
         photo2: photo2,
+        description: description,
         // number_of_rooms: numberOfRooms,
       }
       console.log(editHomestay);

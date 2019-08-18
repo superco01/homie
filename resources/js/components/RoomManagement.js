@@ -33,11 +33,15 @@ class RoomManagement extends Component {
             // const homestayId= this.props.match.params.id
             const data = {homestay_id : JSON.parse(localStorage.getItem('id'))}
             axios.post(`api/roomAvailability`, data, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
-        .then(response => {
-            // console.log(response.data[1].orders[0].name);
-          this.setState({ rooms: response.data });
-          console.log(this.state.rooms);
+            .then(response => {
+                // console.log(response.data[1].orders[0].name);
+                this.setState({ rooms: response.data });
+                console.log(this.state.rooms);
+            })
         })
+        .catch( error => {
+            console.log(error.response);
+            alert(error.response.data)
         })
     }
     checkout(e) {
@@ -56,21 +60,28 @@ class RoomManagement extends Component {
             // const homestayId= this.props.match.params.id
             const data = {homestay_id : JSON.parse(localStorage.getItem('id'))}
             axios.post(`api/roomAvailability`, data, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
-        .then(response => {
-            // console.log(response.data[1].orders[0].name);
-          this.setState({ rooms: response.data });
-          console.log(this.state.rooms);
+            .then(response => {
+                // console.log(response.data[1].orders[0].name);
+                this.setState({ rooms: response.data });
+                console.log(this.state.rooms);
+            })
         })
+        .catch( error => {
+            console.log(error);
+            alert(error.response.data)
         })
     }
 
     componentDidMount() {
         // const homestayId= this.props.match.params.id
-        const data = {homestay_id : JSON.parse(localStorage.getItem('id'))}
+        const data = {homestay_id : JSON.parse(localStorage.getItem('homestayId'))}
         axios.post(`api/roomAvailability`, data, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
         .then(response => {
+          console.log('response rooms');
+          console.log(response);
             // console.log(response.data[1].orders[0].name);
           this.setState({ rooms: response.data });
+          console.log('set state rooms');
           console.log(this.state.rooms);
         })
     }
@@ -78,6 +89,7 @@ class RoomManagement extends Component {
     render() {
         // console.log(this.state.rooms[0].id);
         if (this.state.rooms.length > 0) {
+            console.log('set state rooms on render');
             console.log(this.state.rooms);
         }
         

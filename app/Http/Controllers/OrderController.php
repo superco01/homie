@@ -11,9 +11,9 @@ use DateTime;
 
 class OrderController extends Controller
 {
-    // public function stubSave($saveOrder) {
-    //     return $saveOrder;
-    // }
+    public function stubCreate($createOrder) {
+        return $createOrder;
+    }
 
     // public function createOrder(Request $request) {
     //     $inputOrder = "Order Failed";
@@ -29,6 +29,48 @@ class OrderController extends Controller
     //  }
      
 
+    public function createOrderIT(Request $request) {
+        $this->validate($request, [
+            'name'          => 'required',
+            'guest'         => 'required',
+            'email'         => 'required',
+            'phone_number'  => 'required',
+            'room_id'       => 'required',
+        ]);
+        $checkinDate = date('Y-m-d', strtotime($request->checkin_date));
+        $checkoutDate = date('Y-m-d', strtotime($request->checkin_date. ' + '.$request->duration.' day'));
+        $roomPrice = Room::where('id', $request->room_id)->first(['price']);
+        $priceTotal = $roomPrice->price * $request->duration;
+
+        $order = $this->stubCreate('Order Success');
+        // $order = Order::create(['name' => $request->name,
+        //                         'guest' => $request->guest,
+        //                         'email' => $request->email,
+        //                         'phone_number' => $request->phone_number,
+        //                         'room_id' => $request->room_id,
+        //                         'room_number' => $request->room_number,
+        //                         'homestay_id' => $request->homestay_id,
+        //                         'checkin_date' => $checkinDate,
+        //                         'duration' => $request->duration,
+        //                         'checkout_date' => $checkoutDate,
+        //                         'price_total' => $priceTotal,
+        //                         ]);
+
+        for ($i=0; $i <= $request->duration; $i++) { 
+            $order_id = 0;
+            $stay_date = date('Y-m-d', strtotime($request->checkin_date. ' + '.$i.' day'));
+            $orderMeta = $this->stubCreate('OrderMeta Success');
+            // $orderMeta = OrderMeta::create([
+            //     'order_id' => $order_id,
+            //     'stay_date' => $stay_date,
+            //     'status' => 'no status',
+            // ]);
+        }
+        return response()->json(compact('order', 'orderMeta'), 201);
+        // return response()->json($order, 201);
+    }
+     
+
     public function createOrder(Request $request) {
         $this->validate($request, [
             'name'          => 'required',
@@ -40,11 +82,8 @@ class OrderController extends Controller
         $checkinDate = date('Y-m-d', strtotime($request->checkin_date));
         $checkoutDate = date('Y-m-d', strtotime($request->checkin_date. ' + '.$request->duration.' day'));
         $roomPrice = Room::where('id', $request->room_id)->first(['price']);
-        // error_log($checkinDate);
-        // error_log($checkoutDate);
-        // dd($roomPrice);
         $priceTotal = $roomPrice->price * $request->duration;
-        // dd($request);
+
         $order = Order::create(['name' => $request->name,
                                 'guest' => $request->guest,
                                 'email' => $request->email,
@@ -57,7 +96,7 @@ class OrderController extends Controller
                                 'checkout_date' => $checkoutDate,
                                 'price_total' => $priceTotal,
                                 ]);
-        error_log($order->id);
+
         for ($i=0; $i <= $request->duration; $i++) { 
             $order_id = $order->id;
             $stay_date = date('Y-m-d', strtotime($request->checkin_date. ' + '.$i.' day'));
@@ -67,6 +106,7 @@ class OrderController extends Controller
                 'status' => 'no status',
             ]);
         }
+        // return response()->json(compact('order', 'orderMeta'), 201);
         return response()->json($order, 201);
     }
 

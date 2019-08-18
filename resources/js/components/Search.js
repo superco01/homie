@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Grid, TextField, Paper, Container, Button, ButtonBase, Divider, FormControl, OutlinedInput, InputLabel, Select, MenuItem, Typography} from '@material-ui/core'
+import { InputLabel, inputLabel, Grid, TextField, Paper, Container, Button, ButtonBase, Divider, FormControl, OutlinedInput, Select, MenuItem, Typography, FilledInput } from '@material-ui/core'
 import HomestayList from './HomestayList';
 import SearchResult from './SearchResult';
 import { withStyles, ThemeProvider, withTheme } from '@material-ui/styles';
@@ -44,6 +44,7 @@ class Search extends Component {
     }
     componentDidMount() {
         // console.log(localStorage);
+        // this.setState({labelWidth: inputLabel.current.offsetWidth})
         axios.post('api/homestaySearch',{
             room_availability: 1,
         })
@@ -88,19 +89,22 @@ class Search extends Component {
             <div>
                 {/* {this.state.location ? ( */}
                     <div>
-                        <Container
-                        style={{padding: 30, paddingLeft: 150, paddingRight: 150}}>
-                        <Paper>
-                            <Grid alignItems="center" container spacing={2} style={{margin: 12, paddingBottom: 12}}>
-                                <Grid item md={3}>
-                                <Typography color="textSecondary">Location</Typography>
-                                <FormControl variant="outlined">
+                        <Container style={{padding: 30, paddingLeft: 140, paddingRight: 140}}>
+                        <Paper style={{ padding: 50 }}>
+                            <Grid alignItems="center" justify="space-between" container spacing={2}>
+                                <Grid item>
+                                {/* <Typography color="textSecondary">Location</Typography> */}
+                                <FormControl variant="filled">
                                     {/* <TextField disabled value="Location" htmlFor="outlined-location-simple">
                                     </TextField> */}
+                                    <InputLabel htmlFor="filled-age-simple">
+                                        Location
+                                    </InputLabel>
                                     <Select
+                                    // variant='outlined'
                                     value={this.state.location}
                                     onChange={this.handleFieldChange}
-                                    input={<OutlinedInput labelWidth={this.state.labelWidth} name="location" id="outlined-location-simple" />}
+                                    input={<FilledInput name="location" id="filled-location-simple" />}
                                     >
                                     <MenuItem value="Select Location">
                                         Select Location
@@ -114,7 +118,7 @@ class Search extends Component {
                                     </Select>
                                 </FormControl>
                                 </Grid>
-                                <Grid item md={3}>
+                                <Grid item>
                                 <TextField
                                     id="date"
                                     name="checkinDate"
@@ -122,43 +126,49 @@ class Search extends Component {
                                     type="date"
                                     value={this.state.checkinDate}
                                     onChange={this.handleFieldChange}
-                                    style={{marginTop: 24}}
+                                    // style={{marginTop: 24}}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
-                                    variant="outlined"
+                                    variant="filled"
                                 />
                                 </Grid>
-                                <Grid item md={2}>
+                                <Grid item xs={2}>
                                 <TextField
                                     id="outlined-number"
                                     name="duration"
                                     label="Duration"
                                     type="number"
+                                    InputProps={{ inputProps: { min: 1, max: 14 } }}
                                     value={this.state.duration}
                                     onChange={this.handleFieldChange}
-                                    style={{marginTop: 24}}
+                                    // style={{marginTop: 24}}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
-                                    variant="outlined"
+                                    variant="filled"
                                 />
                                 </Grid>
-                                <Grid item sm={12} md={2} align="right">
+                                <Grid container justify="flex-end" direction="row" item md={2}>
+                                    <Grid item xs={12}>
                                     <Button
+                                        // xs={2}
                                         className={this.props.classes.button}
                                         variant="contained"
                                         // color="primary"
-                                        style={{padding: 20, marginRight: 30, marginLeft:150, marginTop: 30, marginBottom: 30}}
+                                        style={{ paddingTop: 18, paddingBottom: 18 }}
+                                        // style={{padding: 20, marginRight: 30, marginLeft:15, marginTop: 3, marginBottom: 3}}
                                         onClick={this.onSearch}
+                                        fullWidth
                                         >Search
                                     </Button>
+                                    </Grid>
                                 </Grid>
                             </Grid>
                         </Paper>
                         </Container>
                         <Container
-                        style={{padding: 20, paddingLeft: 150, paddingRight: 150}}>
+                        style={{padding: 20, paddingLeft: 140, paddingRight: 140}}>
                         <Grid
                         container
                         spacing={4}

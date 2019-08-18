@@ -109,7 +109,7 @@ class HomestayDetail extends Component {
                           <Grid item xs={12} >
                             <Grid item xs={12}>
                               <Typography variant="h6">
-                              <NumberFormat value={room.price} displayType={'text'} thousandSeparator={true} prefix={'Rp '} suffix={',-'} />
+                              <NumberFormat value={room.price} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} prefix={'Rp '} suffix={',-'} />
                               </Typography>
                             </Grid>
                             <Grid item xs={12}>

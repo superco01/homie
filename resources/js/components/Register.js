@@ -61,6 +61,7 @@ export default function Register(props) {
         alert('Field should not empty')
         console.log(error);
       }).then( () => {
+        alert('Account succesfully registered')
         props.history.push(`/login`);
       })
   }

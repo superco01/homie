@@ -72,20 +72,13 @@ class HomestayController extends Controller
         }])->get()
         ) : (
         $homestaySearch = Homestay::where('location', $request->location)->with(['rooms.orders' => function ($query) {
-            // $query->where('status', '');
+            // $query->where('room_availability', 1);
         }])->get()
         );
+
+        // $result = $homestaySearch->room;
+        // error_log($homestaySearch[0]->rooms);
     
-        //SEND EMAIL NOTIFICATION TO OWNER
-        // $order = Order::where('id', 82)->first();
-        // $user = $order->room->homestay->user;
-
-        // $to_name = $user->name;
-        // $to_email = 'habibyafi45@gmail.com';
-        // $data = array('name'=>"Homie", 'body' => "A test mail");
-
-        // Mail::to($to_email, $to_name)->send(new PaymentConfirmation($order));
-
         return response()->json(compact('homestaySearch'));
     }
 
