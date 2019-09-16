@@ -70,7 +70,8 @@ const headRows = [
   { id: 'email', numeric: false, disablePadding: true, label: 'Email' },
   { id: 'phone', numeric: false, disablePadding: false, label: 'Phone Number' },
   { id: 'guestName', numeric: false, disablePadding: false, label: 'Guest Name' },
-  { id: 'room', numeric: false, disablePadding: false, label: 'Room Number' },
+  { id: 'homestayName', numeric: false, disablePadding: false, label: 'Homestay' },
+  { id: 'room', numeric: true, disablePadding: false, label: 'Room Number' },
   { id: 'checkin', numeric: false, disablePadding: false, label: 'Check-in Date' },
   { id: 'duration', numeric: true, disablePadding: false, label: 'Duration of Stay' },
   { id: 'checkout', numeric: false, disablePadding: false, label: 'Check-out Date' },
@@ -332,6 +333,7 @@ export default function AdminOrder() {
                       <TableCell align="left">{row.email}</TableCell>
                       <TableCell align="right">{row.phone_number}</TableCell>
                       <TableCell align="left">{row.guest}</TableCell>
+                      <TableCell align="left">{row.room.homestay.name}</TableCell>
                       <TableCell align="right">{row.room_number}</TableCell>
                       <TableCell align="right">{row.checkin_date}</TableCell>
                       <TableCell align="right">{row.duration}</TableCell>

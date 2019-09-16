@@ -52,6 +52,7 @@ class Search extends Component {
             this.setState({ homestays: response.data.homestaySearch})
             // console.log(this.state.homestays);
         })
+        
         // axios.get('/api/homestay')
         //     .then(response => {
         //         return response;
@@ -120,6 +121,7 @@ class Search extends Component {
                                 </Grid>
                                 <Grid item>
                                 <TextField
+                                    // max={moment().format("YYYY-MM-DD")}
                                     id="date"
                                     name="checkinDate"
                                     label="Check-in"
@@ -127,6 +129,7 @@ class Search extends Component {
                                     value={this.state.checkinDate}
                                     onChange={this.handleFieldChange}
                                     // style={{marginTop: 24}}
+                                    InputProps={{ inputProps: { min: this.state.checkinDate} }}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}

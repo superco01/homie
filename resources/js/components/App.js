@@ -23,6 +23,8 @@ import AdminOwner from './AdminOwner';
 import AdminHomestay from './AdminHomestay';
 import AdminOrder from './AdminOrder';
 
+// document.body.style.backgroundImage = "url('/images/joel-de-vriend-3DV4aphPBRM-unsplash.jpg')";
+
 export default class App extends Component {
     constructor(){
         super();
@@ -31,6 +33,10 @@ export default class App extends Component {
             errors: [],
             id_user: 1,
         }
+        localStorage.setItem('usertoken', '0')
+        localStorage.setItem('name', '0')
+        localStorage.setItem('id', '0')
+        localStorage.setItem('homestayId', '0')
     } 
 
     render() {

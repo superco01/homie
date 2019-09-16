@@ -66,14 +66,14 @@ export default function AddHomestay(props) {
   function onSubmit(e) {
       e.preventDefault()
       console.log(pictures);
-      let photo1 = null;
-      let photo2 = null;
+      let photo1Temp = null;
+      let photo2Temp = null;
       const userId = JSON.parse(localStorage.getItem('id'))
-      if (pictures[0] != null) {
-        photo1 = pictures[0].name
+      if (pictures[pictures.length - 2] != null) {
+        photo1Temp = pictures[pictures.length - 2].name
       }
-      if (pictures[1] != null) {
-        photo2 = pictures[1].name
+      if (pictures[pictures.length - 1] != null) {
+        photo2Temp = pictures[pictures.length - 1].name
       }
       
       const addNewHomestay = {
@@ -83,8 +83,8 @@ export default function AddHomestay(props) {
         address: address,
         facilities: facilities,
         number_of_rooms: numberOfRooms,
-        photo1: photo1,
-        photo2: photo2,
+        photo1: photo1Temp,
+        photo2: photo2Temp,
         description: description,
       }
 
@@ -252,6 +252,7 @@ export default function AddHomestay(props) {
             <Typography style={{ padding: 12}}>Add 2 Pictures</Typography>
             <ImageUploader
                 withIcon={false}
+                singleImage={true}
                 withPreview
                 buttonText='Choose images'
                 onChange={onDrop}

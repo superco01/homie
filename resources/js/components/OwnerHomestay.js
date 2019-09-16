@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Divider, ButtonBase, Grid, Card, CardActions, CardContent, CardMedia, Button, Typography, Container, Paper, withStyles} from '@material-ui/core'
 import {Link} from 'react-router-dom'
+import Carousel from 'nuka-carousel';
 
 const styles = {
   root: {
@@ -50,11 +51,18 @@ class OwnerHomestay extends Component {
               <Container>
                 <Container spacing={3} style={{paddingBottom: 25}}>
                   <Card spacing={3}>
+                  <Carousel>
                     <CardMedia
                       style={{height: 0, paddingTop: '56.25%'}}
                       image={this.state.homestay.photo1}
                       title={this.state.homestay.name}
                     />
+                    <CardMedia
+                      style={{height: 0, paddingTop: '56.25%'}}
+                      image={this.state.homestay.photo2}
+                      title={this.state.homestay.name}
+                    />
+                    </Carousel>
                     <CardContent>
                       <Typography gutterBottom variant="h4" component="header">
                           {this.state.homestay.name}

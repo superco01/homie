@@ -169,7 +169,7 @@ export default function Payment(props) {
     console.log(snapPayResult);
     console.log(result);
     
-    axios.post('api/orderUpdate', result)
+    // axios.post('api/orderUpdate', result)
   }
 
   function onPay(e) {

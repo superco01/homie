@@ -87,11 +87,11 @@ export default function EditRoom(props) {
       console.log('---------------------');
       var photo = photos
       
-      if (pictures[0] != null) {
+      if (pictures[pictures.length - 1] != null) {
         console.log('set photooo');
-        console.log('images/'.concat(pictures[0].name));
+        console.log('images/'.concat(pictures[pictures.length - 1].name));
         
-        photo = 'images/'.concat(pictures[0].name)
+        photo = 'images/'.concat(pictures[pictures.length - 1].name)
       }
       
       const editRoom = {

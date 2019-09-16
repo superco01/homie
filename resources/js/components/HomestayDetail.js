@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Divider, ButtonBase, Grid, Card, CardActions, CardContent, CardMedia, Button, Typography, Container, Paper, withStyles} from '@material-ui/core'
 import {Link} from 'react-router-dom'
 import NumberFormat from 'react-number-format';
+import Carousel from 'nuka-carousel';
 
 const styles = {
   root: {
@@ -58,14 +59,24 @@ class HomestayDetail extends Component {
               <Container>
                 <Container spacing={3} style={{paddingBottom: 25}}>
                   <Card spacing={3}>
+                    <Carousel>
                     <CardMedia
                       style={{height: 0, paddingTop: '56.25%'}}
                       image={this.state.homestay.photo1}
                       title={this.state.homestay.name}
                     />
+                    <CardMedia
+                      style={{height: 0, paddingTop: '56.25%'}}
+                      image={this.state.homestay.photo2}
+                      title={this.state.homestay.name}
+                    />
+                    </Carousel>
                     <CardContent>
-                      <Typography gutterBottom variant="caption" component="header">
+                      <Typography variant="h4" component="header">
                           {this.state.homestay.name}
+                      </Typography>
+                      <Typography component="p">
+                          Homestay Description: {this.state.homestay.description}
                       </Typography>
                       <Typography component="p">
                           Facilities : {this.state.homestay.facilities}
@@ -100,7 +111,7 @@ class HomestayDetail extends Component {
                                 Room Type: {room.type}
                               </Typography>
                               <Typography variant="body1">
-                                {room.description}
+                                Room Desription: {room.description}
                               </Typography>
                             </Grid>
                           </Grid>

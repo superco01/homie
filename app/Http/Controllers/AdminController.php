@@ -13,23 +13,25 @@ use App\Transaction;
 class AdminController extends Controller
 {
     public function indexOwner() {
-        $owners = User::where('name', '<>', 'admin')->get();
+        $owners = User::where('name', '<>', 'admin')->with(['homestays'])->get();
         return $owners->toJson();
     }
     public function indexHomestay() {
-        $homestays = Homestay::get();
+        $homestays = Homestay::with(['user'])->get();
         return $homestays->toJson();
     }
     public function indexTransaction() {
-        $orders = Order::get();
+        $orders = Order::with(['room.homestay'])->get();
         return $orders->toJson();
     }
     public function deleteOwner(Request $request) {
         $user = User::find($request->id);
         // $this->deleteHomestay($request);
         $homestay = Homestay::where('user_id', $request->id)->first();
-        $deleteRoom = Room::where('homestay_id', $homestay->id)->delete();
-        $homestay->delete();
+        if ($homestay != null) {
+            $deleteRoom = Room::where('homestay_id', $homestay->id)->delete();
+            $homestay->delete();
+        }
         $user->delete();
         return $user->toJson();
     }

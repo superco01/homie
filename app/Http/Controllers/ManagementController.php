@@ -41,10 +41,10 @@ class ManagementController extends Controller
 
         $transactionStatus = Order::where('guest', $request->guest_name)->where('id', $request->order_id)->get(['transaction_status']);
         if ($transactionStatus[0]->transaction_status == 'capture' ) {
-            // $transactionStatus = Order::where('guest', $request->guest_name)->where('id', $request->order_id)->update(['transaction_status' => 'active']);
+            $transactionStatus = Order::where('guest', $request->guest_name)->where('id', $request->order_id)->update(['transaction_status' => 'active']);
             // $orderMetaUpdate = OrderMeta::where('order_id', $id)->update(['status' => 'used']);
             $orderMetaUpdate = Order::where('guest', $request->guest_name)->where('id', $request->order_id)->first();
-            // $orderMetaUpdate->orderMeta()->update(['status' => 'active']);
+            $orderMetaUpdate->orderMeta()->update(['status' => 'active']);
             return response()->json('Success', 200);
         }
         else {
@@ -61,9 +61,9 @@ class ManagementController extends Controller
 
         $transactionStatus = Order::where('guest', $request->guest_name)->where('id', $request->order_id)->get(['transaction_status']);
         if ($transactionStatus[0]->transaction_status == 'active' ) {
-            // $transactionStatus = Order::where('guest', $request->guest_name)->where('id', $request->order_id)->update(['transaction_status' => 'used']);
+            $transactionStatus = Order::where('guest', $request->guest_name)->where('id', $request->order_id)->update(['transaction_status' => 'used']);
             $orderMetaUpdate = Order::where('guest', $request->guest_name)->where('id', $request->order_id)->first();
-            // $orderMetaUpdate->orderMeta()->update(['status' => 'used']);
+            $orderMetaUpdate->orderMeta()->update(['status' => 'used']);
             return response()->json('Success', 200);
         }
         else {

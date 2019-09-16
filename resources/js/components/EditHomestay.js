@@ -83,6 +83,7 @@ export default function EditHomestay(props) {
   }, [])
   
   function onDrop(picture) {
+    console.log(pictures);
     setPictures(pictures.concat(picture));
     console.log(pictures);
   }
@@ -96,15 +97,16 @@ export default function EditHomestay(props) {
       var photo1
       var photo2
       
-      if (pictures[0] != null) {
+      if (pictures[pictures.length - 2] != null) {
         console.log('set photooo');
-        console.log('images/'.concat(pictures[0].name));
+        console.log('images/'.concat(pictures[pictures.length - 2].name));
         
-        photo1 = 'images/'.concat(pictures[0].name)
+        photo1 = 'images/'.concat(pictures[pictures.length - 2].name)
       }
-      if (pictures[1] != null) {
-        console.log('images/'.concat(pictures[1].name));
-        photo2 = 'images/'.concat(pictures[1].name)
+      if (pictures[pictures.length - 1] != null) {
+        console.log('set photooo 2');
+        console.log('images/'.concat(pictures[pictures.length - 1].name));
+        photo2 = 'images/'.concat(pictures[pictures.length - 1].name)
       }
       
       const editHomestay = {
@@ -256,6 +258,7 @@ export default function EditHomestay(props) {
             <Typography style={{ padding: 12}}>Max 2 Pictures</Typography>
             <ImageUploader
                 withIcon={false}
+                singleImage={true}
                 withPreview
                 buttonText='Choose images'
                 onChange={onDrop}

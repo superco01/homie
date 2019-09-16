@@ -55,7 +55,7 @@ function HomestayList(props) {
                   Lowest Price
                 </Typography>
                 <Typography variant="h6">
-                  <NumberFormat value={lowestPrice} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} prefix={'Rp '} suffix={',-'} />
+                  {lowestPrice == 0? "-": <NumberFormat value={lowestPrice} displayType={'text'} thousandSeparator={'.'} decimalSeparator={','} prefix={'Rp '} suffix={',-'} />}
                 </Typography>
               </Grid>
               <Grid item>

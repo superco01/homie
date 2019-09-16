@@ -63,8 +63,11 @@ function Header(props) {
   console.log(localStorage);
   console.log('----------------------------------');
   // logout();
+  
+  
 
   useEffect(() => {
+    
     
     // console.log(JSON.parse(localStorage.getItem('user')))
     // console.log("----------------------------------");
@@ -112,12 +115,6 @@ function Header(props) {
   return (
     
     <div className={classes.root}>
-      {/* <FormGroup>
-        <FormControlLabel
-          control={<Switch checked={auth} onChange={handleChange} aria-label="LoginSwitch" />}
-          label={auth ? 'Logout' : 'Login'}
-        />
-      </FormGroup> */}
       <AppBar className={classes.root} position="static" >
         <Toolbar>
           <Typography color="inherit" style={{textDecoration: 'none',}} component={Link} to="/" variant="h5" className={classes.title}>
@@ -182,13 +179,16 @@ function Header(props) {
                 open={open}
                 onClose={handleClose}
               >
+                {localStorage.getItem('homestayId') == 0? 
+                  <MenuItem onClick={handleClose} component={Link} to={`/addhomestay/${user.id}`} >Add Homestay</MenuItem>
+                  : <div>
                 <MenuItem onClick={handleClose} component={Link} to={`/ownerhomestay`} >My Homestay</MenuItem>
-                <MenuItem onClick={handleClose} component={Link} to={`/addhomestay/${user.id}`} >Add Homestay</MenuItem>
                 <MenuItem onClick={handleClose} component={Link} to={`/edithomestay/${user.id}`} >Edit Homestay</MenuItem>
                 <MenuItem onClick={handleClose} component={Link} to={`/editrooms/${JSON.parse(localStorage.getItem('homestayId'))}`} >Edit Rooms</MenuItem>
                 <MenuItem onClick={handleClose} component={Link} to={`/roommanagement/${user.id}`} >Check-in / Check-Out</MenuItem>
                 <MenuItem onClick={handleClose} component={Link} to={`/orderlist/${user.id}`} >Order List</MenuItem>
                 <MenuItem onClick={handleClose} component={Link} to={`/report/${user.id}`} >Report</MenuItem>
+                </div>}
               </Menu>
             </div>
             )}

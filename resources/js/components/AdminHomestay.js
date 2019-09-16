@@ -85,7 +85,7 @@ class AdminHomestay extends Component {
                     </Typography>
                 </Container>
                 { this.state.homestays.map(homestay =>(
-                    <Paper>
+                    <Paper key={homestay.id}>
                   <Container key={homestay.id}  style={{paddingTop: 15, paddingBottom: 15}}>
                     {/* <Divider/> */}
                       <Grid container spacing={2}>
@@ -93,11 +93,17 @@ class AdminHomestay extends Component {
                           <Grid item xs container direction="column" spacing={2}>
                             <Grid item xs>
                               <Typography variant="h6" >
-                                Name : {homestay.name}
+                                Homestay Name : {homestay.name}
                               </Typography>
                             </Grid>
                             {/* <Divider/> */}
                             <Grid item xs>
+                              <Typography variant="body1">
+                                Owner : {homestay.user.name}
+                              </Typography>
+                              <Typography variant="body1">
+                                Room Total : {homestay.number_of_rooms}
+                              </Typography>
                               <Typography variant="body1">
                                 Location : {homestay.location}
                               </Typography>
@@ -114,7 +120,7 @@ class AdminHomestay extends Component {
                                 Rp {homestay.price},-
                               </Typography> */}
                             </Grid>
-                            <Grid item xs={12} direction="column">
+                            <Grid item xs={12}>
                                 <ButtonBase justify="center" style={{ width: 128 , height: 128 }}>
                                   <Button
                                   onClick={()=>this.onDelete(homestay.id)}

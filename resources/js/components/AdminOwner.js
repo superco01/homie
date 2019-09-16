@@ -82,7 +82,7 @@ class AdminOwner extends Component {
                     </Typography>
                 </Container>
                 { this.state.owners.map(owner =>(
-                    <Paper>
+                    <Paper key={owner.id}>
                   <Container key={owner.id}  style={{paddingTop: 15, paddingBottom: 15}}>
                     {/* <Divider/> */}
                       <Grid container spacing={2}>
@@ -95,6 +95,15 @@ class AdminOwner extends Component {
                             </Grid>
                             {/* <Divider/> */}
                             <Grid item xs>
+                            {owner.homestays == null?
+                              <Typography variant="h6">
+                                Homestay Name : Homestay has not been registered
+                              </Typography> 
+                              : 
+                              <Typography variant="h6">
+                                Homestay Name : {owner.homestays.name}
+                              </Typography>
+                              }
                               <Typography variant="h6">
                                 Email : {owner.email}
                               </Typography>

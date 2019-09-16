@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Transaction;
+use Mail;
 
 use App\Veritrans\Midtrans;
 use App\User;
@@ -89,15 +90,18 @@ class PaymentController extends Controller
     }
 
     public function notificationHandler() {
+        error_log("HANDLERRRRRRRRRRRRRRRR");
         Veritrans_Config::$isProduction = false;
         Veritrans_Config::$serverKey = 'SB-Mid-server-MhIjQw_PkDBGIxnf9mn2XHIQ';
+        error_log("HANDLERRRRRRRRRRRRRRRR2");
         $notif = new Veritrans_Notification();
+        error_log("HANDLERRRRRRRRRRRRRRRR3");
 
         $transaction = $notif->transaction_status;
         $type = $notif->payment_type;
         $order_id = $notif->order_id;
         $fraud = $notif->fraud_status;
-
+        
         if ($transaction == 'capture') {
             $orderUpdate = Order::where('id', $order_id)->update(['transaction_status' => $transaction,
                                                                   'order_type' => $type,
@@ -105,15 +109,15 @@ class PaymentController extends Controller
             $orderUpdateMeta = OrderMeta::where('order_id', $order_id)->update(['status' => $transaction]);
 
             //SEND EMAIL NOTIFICATION TO OWNER
-            $order = Order::where('id', 82)->first();
+            $order = Order::where('id', $order_id)->first();
             $user = $order->room->homestay->user;
 
             $to_name = $user->name;
             $to_email = $user->email;
             // $data = array('name'=>"Homie", 'body' => "A test mail");
-
+            error_log("HANDLERRRRRRRRRRRRRRRR4");
             Mail::to($to_email, $to_name)->send(new PaymentConfirmation($order));
-
+            error_log("HANDLERRRRRRRRRRRRRRRR5");
         // For credit card transaction, we need to check whether transaction is challenge by FDS or not
             if ($type == 'credit_card'){
                 if($fraud == 'challenge'){
@@ -129,17 +133,24 @@ class PaymentController extends Controller
         }
         else if ($transaction == 'settlement'){
         // TODO set payment status in merchant's database to 'Settlement'
-            $orderUpdate = Order::where('id', $order_id)->update(['transaction_status' => $transaction,
+            $orderUpdate = Order::where('id', $order_id)->update(['transaction_status' => 'capture',
                                                                     'order_type' => $type,
                                                                     'fraud_status' => $fraud]);
             $orderUpdateMeta = OrderMeta::where('order_id', $order_id)->update(['status' => $transaction]);
+
+            //SEND EMAIL NOTIFICATION TO OWNER
+            $order = Order::where('id', $order_id)->first();
+            $user = $order->room->homestay->user;
+
+            $to_name = $user->name;
+            $to_email = $user->email;
+            // $data = array('name'=>"Homie", 'body' => "A test mail");
+            error_log("HANDLERRRRRRRRRRRRRRRR4");
+            Mail::to($to_email, $to_name)->send(new PaymentConfirmation($order));
+
         echo "Transaction order_id: " . $order_id ." successfully transfered using " . $type;
         }
         else if($transaction == 'pending'){
-            $orderUpdate = Order::where('id', $order_id)->update(['transaction_status' => $transaction,
-                                                                    'order_type' => $type,
-                                                                    'fraud_status' => $fraud]);
-            $orderUpdateMeta = OrderMeta::where('order_id', $order_id)->update(['status' => $transaction]);
         // TODO set payment status in merchant's database to 'Pending'
         echo "Waiting customer to finish transaction order_id: " . $order_id . " using " . $type;
         }

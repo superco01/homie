@@ -26,12 +26,13 @@ class RoomManagement extends Component {
         }
         console.log(checkin);
         
+        if(confirm('Are you sure to check-in this guest?')) {
         axios.post('api/checkin', checkin, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
         .then((response) => {
             console.log(response);
             // this.setState({ toggle: response.data })
             // const homestayId= this.props.match.params.id
-            const data = {homestay_id : JSON.parse(localStorage.getItem('id'))}
+            const data = {homestay_id : JSON.parse(localStorage.getItem('homestayId'))}
             axios.post(`api/roomAvailability`, data, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
             .then(response => {
                 // console.log(response.data[1].orders[0].name);
@@ -43,6 +44,7 @@ class RoomManagement extends Component {
             console.log(error.response);
             alert(error.response.data)
         })
+        }
     }
     checkout(e) {
         console.log("check out------");
@@ -53,12 +55,13 @@ class RoomManagement extends Component {
         }
         console.log(checkout);
         
+        if(confirm('Are you sure to check-out this guest?')) {
         axios.post('api/checkout', checkout, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
         .then((response) => {
             console.log(response);
             // this.setState({ toggle: response.data })
             // const homestayId= this.props.match.params.id
-            const data = {homestay_id : JSON.parse(localStorage.getItem('id'))}
+            const data = {homestay_id : JSON.parse(localStorage.getItem('homestayId'))}
             axios.post(`api/roomAvailability`, data, { headers: {'Authorization': "Bearer "+localStorage.getItem('usertoken')} })
             .then(response => {
                 // console.log(response.data[1].orders[0].name);
@@ -70,6 +73,7 @@ class RoomManagement extends Component {
             console.log(error);
             alert(error.response.data)
         })
+        }
     }
 
     componentDidMount() {

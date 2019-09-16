@@ -221,7 +221,7 @@ export default function OwnerOrderList() {
 
   useEffect(() => {
     const fetchOrder = async () => {
-      const response = await axios.get(`api/orderList/${JSON.parse(localStorage.getItem('id'))}`)
+      const response = await axios.get(`api/orderList/${JSON.parse(localStorage.getItem('homestayId'))}`)
       setValues(response.data.order)
       console.log(response.data);
     }

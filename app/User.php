@@ -53,6 +53,6 @@ class User extends Authenticatable implements JWTSubject
     // }
 
     public function homestays() {
-        return $this-hasOne(Homestay::class);
+        return $this->hasOne(Homestay::class);
     }
 }
